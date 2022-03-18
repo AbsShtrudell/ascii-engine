@@ -4,12 +4,12 @@
 void Engine::Start()
 {
 	Level level;
-	Sprite z(32, 20, "F:\\Projects\\VS Projects\\ALife\\WD_Quad.txt");
-	Sprite j(15, 9, "F:\\Projects\\VS Projects\\ALife\\test.txt");
-	j.LoadFrame("F:\\Projects\\VS Projects\\ALife\\test1.txt", 1);
-	j.LoadFrame("F:\\Projects\\VS Projects\\ALife\\test2.txt", 2);
+	Sprite z(32, 20, "E:\\Projects\\VS Projects\\ALife\\WD_Quad.txt");
+	Sprite j(15, 9, "E:\\Projects\\VS Projects\\ALife\\test.txt");
+	j.LoadFrame("E:\\Projects\\VS Projects\\ALife\\test1.txt", 1);
+	j.LoadFrame("E:\\Projects\\VS Projects\\ALife\\test2.txt", 2);
 	j.SetLocation(Vector2(1, 1));
-	
+
 	Object g;
 	int c = Object::GetAllObjectsOfClass<Sprite>().size();
 	int i = Object::GetAllObjects().size();
@@ -58,44 +58,51 @@ void Engine::Init()
 
 	ConsoleWindow = GetConsoleWindow();
 	GetWindowRect(ConsoleWindow, &ConsoleWindowSize); //stores the console's current dimensions
-	MoveWindow(ConsoleWindow, ConsoleWindowSize.left, ConsoleWindowSize.top, 800, 510, TRUE); // 800 width, 100 height
-	SetWindowLong(ConsoleWindow, GWL_STYLE, GetWindowLong(ConsoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
+	//MoveWindow(ConsoleWindow, ConsoleWindowSize.left, ConsoleWindowSize.top, 800, 510, TRUE); // 800 width, 100 height
+	//SetWindowLong(ConsoleWindow, GWL_STYLE, GetWindowLong(ConsoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
 
 
 	Console = GetStdHandle(STD_OUTPUT_HANDLE);
 	GetConsoleScreenBufferInfo(Console, &ConsoleScreenInfo);
 	ConsoleBuffSize =
 	{
-		ConsoleScreenInfo.srWindow.Right - ConsoleScreenInfo.srWindow.Left + 1,
-		ConsoleScreenInfo.srWindow.Bottom - ConsoleScreenInfo.srWindow.Top + 1
+		SCREEN_HEIGHT - 10,SCREEN_WIDTH - 10
+		/*SHORT(ConsoleScreenInfo.srWindow.Right - ConsoleScreenInfo.srWindow.Left),
+		SHORT(ConsoleScreenInfo.srWindow.Bottom - ConsoleScreenInfo.srWindow.Top) 	*/
 	};
 	SetConsoleScreenBufferSize(Console, ConsoleBuffSize);
-
+	_SMALL_RECT  Rect;
+	Rect.Right = SCREEN_WIDTH - 1;
+	Rect.Left = 0;
+	Rect.Top = 0;
+	Rect.Bottom = SCREEN_HEIGHT - 1;
+	SetConsoleWindowInfo(Console, TRUE, &Rect);
 
 	CursorInfo.bVisible = false;
 	CursorInfo.dwSize = 1;
 	SetConsoleCursorInfo(Console, &CursorInfo);
-	
+
 }
 
 void Engine::UpdateScreen()
 {
 	COORD cursor;
-
-	//for (int i = 0; i < SCREEN_HEIGHT; i++)
-	//	for (int j = 0; j < SCREEN_WIDTH; j++)
-	//		if (Matrix[i][j] != BuffMatrix[i][j])
-	//		{
-	//			Matrix[i][j] = BuffMatrix[i][j];
-	//			cursor.Y = i;
-	//			cursor.X = j;
-	//			SetConsoleCursorPosition(Console, cursor);
-	//			std::wcout << Matrix[i][j];
-	//		}
-
+	int counter = 0;
+	LPWSTR screen = new WCHAR[SCREEN_HEIGHT * SCREEN_WIDTH];
+	for (int i = 0; i < SCREEN_HEIGHT; i++)
+		for (int j = 0; j < SCREEN_WIDTH; j++)
+		{
+			if (Matrix[i][j] != BuffMatrix[i][j])
+				Matrix[i][j] = BuffMatrix[i][j];
+			screen[counter] = BuffMatrix[i][j];
+			counter++;
+		}
+	screen[SCREEN_HEIGHT * SCREEN_WIDTH - 1] = '\0';
+	DWORD dwBytesWritten = 0;
+	WriteConsoleOutputCharacter(Console, screen, SCREEN_HEIGHT * SCREEN_WIDTH, { 0, 0 }, &dwBytesWritten);
 }
 
-void Engine::Draw(Vector2 location, Sprite *sprite)
+void Engine::Draw(Vector2 location, Sprite* sprite)
 {
 	for (size_t i = 0; i < sprite->GetSize().Y; i++)
 	{
@@ -110,16 +117,16 @@ void Engine::Draw(Vector2 location, Sprite *sprite)
 
 void Engine::Draw(Vector2 location, Sprite* sprite, int frame)
 {
-	if(!(frame > sprite->frames.size() - 1))
-	for (size_t i = 0; i < sprite->GetSize().Y; i++)
-	{
-		if (i + location.Y >= SCREEN_HEIGHT || location.Y + i < 0) continue;
-		for (size_t j = 0; j < sprite->GetSize().X; j++)
+	if (!(frame > sprite->frames.size() - 1))
+		for (size_t i = 0; i < sprite->GetSize().Y; i++)
 		{
-			if (j + location.X >= SCREEN_WIDTH || location.X + j < 0) continue;
-			BuffMatrix[i + location.Y][j + location.X] = sprite->frames[frame][i][j];
+			if (i + location.Y >= SCREEN_HEIGHT || location.Y + i < 0) continue;
+			for (size_t j = 0; j < sprite->GetSize().X; j++)
+			{
+				if (j + location.X >= SCREEN_WIDTH || location.X + j < 0) continue;
+				BuffMatrix[i + location.Y][j + location.X] = sprite->frames[frame][i][j];
+			}
 		}
-	}
 }
 
 void Engine::UpdateBuffMatrix()
@@ -127,8 +134,8 @@ void Engine::UpdateBuffMatrix()
 	Clear(MATRIX_BUFF);
 	for (size_t i = 0; i < Sprite::GetAllSprites().size(); i++)
 	{
-		if (Sprite::GetAllSprites()[i]->Visible == true) 
-			if(Sprite::GetAllSprites()[i]->Animate == true)
+		if (Sprite::GetAllSprites()[i]->Visible == true)
+			if (Sprite::GetAllSprites()[i]->Animate == true)
 				Draw(Sprite::GetAllSprites()[i]->GetLocation(), Sprite::GetAllSprites()[i], Sprite::GetAllSprites()[i]->NextFrame());
 			else Draw(Sprite::GetAllSprites()[i]->GetLocation(), Sprite::GetAllSprites()[i]);
 	}
