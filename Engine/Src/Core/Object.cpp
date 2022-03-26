@@ -6,7 +6,7 @@ Object::Object()
 	InputSystem::Get()->AddListener(this);
 }
 
-Object::Object(Vector2 Location)
+Object::Object(Vec2 Location)
 {
 	SetLocation(Location);
 	AllObjects.push_back(this);
@@ -24,27 +24,27 @@ Object::~Object()
 	InputSystem::Get()->RemoveListener(this);
 }
 
-const Vector2 Object::GetLocation()
+const Vec2 Object::GetLocation()
 {
 	if (Owner == NULL) return Location;
-	else return Vector2(Location.X + GetOwner()->Location.X, Location.Y + GetOwner()->Location.Y);
+	else return Vec2(Location.x + GetOwner()->Location.y, Location.y + GetOwner()->Location.y);
 }
 
-Vector2 Object::SetLocation(Vector2 vector)
+Vec2 Object::SetLocation(Vec2 vector)
 {
 	Location = vector;
 	return Location;
 }
 
-Vector2 Object::AddLocation(Vector2 vector)
+Vec2 Object::AddLocation(Vec2 vector)
 {
-	Location.Sum(vector);
+	Location.Add(vector);
 	return Location;
 }
 
-Vector2 Object::AddLocation(int x, int y)
+Vec2 Object::AddLocation(int x, int y)
 {
-	Location.Sum(x, y);
+	Location.Add(x, y);
 	return Location;
 }
 

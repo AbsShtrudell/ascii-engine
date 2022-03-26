@@ -31,7 +31,7 @@ Sprite::~Sprite()
 	frames.clear();
 }
 
-const Vector2 Sprite::GetSize()
+const Vec2 Sprite::GetSize()
 {
 	return size;
 }
@@ -57,11 +57,11 @@ void Sprite::LoadFrame(std::string path, int frame)
 	wchar_t** fr;
 	
 	std::wifstream textureFile(path, std::ios::in);
-	fr = new wchar_t* [size.Y];
-	for (int i = 0; i < size.Y; i++)
+	fr = new wchar_t* [size.y];
+	for (int i = 0; i < size.y; i++)
 	{
-		fr[i] = new wchar_t[size.X];
-		for (int j = 0; j < size.X; j++)
+		fr[i] = new wchar_t[size.x];
+		for (int j = 0; j < size.x; j++)
 		{
 			textureFile >> fr[i][j];
 			if (fr[i][j] == L'·') fr[i][j] = L' ';
@@ -85,14 +85,14 @@ int Sprite::SetZOrder(int newValue)
 	return Z;
 }
 
-void Sprite::SetSize(Vector2 sz)
+void Sprite::SetSize(Vec2 sz)
 {
 	size = sz;
 }
 
 void Sprite::SetSize(int x, int y)
 {
-	size = Vector2(x, y);
+	size = Vec2(x, y);
 }
 
 void Sprite::SetFrame(int frame)

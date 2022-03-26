@@ -16,7 +16,7 @@ public:
 	~Sprite();
 	//Sprite(const Sprite& sprite);
 
-	const Vector2 GetSize();
+	const Vec2 GetSize();
 	const int GetZOrder();
 	const int GetCurrentFrame();
 	static std::vector<Sprite*> GetAllSprites();
@@ -24,7 +24,7 @@ public:
 	
 	void LoadFrame(std::string path, int frame);
 	int SetZOrder(int newValue);
-	void SetSize(Vector2 sz);
+	void SetSize(Vec2 sz);
 	void SetSize(int x, int y);
 	void SetFrame(int frame);
 
@@ -41,7 +41,7 @@ private:
 	void ClearFrame(int frame);
 
 	int currentFrame = 0;
-	Vector2 size = Vector2(0, 0);
+	Vec2 size = Vec2(0, 0);
 	int Z = 0;
 };
 

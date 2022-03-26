@@ -1,19 +1,17 @@
 ﻿#include "Engine.h"
-#include "InputSystem.h"
 
 void Engine::Start()
 {
-	Level level;
 	Sprite z(32, 20, "E:\\Projects\\VS Projects\\ALife\\WD_Quad.txt");
 	Sprite j(15, 9, "E:\\Projects\\VS Projects\\ALife\\test.txt");
 	j.LoadFrame("E:\\Projects\\VS Projects\\ALife\\test1.txt", 1);
 	j.LoadFrame("E:\\Projects\\VS Projects\\ALife\\test2.txt", 2);
-	j.SetLocation(Vector2(1, 1));
+	j.SetLocation(Vec2(1, 1));
 
 	Object g;
 	int c = Object::GetAllObjectsOfClass<Sprite>().size();
 	int i = Object::GetAllObjects().size();
-	Vector2 l;
+	Vec2 l;
 
 	while (!exit)
 	{
@@ -81,20 +79,18 @@ void Engine::Init()
 	CursorInfo.bVisible = false;
 	CursorInfo.dwSize = 1;
 	SetConsoleCursorInfo(Console, &CursorInfo);
-
+	ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 }
 
 void Engine::UpdateScreen()
 {
-	COORD cursor;
 	int counter = 0;
 	LPWSTR screen = new WCHAR[SCREEN_HEIGHT * SCREEN_WIDTH];
 	for (int i = 0; i < SCREEN_HEIGHT; i++)
 		for (int j = 0; j < SCREEN_WIDTH; j++)
 		{
-			if (Matrix[i][j] != BuffMatrix[i][j])
-				Matrix[i][j] = BuffMatrix[i][j];
-			screen[counter] = BuffMatrix[i][j];
+			Matrix[i][j] = BuffMatrix[i][j];
+			screen[counter] = Matrix[i][j];
 			counter++;
 		}
 	screen[SCREEN_HEIGHT * SCREEN_WIDTH - 1] = '\0';
@@ -102,29 +98,29 @@ void Engine::UpdateScreen()
 	WriteConsoleOutputCharacter(Console, screen, SCREEN_HEIGHT * SCREEN_WIDTH, { 0, 0 }, &dwBytesWritten);
 }
 
-void Engine::Draw(Vector2 location, Sprite* sprite)
+void Engine::Draw(Vec2 location, Sprite* sprite)
 {
-	for (size_t i = 0; i < sprite->GetSize().Y; i++)
+	for (size_t i = 0; i < sprite->GetSize().y; i++)
 	{
-		if (i + location.Y >= SCREEN_HEIGHT || location.Y + i < 0) continue;
-		for (size_t j = 0; j < sprite->GetSize().X; j++)
+		if (i + location.y >= SCREEN_HEIGHT || location.y + i < 0) continue;
+		for (size_t j = 0; j < sprite->GetSize().x; j++)
 		{
-			if (j + location.X >= SCREEN_WIDTH || location.X + j < 0) continue;
-			BuffMatrix[i + location.Y][j + location.X] = sprite->frames[0][i][j];
+			if (j + location.x >= SCREEN_WIDTH || location.x + j < 0) continue;
+			BuffMatrix[i + location.y][j + location.x] = sprite->frames[0][i][j];
 		}
 	}
 }
 
-void Engine::Draw(Vector2 location, Sprite* sprite, int frame)
+void Engine::Draw(Vec2 location, Sprite* sprite, int frame)
 {
 	if (!(frame > sprite->frames.size() - 1))
-		for (size_t i = 0; i < sprite->GetSize().Y; i++)
+		for (size_t i = 0; i < sprite->GetSize().y; i++)
 		{
-			if (i + location.Y >= SCREEN_HEIGHT || location.Y + i < 0) continue;
-			for (size_t j = 0; j < sprite->GetSize().X; j++)
+			if (i + location.y >= SCREEN_HEIGHT || location.y + i < 0) continue;
+			for (size_t j = 0; j < sprite->GetSize().x; j++)
 			{
-				if (j + location.X >= SCREEN_WIDTH || location.X + j < 0) continue;
-				BuffMatrix[i + location.Y][j + location.X] = sprite->frames[frame][i][j];
+				if (j + location.x >= SCREEN_WIDTH || location.x + j < 0) continue;
+				BuffMatrix[i + location.y][j + location.x] = sprite->frames[frame][i][j];
 			}
 		}
 }

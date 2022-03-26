@@ -18,6 +18,25 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Console.cpp" />
+    <ClCompile Include="Src\Core\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="Src\Core\Object.cpp" />
+    <ClCompile Include="Src\Core\Sprite.cpp" />
+    <ClCompile Include="Src\Core\Vec2.cpp" />
+    <ClCompile Include="Src\Engine.cpp" />
+    <ClCompile Include="Src\Src.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Console.h" />
+    <ClInclude Include="Src\Core\InputSystem\InputListener.h" />
+    <ClInclude Include="Src\Core\InputSystem\InputSystem.h" />
+    <ClInclude Include="Src\Core\InputSystem\KeyCode.h" />
+    <ClInclude Include="Src\Core\Object.h" />
+    <ClInclude Include="Src\Core\Sprite.h" />
+    <ClInclude Include="Src\Core\Vec2.h" />
+    <ClInclude Include="Src\Engine.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,25 +157,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Engine.h" />
-    <ClInclude Include="InputListener.h" />
-    <ClInclude Include="InputSystem.h" />
-    <ClInclude Include="KeyCode.h" />
-    <ClInclude Include="Level.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Vector2.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="InputSystem.cpp" />
-    <ClCompile Include="Level.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Src.cpp" />
-    <ClCompile Include="Vector2.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

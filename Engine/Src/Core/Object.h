@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Vector2.h"
-#include "InputSystem.h"
+#include "Vec2.h"
+#include "InputSystem/InputSystem.h"
 #include <vector>
 
 class Object;
@@ -13,14 +13,14 @@ class Object: public InputListener
 public:
 
 	Object();
-	Object(Vector2 Location);
+	Object(Vec2 Location);
 	~Object();
 
-	const Vector2 GetLocation();
+	const Vec2 GetLocation();
 	
-	Vector2 SetLocation(Vector2 vector);
-	Vector2 AddLocation(Vector2 vector);
-	Vector2 AddLocation(int x, int y);
+	Vec2 SetLocation(Vec2 vector);
+	Vec2 AddLocation(Vec2 vector);
+	Vec2 AddLocation(int x, int y);
 
 	Object* GetOwner();
 	void Attach(Object* owner, Object* child);
@@ -53,6 +53,6 @@ private:
 
 	std::vector<Object*> ChildrenList;
 	Object* Owner = nullptr;
-	Vector2 Location = Vector2(0,0);
+	Vec2 Location = Vec2(0,0);
 };
 
