@@ -9,19 +9,29 @@ namespace ASCII
 	public:
 
 		ASCII::Console();
+		ASCII::Console(Console& console);
 		~Console();
 
-		void SetConsoleWindowSize();
-		void SetConsoleBifferSize(Vec2 size);
-		void SetFullscreen();
+		void HideCursor();
+		void SetWindow(int Width, int Height);
+		void WriteConsoleSymbols(wchar_t* symbols, int symbolsAmount);
 
+		const HANDLE getConsoleHandle() const;
+		const HWND getConsoleHWND() const;
+		const CONSOLE_CURSOR_INFO getCursorInfo();
+		const CONSOLE_SCREEN_BUFFER_INFO getConsoleScreenBuffInfo();
+		const COORD getConsoleBuffSize();
+		const WINDOWINFO getConsoleWindowInfo();
+		const RECT getConsoleWindowSize();	
 
 	private:
-		HANDLE HConsole;
+		HANDLE ConsoleHandle;
+		HWND ConsoleHWND;
+
 		CONSOLE_CURSOR_INFO CursorInfo;
-		CONSOLE_SCREEN_BUFFER_INFO ConsoleScreenInfo;
-		HWND ConsoleWindow;
-		COORD ConsoleBuffSize;
+		CONSOLE_SCREEN_BUFFER_INFO ConsoleScreenBuffInfo;
 		RECT ConsoleWindowSize;
+		COORD ConsoleBuffSize;
+		WINDOWINFO ConsoleWindowInfo;
 	};
 }
