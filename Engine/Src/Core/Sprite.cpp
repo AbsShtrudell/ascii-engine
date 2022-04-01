@@ -41,43 +41,43 @@ const int Sprite::GetZOrder()
 	return Z;
 }
 
-const int Sprite::GetCurrentFrame()
-{
-	return currentFrame;
-}
+//const int Sprite::GetCurrentFrame()
+//{
+//	return currentFrame;
+//}
 
-void Sprite::ClearFrame(int frame)
-{
-	delete[]frames[frame];
-	frames.erase(std::next(frames.begin(),frame));
-}
+//void Sprite::ClearFrame(int frame)
+//{
+//	delete[]frames[frame];
+//	frames.erase(std::next(frames.begin(),frame));
+//}
 
-void Sprite::LoadFrame(std::string path, int frame)
-{
-	wchar_t** fr;
-	
-	std::wifstream textureFile(path, std::ios::in);
-	fr = new wchar_t* [size.y];
-	for (int i = 0; i < size.y; i++)
-	{
-		fr[i] = new wchar_t[size.x];
-		for (int j = 0; j < size.x; j++)
-		{
-			textureFile >> fr[i][j];
-			if (fr[i][j] == L'·') fr[i][j] = L' ';
-		}
-	}
-	textureFile.close();
-
-	if ((frame <= frames.size() - 1) && frames.size() != 0)
-	{
-		ClearFrame(frame);
-		frames[frame] = fr;
-	}
-	else frames.push_back(fr);
-
-	
-}
+//void Sprite::LoadFrame(std::string path, int frame)
+//{
+//	wchar_t** fr;
+//	
+//	std::wifstream textureFile(path, std::ios::in);
+//	fr = new wchar_t* [size.y];
+//	for (int i = 0; i < size.y; i++)
+//	{
+//		fr[i] = new wchar_t[size.x];
+//		for (int j = 0; j < size.x; j++)
+//		{
+//			textureFile >> fr[i][j];
+//			if (fr[i][j] == L'·') fr[i][j] = L' ';
+//		}
+//	}
+//	textureFile.close();
+//
+//	if ((frame <= frames.size() - 1) && frames.size() != 0)
+//	{
+//		ClearFrame(frame);
+//		frames[frame] = fr;
+//	}
+//	else frames.push_back(fr);
+//
+//	
+//}
 
 int Sprite::SetZOrder(int newValue)
 {
@@ -95,20 +95,30 @@ void Sprite::SetSize(int x, int y)
 	size = Vec2(x, y);
 }
 
-void Sprite::SetFrame(int frame)
+//void Sprite::SetFrame(int frame)
+//{
+//	if (frame > frames.size() - 1)
+//		currentFrame = frames.size() - 1;
+//	else currentFrame = frame;
+//}
+
+const bool Sprite::isVisible() const
 {
-	if (frame > frames.size() - 1)
-		currentFrame = frames.size() - 1;
-	else currentFrame = frame;
+	return Visible;
 }
 
-int Sprite::NextFrame()
+void Sprite::setVisibility(bool visibility)
 {
-	if (currentFrame + 1 > frames.size() - 1)
-		currentFrame = 0;
-	else currentFrame++;
-	return currentFrame;
+	Visible = visibility;
 }
+
+//int Sprite::NextFrame()
+//{
+//	if (currentFrame + 1 > frames.size() - 1)
+//		currentFrame = 0;
+//	else currentFrame++;
+//	return currentFrame;
+//}
 
 void Sprite::ZSort()
 {
@@ -124,4 +134,18 @@ void Sprite::ZSort()
 std::vector<Sprite*> Sprite::GetAllSprites()
 {
 	return AllSprites;
+}
+
+std::vector<Sprite*> Sprite::AllSprites = {};
+
+Sprite::SpriteLoader::SpriteLoader()
+{
+}
+
+Sprite::SpriteLoader::~SpriteLoader()
+{
+}
+
+void Sprite::SpriteLoader::LoadSprite(std::string path, Sprite& spr)
+{
 }

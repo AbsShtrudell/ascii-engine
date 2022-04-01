@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Console.cpp" />
+    <ClCompile Include="Src\Core\FlipBook.cpp" />
     <ClCompile Include="Src\Core\InputSystem\InputSystem.cpp" />
     <ClCompile Include="Src\Core\Object.cpp" />
     <ClCompile Include="Src\Core\Sprite.cpp" />
@@ -30,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Console.h" />
+    <ClInclude Include="Src\Core\FlipBook.h" />
     <ClInclude Include="Src\Core\InputSystem\InputListener.h" />
     <ClInclude Include="Src\Core\InputSystem\InputSystem.h" />
     <ClInclude Include="Src\Core\InputSystem\KeyCode.h" />

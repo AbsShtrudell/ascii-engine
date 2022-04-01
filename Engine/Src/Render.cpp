@@ -133,7 +133,7 @@ void Render::UpdateBuffMatrix()
 	{
 		if (Sprite::GetAllSprites()[i]->Visible == true)
 			if (Sprite::GetAllSprites()[i]->Animate == true)
-				Draw(Sprite::GetAllSprites()[i]->GetLocation(), Sprite::GetAllSprites()[i], Sprite::GetAllSprites()[i]->NextFrame());
-			else Draw(Sprite::GetAllSprites()[i]->GetLocation(), Sprite::GetAllSprites()[i]);
+				Draw(Sprite::GetAllSprites()[i]->GetWorldLocation(), Sprite::GetAllSprites()[i], Sprite::GetAllSprites()[i]->NextFrame());
+			else Draw(Sprite::GetAllSprites()[i]->GetWorldLocation(), Sprite::GetAllSprites()[i]);
 	}
 }

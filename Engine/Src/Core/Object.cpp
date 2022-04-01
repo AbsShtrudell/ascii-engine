@@ -6,11 +6,12 @@ Object::Object()
 	InputSystem::Get()->AddListener(this);
 }
 
-Object::Object(Vec2 Location)
+Object::Object(Vec2 Location, Object* owner)
 {
 	SetLocation(Location);
 	AllObjects.push_back(this);
 	InputSystem::Get()->AddListener(this);
+	if (owner != NULL) Attach(owner, this);
 }
 
 Object::~Object()
@@ -24,10 +25,15 @@ Object::~Object()
 	InputSystem::Get()->RemoveListener(this);
 }
 
-const Vec2 Object::GetLocation()
+const Vec2 Object::GetWorldLocation()
 {
 	if (Owner == NULL) return Location;
 	else return Vec2(Location.x + GetOwner()->Location.y, Location.y + GetOwner()->Location.y);
+}
+
+const Vec2 Object::GetRelativeLocation()
+{
+	return Location;
 }
 
 Vec2 Object::SetLocation(Vec2 vector)
@@ -53,9 +59,33 @@ void Object::SetOwner(Object* owner)
 	Owner = owner;
 }
 
-Object* Object::GetOwner()
+Object* Object::GetOwner() const
 {
 	return Owner;
+}
+
+void Object::AttachChild(Object* child)
+{
+	if (child->GetOwner() != NULL)
+	{
+		if (child->GetOwner() == this) return;
+		Deattach(child->GetOwner(), child);
+	}
+	ChildrenList.push_back(child);
+	child->SetOwner(this);
+}
+
+void Object::DeattachChild(Object* child)
+{
+	if (child->GetOwner() == NULL || child->GetOwner() != this) return;
+
+	for (size_t i = 0; i < ChildrenList.size(); i++)
+		if (child == ChildrenList[i])
+		{
+			ChildrenList.erase(ChildrenList.begin() + i);
+			break;
+		}
+	child->SetOwner(NULL);
 }
 
 void  Object::Attach(Object* owner, Object* child)
@@ -73,10 +103,10 @@ void Object::Deattach(Object* owner, Object* child)
 {
 	if (child->GetOwner() == NULL || child->GetOwner() != owner) return;
 
-	for (size_t i = 0; i < ChildrenList.size(); i++)
-		if (child == ChildrenList[i])
+	for (size_t i = 0; i < owner->ChildrenList.size(); i++)
+		if (child == owner->ChildrenList[i])
 		{
-			ChildrenList.erase(ChildrenList.begin() + i);
+			owner->ChildrenList.erase(owner->ChildrenList.begin() + i);
 			break;
 		}
 	child->SetOwner(NULL);
@@ -109,3 +139,5 @@ void Object::OnKeyDown(int key)
 void Object::OnKeyUp(int key)
 {
 }
+
+std::vector<Object*> Object::AllObjects = {};
