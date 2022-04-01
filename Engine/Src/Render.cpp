@@ -2,22 +2,16 @@
 
 Render::Render()
 {
-	SymbolMatrix = nullptr;
-	BuffSymbolMatrix = nullptr;
-	ColorMatrix = nullptr;
-	BuffColorMatrix = nullptr;
-	BackColorMatrix = nullptr;
-	BuffBackColorMatrix = nullptr;
+	SymbolMatrix = new Matrix<wchar_t>(screenSize, L' ');
+	BuffSymbolMatrix = new Matrix<wchar_t>(screenSize, L' ');
+	ColorMatrix = new Matrix<int>(screenSize, 0);
+	BuffColorMatrix = new Matrix<int>(screenSize, 0);
+	BackColorMatrix = new Matrix<int>(screenSize, 0);
+	BuffBackColorMatrix = new Matrix<int>(screenSize, 0);
 }
 
 Render::~Render()
 {
-	delete[] SymbolMatrix;
-	delete[] BuffSymbolMatrix;
-	delete[] ColorMatrix;
-	delete[] BuffColorMatrix;
-	delete[] BackColorMatrix;
-	delete[] BuffBackColorMatrix;
 }
 
 void Render::Clear(MatrixEnum MatrixType)
@@ -25,34 +19,34 @@ void Render::Clear(MatrixEnum MatrixType)
 	switch (MatrixType)
 	{
 	case MatrixEnum::SYMBOL_MATRIX:
-		FillMatrix(SymbolMatrix, L' ');
+		SymbolMatrix->Clear();
 		break;
 	case MatrixEnum::SYMBOL_MATRIX_BUFF:
-		FillMatrix(BuffSymbolMatrix, L' ');
+		BuffSymbolMatrix->Clear();
 		break;
 	case MatrixEnum::COLOR_MATRIX:
-		FillMatrix(ColorMatrix, 0);
+		ColorMatrix->Clear();
 		break;
 	case MatrixEnum::COLOR_MATRIX_BUFF:
-		FillMatrix(BuffColorMatrix, 0);
+		BuffColorMatrix->Clear();
 		break;
 	case MatrixEnum::BACKCOLOR_MATRIX:
-		FillMatrix(BackColorMatrix, 0);
+		BackColorMatrix->Clear();
 		break;
 	case MatrixEnum::BACKCOLOR_MATRIX_BUFF:
-		FillMatrix(BuffBackColorMatrix, 0);
+		BuffBackColorMatrix->Clear();
 		break;
 	}
 }
 
 void Render::ResizeAllMatrixes(Vec2 size)
 {
-	Resize(SymbolMatrix, size);
-	Resize(BuffSymbolMatrix, size);
-	Resize(ColorMatrix, size);
-	Resize(BuffColorMatrix, size);
-	Resize(BackColorMatrix, size);
-	Resize(BuffBackColorMatrix, size);
+	SymbolMatrix->setSize(size);
+	BuffSymbolMatrix->setSize(size);
+	ColorMatrix->setSize(size);
+	BuffColorMatrix->setSize(size);
+	BackColorMatrix->setSize(size);
+	BuffBackColorMatrix->setSize(size);
 	screenSize = size;
 }
 
@@ -61,56 +55,42 @@ void Render::ResizeMatrix(MatrixEnum MatrixType, Vec2 size)
 	switch (MatrixType)
 	{
 	case MatrixEnum::SYMBOL_MATRIX:
-		Resize(SymbolMatrix, size);
+		SymbolMatrix->setSize(size);
 		break;
 	case MatrixEnum::SYMBOL_MATRIX_BUFF:
-		Resize(BuffSymbolMatrix, size);
+		BuffSymbolMatrix->setSize(size);
 		break;
 	case MatrixEnum::COLOR_MATRIX:
-		Resize(ColorMatrix, size);
+		ColorMatrix->setSize(size);
 		break;
 	case MatrixEnum::COLOR_MATRIX_BUFF:
-		Resize(BuffColorMatrix, size);
+		BuffColorMatrix->setSize(size);
 		break;
 	case MatrixEnum::BACKCOLOR_MATRIX:
-		Resize(BackColorMatrix, size);
+		BackColorMatrix->setSize(size);
 		break;
 	case MatrixEnum::BACKCOLOR_MATRIX_BUFF:
-		Resize(BuffBackColorMatrix, size);
+		BuffBackColorMatrix->setSize(size);
 		break;
 	}
 	screenSize = size;
-}
-
-void Render::FillMatrix(wchar_t** matrix, wchar_t symbol)
-{
-	for (int i = 0; i < screenSize.y; i++)
-		for (int j = 0; j < screenSize.x; j++)
-			matrix[i][j] = symbol;
-}
-
-void Render::FillMatrix(int** matrix, int value)
-{
-	for (int i = 0; i < screenSize.y; i++)
-		for (int j = 0; j < screenSize.x; j++)
-			matrix[i][j] = value;
 }
 
 void Render::UpdateScreen()
 {
 	int counter = 0;
 	LPWSTR screen = new WCHAR[screenSize.y * screenSize.x];
-	for (int i = 0; i < screenSize.y; i++)
-		for (int j = 0; j < screenSize.x; j++)
+	for (int i = 0; i < screenSize.x; i++)
+		for (int j = 0; j < screenSize.y; j++)
 		{
-			SymbolMatrix[i][j] = BuffSymbolMatrix[i][j];
-			screen[counter] = SymbolMatrix[i][j];
+			SymbolMatrix->at(i, j) = BuffSymbolMatrix->at(i, j);
+			screen[counter] = SymbolMatrix->at(i, j);
 			counter++;
 		}
-	screen[screenSize.y * screenSize.x - 1] = '\0';
 	DWORD dwBytesWritten = 0;
 
-	console.WriteConsoleSymbols(screen, screenSize.y * screenSize.x -100);
+	console.WriteConsoleSymbols(screen, screenSize.y * screenSize.x);
+	Clear(MatrixEnum::SYMBOL_MATRIX_BUFF);
 	delete[]screen;
 }
 
@@ -122,21 +102,21 @@ void Render::Draw(Vec2 location, Sprite* sprite)
 		for (size_t j = 0; j < sprite->GetSize().x; j++)
 		{
 			if (j + location.x >= screenSize.x || location.x + j < 0) continue;
-			BuffSymbolMatrix[i + location.y][j + location.x] = sprite->frames[0][i][j];
+			BuffSymbolMatrix->at(i + location.y,j + location.x) = sprite->frames[0][i][j];
 		}
 	}
 }
 
 void Render::Draw(Vec2 location, Sprite* sprite, int frame)
 {
-	if (!(frame > sprite->frames.size() - 1))
-		for (size_t i = 0; i < sprite->GetSize().y; i++)
+	if (frame < sprite->frames.size())
+		for (size_t i = 0; i < sprite->GetSize().x; i++)
 		{
-			if (i + location.y >= screenSize.y || location.y + i < 0) continue;
-			for (size_t j = 0; j < sprite->GetSize().x; j++)
+			if (i + location.x >= screenSize.x || location.x + i < 0) continue;
+			for (size_t j = 0; j < sprite->GetSize().y; j++)
 			{
-				if (j + location.x >= screenSize.x || location.x + j < 0) continue;
-				BuffSymbolMatrix[i + location.y][j + location.x] = sprite->frames[frame][i][j];
+				if (j + location.y >= screenSize.y || location.y + j < 0) continue;
+				BuffSymbolMatrix->at(i + location.x, j + location.y) = sprite->frames[frame][i][j];
 			}
 		}
 }
@@ -144,56 +124,6 @@ void Render::Draw(Vec2 location, Sprite* sprite, int frame)
 const Vec2 Render::getScreenSize() const
 {
 	return screenSize;
-}
-
-void Render::Resize(wchar_t**& matrix, Vec2 size)
-{
-	if (size.x == 0 || size.y == 0) return;
-
-	wchar_t** buffmatrix = nullptr;
-
-	buffmatrix = new wchar_t* [size.x];
-	for (int i = 0; i < size.x; i++)
-	{
-		//buffmatrix[i] = nullptr;
-		buffmatrix[i] = new wchar_t[size.y];
-	}
-
-	FillMatrix(buffmatrix, L' ');
-
-	if (matrix != NULL)
-	{
-		for (int i = 0; i < screenSize.x; i++)
-			for (int j = 0; j < screenSize.y; j++)
-				buffmatrix[i][j] = matrix[i][j];
-	}
-	matrix = buffmatrix;
-	//delete[]buffmatrix;
-}
-
-void Render::Resize(int**& matrix, Vec2 size)
-{
-	if (size.x == 0 || size.y == 0) return;
-
-	int** buffmatrix = nullptr;
-
-	buffmatrix = new int* [size.x];
-	for (int i = 0; i < size.x; i++)
-	{
-		//buffmatrix[i] = nullptr;
-		buffmatrix[i] = new int[size.y];
-	}
-
-	FillMatrix(buffmatrix, 7);
-
-	if (matrix != NULL)
-	{
-		for (int i = 0; i < screenSize.x; i++)
-			for (int j = 0; j < screenSize.y; j++)
-				buffmatrix[i][j] = matrix[i][j];
-	}
-	matrix = buffmatrix;
-	//delete[]buffmatrix;
 }
 
 void Render::UpdateBuffMatrix()

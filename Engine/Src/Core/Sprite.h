@@ -37,7 +37,6 @@ public:
 	bool Animate = true;
 	
 private:
-	
 	void ClearFrame(int frame);
 
 	int currentFrame = 0;

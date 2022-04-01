@@ -3,6 +3,7 @@
 #include "Core/Vec2.h"
 #include "Core/Sprite.h"
 #include "Console.h"
+#include "Matrix.h"
 
 enum class MatrixEnum { SYMBOL_MATRIX, SYMBOL_MATRIX_BUFF, COLOR_MATRIX, COLOR_MATRIX_BUFF, BACKCOLOR_MATRIX, BACKCOLOR_MATRIX_BUFF };
 
@@ -23,16 +24,10 @@ public:
 	const Vec2 getScreenSize() const;
 
 private:
-	void Resize(wchar_t**& matrix, Vec2 size);
-	void Resize(int**& matrix, Vec2 size);
-	void FillMatrix(wchar_t** matrix, wchar_t symbol);
-	void FillMatrix(int** matrix, int value);
+	Matrix<wchar_t> *SymbolMatrix, *BuffSymbolMatrix;
+	Matrix<int> *ColorMatrix, *BuffColorMatrix;
+	Matrix<int> *BackColorMatrix, *BuffBackColorMatrix;
 
-	wchar_t **SymbolMatrix, **BuffSymbolMatrix;
-	int **ColorMatrix, **BuffColorMatrix;
-	int **BackColorMatrix, **BuffBackColorMatrix;
-
-	Vec2 screenSize = Vec2(30, 30);
+	Vec2 screenSize = Vec2(85, 30);
 	ASCII::Console console;
 };
-

@@ -26,7 +26,7 @@ void ASCII::Console::SetWindow(int Width, int Height)
 	Rect.Top = 0;
 	Rect.Left = 0;
 	Rect.Bottom = Height;
-	Rect.Right = Width;
+	Rect.Right = Width+1;
 	HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleScreenBufferSize(Handle, coord);
 	SetConsoleWindowInfo(Handle, TRUE, &Rect);
@@ -34,7 +34,8 @@ void ASCII::Console::SetWindow(int Width, int Height)
 
 void ASCII::Console::WriteConsoleSymbols(wchar_t* symbols,int symbolsAmount)
 {
-	WriteConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), symbols, symbolsAmount, { 0, 0 }, NULL);
+	DWORD dword = NULL;
+	WriteConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), symbols, symbolsAmount, { 0, 0 }, &dword);
 	return;
 }
 
