@@ -88,4 +88,9 @@ const RECT ASCII::Console::getConsoleWindowSize()
 	return ConsoleWindowSize;
 }
 
+const Vec2 ASCII::Console::getCursorPosition()
+{
+	return Vec2(getConsoleScreenBuffInfo().dwCursorPosition.X, getConsoleScreenBuffInfo().dwCursorPosition.Y);
+}
+
 

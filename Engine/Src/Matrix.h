@@ -57,7 +57,7 @@ Matrix<T>::Matrix(Matrix& matr)
 template<typename T>
 Matrix<T>::~Matrix()
 {
-	delete[]this->matrix;
+
 }
 
 template<typename T>

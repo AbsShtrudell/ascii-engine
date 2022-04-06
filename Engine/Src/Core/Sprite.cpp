@@ -56,7 +56,9 @@ int Sprite::setZOrder(int newValue)
 void Sprite::setSize(Vec2 sz)
 {
 	size = sz;
-	if (symbolMatrix != NULL) symbolMatrix->setSize(sz);
+	if (symbolMatrix == NULL) symbolMatrix = new Matrix<CSymb>(sz, {L' ', 7});
+	symbolMatrix->setSize(sz);
+	
 }
 
 void Sprite::setSize(int x, int y)
@@ -73,6 +75,16 @@ const bool Sprite::isVisible() const
 void Sprite::setVisibility(bool visibility)
 {
 	visible = visibility;
+}
+
+void Sprite::LoadSprite(std::string path)
+{
+	SpriteReader::LoadSprite(path, this);
+}
+
+void Sprite::SaveSprite(std::string path)
+{
+	SpriteWriter::WriteSprite(path, this);
 }
 
 void Sprite::ZSort()
@@ -110,7 +122,7 @@ void Sprite::SpriteReader::LoadSprite(std::string path, Sprite* sprite)
 		{
 			delete sprite->symbolMatrix;
 		}
-		sprite->symbolMatrix = new Matrix<CSymb>(sprite->getSize(), {L' ', 0});
+		sprite->symbolMatrix = new Matrix<CSymb>(sprite->getSize(), {L' ', 7});
 
 		for (int i = 0; i < sprite->getSize().x; i++)
 		{

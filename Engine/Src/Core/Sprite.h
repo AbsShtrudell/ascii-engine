@@ -43,6 +43,9 @@ public:
 	void setSize(int x, int y);
 	void setVisibility(bool visibility);
 
+	void LoadSprite(std::string path);
+	void SaveSprite(std::string path);
+
 	static void ZSort();
 	
 private:

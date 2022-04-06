@@ -13,7 +13,7 @@ public:
 	Vec2 Add(int x, int y);
 	Vec2 Add(Vec2 vec);
 
-	Vec2& operator=(const Vec2& right);
+	Vec2& operator=(const Vec2 right);
 	bool operator==(const Vec2& right);
 
 	Vec2& operator+=(const Vec2& right);

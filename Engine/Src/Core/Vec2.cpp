@@ -34,7 +34,7 @@ Vec2 Vec2::Add(Vec2 vec)
 	return *this;
 }
 
-Vec2& Vec2::operator=(const Vec2& right)
+Vec2& Vec2::operator=(const Vec2 right)
 {
 	this->x = right.x;
 	this->y = right.y;

@@ -24,6 +24,7 @@ namespace ASCII
 		const COORD getConsoleBuffSize();
 		const WINDOWINFO getConsoleWindowInfo();
 		const RECT getConsoleWindowSize();	
+		const Vec2 getCursorPosition();
 
 	private:
 		HANDLE ConsoleHandle;

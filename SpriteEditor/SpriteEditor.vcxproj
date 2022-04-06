@@ -20,12 +20,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\Src\Console.cpp" />
+    <ClCompile Include="..\Engine\Src\Core\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="..\Engine\Src\Core\Object.cpp" />
     <ClCompile Include="..\Engine\Src\Core\Sprite.cpp" />
+    <ClCompile Include="..\Engine\Src\Core\Vec2.cpp" />
     <ClCompile Include="Src.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\Src\Console.h" />
+    <ClInclude Include="..\Engine\Src\Core\InputSystem\InputListener.h" />
+    <ClInclude Include="..\Engine\Src\Core\InputSystem\InputSystem.h" />
+    <ClInclude Include="..\Engine\Src\Core\Object.h" />
     <ClInclude Include="..\Engine\Src\Core\Sprite.h" />
+    <ClInclude Include="..\Engine\Src\Core\Vec2.h" />
+    <ClInclude Include="..\Engine\Src\CSymb.h" />
+    <ClInclude Include="..\Engine\Src\Matrix.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
