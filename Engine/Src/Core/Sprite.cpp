@@ -1,17 +1,19 @@
 #include "Sprite.h"
 
-Sprite::Sprite(int w, int h, std::string path)
+Sprite::Sprite(std::string path)
 {
-	SetSize(w, h);
-	LoadFrame(path, 0);
+	symbolMatrix = nullptr;
 
-	
+	SpriteReader::LoadSprite(path, this);
+
 	AllSprites.push_back(this);
 	ZSort();
 }
 
 Sprite::Sprite()
 {
+	symbolMatrix = nullptr;
+
 	AllSprites.push_back(this);
 	ZSort();
 }
@@ -26,99 +28,52 @@ Sprite::~Sprite()
 		}
 
 	ZSort();
-	for(int i = 0; i < (int)frames.size(); i++) 
-		delete[]frames[i];
-	frames.clear();
+
+	if (symbolMatrix != NULL) delete symbolMatrix;
 }
 
-const Vec2 Sprite::GetSize()
+const Vec2 Sprite::getSize()
 {
 	return size;
 }
 
-const int Sprite::GetZOrder()
+const int Sprite::getZOrder()
 {
 	return Z;
 }
 
-//const int Sprite::GetCurrentFrame()
-//{
-//	return currentFrame;
-//}
+Matrix<CSymb> Sprite::getSymbMatrix()
+{
+	return *symbolMatrix;
+}
 
-//void Sprite::ClearFrame(int frame)
-//{
-//	delete[]frames[frame];
-//	frames.erase(std::next(frames.begin(),frame));
-//}
-
-//void Sprite::LoadFrame(std::string path, int frame)
-//{
-//	wchar_t** fr;
-//	
-//	std::wifstream textureFile(path, std::ios::in);
-//	fr = new wchar_t* [size.y];
-//	for (int i = 0; i < size.y; i++)
-//	{
-//		fr[i] = new wchar_t[size.x];
-//		for (int j = 0; j < size.x; j++)
-//		{
-//			textureFile >> fr[i][j];
-//			if (fr[i][j] == L'·') fr[i][j] = L' ';
-//		}
-//	}
-//	textureFile.close();
-//
-//	if ((frame <= frames.size() - 1) && frames.size() != 0)
-//	{
-//		ClearFrame(frame);
-//		frames[frame] = fr;
-//	}
-//	else frames.push_back(fr);
-//
-//	
-//}
-
-int Sprite::SetZOrder(int newValue)
+int Sprite::setZOrder(int newValue)
 {
 	Z = newValue;
 	return Z;
 }
 
-void Sprite::SetSize(Vec2 sz)
+void Sprite::setSize(Vec2 sz)
 {
 	size = sz;
+	if (symbolMatrix != NULL) symbolMatrix->setSize(sz);
 }
 
-void Sprite::SetSize(int x, int y)
+void Sprite::setSize(int x, int y)
 {
 	size = Vec2(x, y);
+	if (symbolMatrix != NULL) symbolMatrix->setSize(Vec2(x, y));
 }
-
-//void Sprite::SetFrame(int frame)
-//{
-//	if (frame > frames.size() - 1)
-//		currentFrame = frames.size() - 1;
-//	else currentFrame = frame;
-//}
 
 const bool Sprite::isVisible() const
 {
-	return Visible;
+	return visible;
 }
 
 void Sprite::setVisibility(bool visibility)
 {
-	Visible = visibility;
+	visible = visibility;
 }
-
-//int Sprite::NextFrame()
-//{
-//	if (currentFrame + 1 > frames.size() - 1)
-//		currentFrame = 0;
-//	else currentFrame++;
-//	return currentFrame;
-//}
 
 void Sprite::ZSort()
 {
@@ -126,26 +81,69 @@ void Sprite::ZSort()
 	for (size_t i = 0; i < AllSprites.size() - 1; i++)
 		for (size_t j = 0; j < AllSprites.size() - i - 1; j++)
 		{
-			if (AllSprites[j]->GetZOrder() > AllSprites[j + 1]->GetZOrder())
+			if (AllSprites[j]->getZOrder() > AllSprites[j + 1]->getZOrder())
 				std::swap(AllSprites[j], AllSprites[j + 1]);
 		}
 }
 
-std::vector<Sprite*> Sprite::GetAllSprites()
+std::vector<Sprite*> Sprite::getAllSprites()
 {
 	return AllSprites;
 }
 
 std::vector<Sprite*> Sprite::AllSprites = {};
 
-Sprite::SpriteLoader::SpriteLoader()
+void Sprite::SpriteReader::LoadSprite(std::string path, Sprite* sprite)
 {
+	std::ifstream file;
+	file.open(path, std::ios_base::binary);
+
+	Vec2 sz;
+
+	if (file.is_open())
+	{
+		file >> sz.x >> sz.y;
+
+		sprite->setSize(sz.x, sz.y);
+
+		if (sprite->symbolMatrix != NULL)
+		{
+			delete sprite->symbolMatrix;
+		}
+		sprite->symbolMatrix = new Matrix<CSymb>(sprite->getSize(), {L' ', 0});
+
+		for (int i = 0; i < sprite->getSize().x; i++)
+		{
+			for (int j = 0; j < sprite->getSize().y; j++)
+			{
+				file.get() >> sprite->symbolMatrix->at(i, j).symbol;
+				file.get() >> sprite->symbolMatrix->at(i, j).color;
+			}
+		}
+	}
+	else throw(std::exception("Warning! Can't load file"));//написать свои исключения
 }
 
-Sprite::SpriteLoader::~SpriteLoader()
+void Sprite::SpriteWriter::WriteSprite(std::string path, Sprite* sprite)
 {
-}
+	std::ofstream file;
+	file.open(path, std::ios::out | std::ios::binary);
 
-void Sprite::SpriteLoader::LoadSprite(std::string path, Sprite& spr)
-{
+	if (file.is_open())
+	{
+		file << sprite->getSize().x << sprite->getSize().y;
+
+		if (sprite->symbolMatrix != NULL)
+		{
+			for (int i = 0; i < sprite->getSize().x; i++)
+			{
+				for (int j = 0; j < sprite->getSize().y; j++)
+				{
+					file << sprite->symbolMatrix->at(i, j).symbol;
+					file << sprite->symbolMatrix->at(i, j).color;
+				}
+			}
+		}
+	}
+	else throw(std::exception("Warning! Can't load file"));//написать свои исключения
 }

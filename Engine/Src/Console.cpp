@@ -17,6 +17,15 @@ void ASCII::Console::HideCursor()
 	SetConsoleCursorInfo(ConsoleHandle,&CursorInfo);
 }
 
+void ASCII::Console::MoveCursor(Vec2 position)
+{
+	COORD pos;
+	pos.X = position.x;
+	pos.Y = position.y;
+
+	SetConsoleCursorPosition(getConsoleHandle(), pos);
+}
+
 void ASCII::Console::SetWindow(int Width, int Height)
 {
 	_COORD coord;

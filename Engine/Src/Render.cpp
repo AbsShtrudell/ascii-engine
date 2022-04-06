@@ -96,10 +96,10 @@ void Render::UpdateScreen()
 
 void Render::Draw(Vec2 location, Sprite* sprite)
 {
-	for (size_t i = 0; i < sprite->GetSize().y; i++)
+	for (size_t i = 0; i < sprite->getSize().y; i++)
 	{
 		if (i + location.y >= screenSize.y || location.y + i < 0) continue;
-		for (size_t j = 0; j < sprite->GetSize().x; j++)
+		for (size_t j = 0; j < sprite->getSize().x; j++)
 		{
 			if (j + location.x >= screenSize.x || location.x + j < 0) continue;
 			BuffSymbolMatrix->at(i + location.y,j + location.x) = sprite->frames[0][i][j];
@@ -110,10 +110,10 @@ void Render::Draw(Vec2 location, Sprite* sprite)
 void Render::Draw(Vec2 location, Sprite* sprite, int frame)
 {
 	if (frame < sprite->frames.size())
-		for (size_t i = 0; i < sprite->GetSize().x; i++)
+		for (size_t i = 0; i < sprite->getSize().x; i++)
 		{
 			if (i + location.x >= screenSize.x || location.x + i < 0) continue;
-			for (size_t j = 0; j < sprite->GetSize().y; j++)
+			for (size_t j = 0; j < sprite->getSize().y; j++)
 			{
 				if (j + location.y >= screenSize.y || location.y + j < 0) continue;
 				BuffSymbolMatrix->at(i + location.x, j + location.y) = sprite->frames[frame][i][j];
@@ -129,11 +129,11 @@ const Vec2 Render::getScreenSize() const
 void Render::UpdateBuffMatrix()
 {
 	Clear(MatrixEnum::SYMBOL_MATRIX);
-	for (size_t i = 0; i < Sprite::GetAllSprites().size(); i++)
+	for (size_t i = 0; i < Sprite::getAllSprites().size(); i++)
 	{
-		if (Sprite::GetAllSprites()[i]->Visible == true)
-			if (Sprite::GetAllSprites()[i]->Animate == true)
-				Draw(Sprite::GetAllSprites()[i]->GetWorldLocation(), Sprite::GetAllSprites()[i], Sprite::GetAllSprites()[i]->NextFrame());
-			else Draw(Sprite::GetAllSprites()[i]->GetWorldLocation(), Sprite::GetAllSprites()[i]);
+		if (Sprite::getAllSprites()[i]->visible == true)
+			if (Sprite::getAllSprites()[i]->Animate == true)
+				Draw(Sprite::getAllSprites()[i]->GetWorldLocation(), Sprite::getAllSprites()[i], Sprite::getAllSprites()[i]->NextFrame());
+			else Draw(Sprite::getAllSprites()[i]->GetWorldLocation(), Sprite::getAllSprites()[i]);
 	}
 }

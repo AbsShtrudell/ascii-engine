@@ -19,35 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Console.cpp" />
-    <ClCompile Include="Src\Core\FlipBook.cpp" />
-    <ClCompile Include="Src\Core\InputSystem\InputSystem.cpp" />
-    <ClCompile Include="Src\Core\Object.cpp" />
-    <ClCompile Include="Src\Core\Sprite.cpp" />
-    <ClCompile Include="Src\Core\Vec2.cpp" />
-    <ClCompile Include="Src\Engine.cpp" />
-    <ClCompile Include="Src\Render.cpp" />
-    <ClCompile Include="Src\Src.cpp" />
+    <ClCompile Include="..\Engine\Src\Console.cpp" />
+    <ClCompile Include="..\Engine\Src\Core\Sprite.cpp" />
+    <ClCompile Include="Src.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Console.h" />
-    <ClInclude Include="Src\Core\FlipBook.h" />
-    <ClInclude Include="Src\Core\InputSystem\InputListener.h" />
-    <ClInclude Include="Src\Core\InputSystem\InputSystem.h" />
-    <ClInclude Include="Src\Core\InputSystem\KeyCode.h" />
-    <ClInclude Include="Src\Core\Object.h" />
-    <ClInclude Include="Src\Core\Sprite.h" />
-    <ClInclude Include="Src\Core\Vec2.h" />
-    <ClInclude Include="Src\CSymb.h" />
-    <ClInclude Include="Src\Engine.h" />
-    <ClInclude Include="Src\Matrix.h" />
-    <ClInclude Include="Src\Render.h" />
+    <ClInclude Include="..\Engine\Src\Console.h" />
+    <ClInclude Include="..\Engine\Src\Core\Sprite.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c442e84d-8d5b-41e8-9069-0f0444cfae73}</ProjectGuid>
-    <RootNamespace>Engine</RootNamespace>
+    <ProjectGuid>{bd1dd997-82c1-472b-80ee-764d3c4bae45}</ProjectGuid>
+    <RootNamespace>SpriteEditor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

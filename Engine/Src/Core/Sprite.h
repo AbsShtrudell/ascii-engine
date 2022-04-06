@@ -2,56 +2,54 @@
 
 #include <fstream>
 #include "Object.h"
+#include "../CSymb.h"
 #include "../Matrix.h"
 
 class Sprite : public Object
 {
 protected:
 
-	class SpriteLoader
+	class SpriteReader
 	{
 	public:
-		SpriteLoader();
-		~SpriteLoader();
+		SpriteReader(){}
+		~SpriteReader(){}
 
-		static void LoadSprite(std::string path, Sprite& spr);
+		static void LoadSprite(std::string path, Sprite* sprite);
+	};
+
+	class SpriteWriter
+	{
+	public:
+		SpriteWriter(){}
+		~SpriteWriter(){}
+
+		static void WriteSprite(std::string path, Sprite* sprite);
 	};
 
 public:
-
-	Sprite(int w, int h, std::string path);
+	Sprite(std::string path);
 	Sprite();
 	~Sprite();
 
-	const Vec2 GetSize();
-	const int GetZOrder();
-	//const int GetCurrentFrame();
-	static std::vector<Sprite*> GetAllSprites();
-
-	//void LoadFrame(std::string path, int frame);
-	int SetZOrder(int newValue);
-	void SetSize(Vec2 sz);
-	void SetSize(int x, int y);
-	//void SetFrame(int frame);
-
+	const Vec2 getSize();
+	const int getZOrder();
+	Matrix<CSymb> getSymbMatrix();
 	const bool isVisible() const;
+	static std::vector<Sprite*> getAllSprites();
+
+	int setZOrder(int newValue);
+	void setSize(Vec2 sz);
+	void setSize(int x, int y);
 	void setVisibility(bool visibility);
 
-	//int NextFrame();
-
 	static void ZSort();
-
-	//std::vector<wchar_t**> frames;
 	
 private:
-
-	//void ClearFrame(int frame);
 	static std::vector<Sprite*> AllSprites;
 	
-	Matrix<wchar_t> symbolMatrix;
-	Matrix<int> colorMatrix, backColorMatrix;
-	bool Visible = true;
-	//int currentFrame = 0;
+	Matrix<CSymb>* symbolMatrix;
+	bool visible = true;
 	Vec2 size = Vec2(1, 1);
 	int Z = 0;
 };
