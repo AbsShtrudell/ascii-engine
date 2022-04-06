@@ -42,9 +42,9 @@ const int Sprite::getZOrder()
 	return Z;
 }
 
-Matrix<CSymb> Sprite::getSymbMatrix()
+Matrix<CSymb>* Sprite::getSymbMatrix()
 {
-	return *symbolMatrix;
+	return symbolMatrix;
 }
 
 int Sprite::setZOrder(int newValue)
@@ -107,11 +107,11 @@ std::vector<Sprite*> Sprite::AllSprites = {};
 
 void Sprite::SpriteReader::LoadSprite(std::string path, Sprite* sprite)
 {
-	std::ifstream file;
-	file.open(path, std::ios_base::binary);
+	std::wifstream file;
+	file.open(path);
 
 	Vec2 sz;
-
+	int symb;
 	if (file.is_open())
 	{
 		file >> sz.x >> sz.y;
@@ -128,8 +128,9 @@ void Sprite::SpriteReader::LoadSprite(std::string path, Sprite* sprite)
 		{
 			for (int j = 0; j < sprite->getSize().y; j++)
 			{
-				file.get() >> sprite->symbolMatrix->at(i, j).symbol;
-				file.get() >> sprite->symbolMatrix->at(i, j).color;
+				file >> symb;
+				sprite->symbolMatrix->at(i, j).symbol = wchar_t(symb);
+				file >> sprite->symbolMatrix->at(i, j).color;
 			}
 		}
 	}
@@ -138,12 +139,12 @@ void Sprite::SpriteReader::LoadSprite(std::string path, Sprite* sprite)
 
 void Sprite::SpriteWriter::WriteSprite(std::string path, Sprite* sprite)
 {
-	std::ofstream file;
-	file.open(path, std::ios::out | std::ios::binary);
+	std::wofstream file;
+	file.open(path, std::ios::out);
 
 	if (file.is_open())
 	{
-		file << sprite->getSize().x << sprite->getSize().y;
+		file << sprite->getSize().x << ' ' << sprite->getSize().y << ' ';
 
 		if (sprite->symbolMatrix != NULL)
 		{
@@ -151,8 +152,8 @@ void Sprite::SpriteWriter::WriteSprite(std::string path, Sprite* sprite)
 			{
 				for (int j = 0; j < sprite->getSize().y; j++)
 				{
-					file << sprite->symbolMatrix->at(i, j).symbol;
-					file << sprite->symbolMatrix->at(i, j).color;
+					file << (int)sprite->symbolMatrix->at(i, j).symbol << ' ';
+					file << sprite->symbolMatrix->at(i, j).color << ' ';
 				}
 			}
 		}

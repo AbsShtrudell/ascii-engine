@@ -2,6 +2,6 @@
 
 struct CSymb
 {
-	wchar_t symbol = ' ';
-	int color = 0;
+	wchar_t symbol = L' ';
+	int color = 7;
 };

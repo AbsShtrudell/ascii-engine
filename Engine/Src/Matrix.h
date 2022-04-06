@@ -83,7 +83,7 @@ template<typename T>
 T& Matrix<T>::at(int x, int y)
 {
 	if ((x < size.x && y < size.y) && (x >= 0 && y >= 0))
-		return matrix.at(0).at(0);
+		return matrix.at(x).at(y);
 }
 
 template<typename T>

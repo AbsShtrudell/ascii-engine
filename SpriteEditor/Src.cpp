@@ -31,25 +31,26 @@ int main()
 		wcout << symb.symbol;
 		SetConsoleTextAttribute(console.getConsoleHandle(), 7); 
 		cout << " | [^Q]EXIT\n";
-		SetCursorPos(0, 2);
+		console.MoveCursor(Vec2(0, 2));
 		if(spr != NULL) printSprite(spr, &console);
-		SetCursorPos(curspos.x, curspos.y);
+		console.MoveCursor(Vec2(curspos.x, curspos.y));
 		input = _getch();
 		switch (input)
 		{
 		case 26: //ctrl + z
-			SetCursorPos(0, 1);
+			console.MoveCursor(Vec2(0, 1));
 			cout << "[1]OP [2]NEW";
 			input = _getch();
-			SetCursorPos(0, 1);
+			console.MoveCursor(Vec2(0, 1));
 			switch (input)
 			{
 				case '1':
 					cout << "ENTER FILE PATH: ";
 					getline(cin, file_path);
+					//while (cin.get() != '\n');
 					if (spr == NULL) delete spr;
 					spr = new Sprite(file_path);
-					SetCursorPos(curspos.x, curspos.y);
+					console.MoveCursor(Vec2(curspos.x, curspos.y));
 					break;
 				case '2':
 					cout << "ENTER SIZE: ";
@@ -57,18 +58,19 @@ int main()
 					if (spr == NULL) delete spr;
 					spr = new Sprite();
 					spr->setSize(sz);
-					SetCursorPos(curspos.x, curspos.y);
+					console.MoveCursor(Vec2(curspos.x, curspos.y));
 					break;
 			}
 			break;
 		case 24: //ctrl + x
 			if (spr != NULL)
 			{
-				SetCursorPos(0, 1);
+				console.MoveCursor(Vec2(0, 1));
+				while (cin.get() != '\n');
 				cout << "ENTER FILE PATH: ";
 				getline(cin, file_path);
 				spr->SaveSprite(file_path);
-				SetCursorPos(curspos.x, curspos.y);
+				console.MoveCursor(Vec2(curspos.x, curspos.y));
 			}
 			break;
 		case 18: //ctrl + r
@@ -81,10 +83,11 @@ int main()
 				mode = Mode::SYMBOL;
 				break;
 			}
+			break;
 		case 6: //ctrl + f
 			if (spr != NULL)
 			{
-				SetCursorPos(0, 1);
+				console.MoveCursor(Vec2(0, 1));
 				cout << "ENTER " << ModeToString(mode) << ": ";
 				switch (mode)
 				{
@@ -95,7 +98,7 @@ int main()
 					cin >> symb.color;
 					break;
 				}
-				SetCursorPos(curspos.x, curspos.y);
+				console.MoveCursor(Vec2(curspos.x, curspos.y));
 			}
 			break;
 		case 17: //ctrl + q
@@ -104,7 +107,7 @@ int main()
 		case 'w': case 'W':
 			if (spr != NULL)
 			{
-				if (console.getCursorPosition().y > 1)
+				if (console.getCursorPosition().y > 2)
 					console.MoveCursor(console.getCursorPosition() + Vec2(0, -1));
 			}
 			break;
@@ -135,10 +138,10 @@ int main()
 				switch (mode)
 				{
 				case Mode::SYMBOL:
-					spr->getSymbMatrix().at(curspos.x, curspos.y - 2).symbol = symb.symbol;
+					spr->getSymbMatrix()->at(curspos.x, curspos.y - 2).symbol = symb.symbol;
 					break;
 				case Mode::COLOR:
-					spr->getSymbMatrix().at(curspos.x, curspos.y - 2).color = symb.color;
+					spr->getSymbMatrix()->at(curspos.x, curspos.y - 2).color = symb.color;
 					break;
 				}
 			}
@@ -151,16 +154,14 @@ int main()
 
 void printSprite(Sprite* spr, ASCII::Console* console)
 {
-	for (int i = 0; i < spr->getSize().x; i++)
+	for (int j = 0; j < spr->getSize().y; j++)
 	{
-		for (int j = 0; j < spr->getSize().y; j++)
+		for (int i = 0; i < spr->getSize().x; i++)
 		{
-			wcout << spr->getSymbMatrix().at(i, j).symbol;
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), spr->getSymbMatrix().at(i, j).color);
-			
-			console->MoveCursor(console->getCursorPosition() + Vec2(1, 0));
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), spr->getSymbMatrix()->at(i, j).color);
+			wcout << spr->getSymbMatrix()->at(i, j).symbol;
 		}
-		console->MoveCursor(console->getCursorPosition() + Vec2(0, 1));
+		console->MoveCursor(console->getCursorPosition() - Vec2(spr->getSize().x, -1));
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }

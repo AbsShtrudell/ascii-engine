@@ -34,7 +34,7 @@ public:
 
 	const Vec2 getSize();
 	const int getZOrder();
-	Matrix<CSymb> getSymbMatrix();
+	Matrix<CSymb>* getSymbMatrix();
 	const bool isVisible() const;
 	static std::vector<Sprite*> getAllSprites();
 
