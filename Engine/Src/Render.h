@@ -1,7 +1,6 @@
 #pragma once
 #include <Windows.h>
-#include "Core/Vec2.h"
-#include "Core/Sprite.h"
+#include "Core/IDrawObj.h"
 #include "Console.h"
 #include "Matrix.h"
 
@@ -18,8 +17,7 @@ public:
 	void ResizeMatrix(MatrixEnum MatrixType, Vec2 size);
 	void UpdateScreen();
 	void UpdateBuffMatrix();
-	void Draw(Vec2 location, Sprite* sprite);
-	void Draw(Vec2 location, Sprite* sprite, int frame);
+	void Draw(Vec2 location, IDrawObj* drawObj);
 
 	const Vec2 getScreenSize() const;
 

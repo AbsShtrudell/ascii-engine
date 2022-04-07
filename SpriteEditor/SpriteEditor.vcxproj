@@ -24,6 +24,8 @@
     <ClCompile Include="..\Engine\Src\Core\Object.cpp" />
     <ClCompile Include="..\Engine\Src\Core\Sprite.cpp" />
     <ClCompile Include="..\Engine\Src\Core\Vec2.cpp" />
+    <ClCompile Include="..\Engine\Src\FileManagment\TextureReader.cpp" />
+    <ClCompile Include="..\Engine\Src\FileManagment\TextureWriter.cpp" />
     <ClCompile Include="Src.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +36,8 @@
     <ClInclude Include="..\Engine\Src\Core\Sprite.h" />
     <ClInclude Include="..\Engine\Src\Core\Vec2.h" />
     <ClInclude Include="..\Engine\Src\CSymb.h" />
+    <ClInclude Include="..\Engine\Src\FileManagment\TextureReader.h" />
+    <ClInclude Include="..\Engine\Src\FileManagment\TextureWriter.h" />
     <ClInclude Include="..\Engine\Src\Matrix.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

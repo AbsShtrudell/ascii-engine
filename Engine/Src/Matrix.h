@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/Vec2.h"
-#include <vector>;
+#include "CSymb.h"
+#include <vector>
 
 template <typename T>
 class Matrix
@@ -28,6 +29,8 @@ private:
 	std::vector<std::vector<T>> matrix;
 	Vec2 size;
 };
+
+typedef Matrix<CSymb> Texture;
 
 template<typename T>
 Matrix<T>::Matrix(Vec2 size, T nullValue)

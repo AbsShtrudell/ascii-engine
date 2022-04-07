@@ -18,11 +18,10 @@ class Engine
 {
 
 public:
-
 	void Start();
 	void Stop();
 	void Init();
-	void OnUpdate();
+	void Update();
 
 private:
 	ASCII::Console console;

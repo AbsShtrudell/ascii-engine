@@ -140,4 +140,4 @@ void Object::OnKeyUp(int key)
 {
 }
 
-std::vector<Object*> Object::AllObjects = {};
+std::vector<Object*> Object::AllObjects;

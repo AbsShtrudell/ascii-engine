@@ -2,34 +2,20 @@
 
 Sprite::Sprite(std::string path)
 {
-	symbolMatrix = nullptr;
-
-	SpriteReader::LoadSprite(path, this);
-
-	AllSprites.push_back(this);
-	ZSort();
+	LoadSprite(path);
 }
 
 Sprite::Sprite()
 {
-	symbolMatrix = nullptr;
-
-	AllSprites.push_back(this);
-	ZSort();
 }
 
 Sprite::~Sprite()
 {
-	for (size_t i = 0; i < AllSprites.size(); i++)
-		if (this == AllSprites[i])
-		{
-			AllSprites.erase(AllSprites.begin() + i);
-			break;
-		}
+	if (texture != NULL) delete texture;
+}
 
-	ZSort();
-
-	if (symbolMatrix != NULL) delete symbolMatrix;
+void Sprite::OnDrawn()
+{
 }
 
 const Vec2 Sprite::getSize()
@@ -42,32 +28,37 @@ const int Sprite::getZOrder()
 	return Z;
 }
 
-Matrix<CSymb>* Sprite::getSymbMatrix()
+Matrix<CSymb>* Sprite::getTexture()
 {
-	return symbolMatrix;
+	return texture;
 }
 
-int Sprite::setZOrder(int newValue)
+const Vec2 Sprite::getDrawLoacation()
+{
+	return GetWorldLocation();
+}
+
+void Sprite::setZOrder(int newValue)
 {
 	Z = newValue;
-	return Z;
 }
 
 void Sprite::setSize(Vec2 sz)
 {
 	size = sz;
-	if (symbolMatrix == NULL) symbolMatrix = new Matrix<CSymb>(sz, {L' ', 7});
-	symbolMatrix->setSize(sz);
+	if (texture == NULL) texture = new Texture(sz, {L' ', 7});
+	else texture->setSize(sz);
 	
 }
 
 void Sprite::setSize(int x, int y)
 {
 	size = Vec2(x, y);
-	if (symbolMatrix != NULL) symbolMatrix->setSize(Vec2(x, y));
+	if (texture == NULL) texture = new Texture(Vec2(x, y), { L' ', 7 });
+	else texture->setSize(Vec2(x, y));
 }
 
-const bool Sprite::isVisible() const
+const bool Sprite::isVisible()
 {
 	return visible;
 }
@@ -79,84 +70,12 @@ void Sprite::setVisibility(bool visibility)
 
 void Sprite::LoadSprite(std::string path)
 {
-	SpriteReader::LoadSprite(path, this);
+	TextureReader::ReadFile(path, texture);
+	if (texture != NULL) size = texture->getSize();
+	else setSize(0, 0);
 }
 
 void Sprite::SaveSprite(std::string path)
 {
-	SpriteWriter::WriteSprite(path, this);
-}
-
-void Sprite::ZSort()
-{
-	if (AllSprites.size() == 0) return;
-	for (size_t i = 0; i < AllSprites.size() - 1; i++)
-		for (size_t j = 0; j < AllSprites.size() - i - 1; j++)
-		{
-			if (AllSprites[j]->getZOrder() > AllSprites[j + 1]->getZOrder())
-				std::swap(AllSprites[j], AllSprites[j + 1]);
-		}
-}
-
-std::vector<Sprite*> Sprite::getAllSprites()
-{
-	return AllSprites;
-}
-
-std::vector<Sprite*> Sprite::AllSprites = {};
-
-void Sprite::SpriteReader::LoadSprite(std::string path, Sprite* sprite)
-{
-	std::wifstream file;
-	file.open(path);
-
-	Vec2 sz;
-	int symb;
-	if (file.is_open())
-	{
-		file >> sz.x >> sz.y;
-
-		sprite->setSize(sz.x, sz.y);
-
-		if (sprite->symbolMatrix != NULL)
-		{
-			delete sprite->symbolMatrix;
-		}
-		sprite->symbolMatrix = new Matrix<CSymb>(sprite->getSize(), {L' ', 7});
-
-		for (int i = 0; i < sprite->getSize().x; i++)
-		{
-			for (int j = 0; j < sprite->getSize().y; j++)
-			{
-				file >> symb;
-				sprite->symbolMatrix->at(i, j).symbol = wchar_t(symb);
-				file >> sprite->symbolMatrix->at(i, j).color;
-			}
-		}
-	}
-	else throw(std::exception("Warning! Can't load file"));//написать свои исключения
-}
-
-void Sprite::SpriteWriter::WriteSprite(std::string path, Sprite* sprite)
-{
-	std::wofstream file;
-	file.open(path, std::ios::out);
-
-	if (file.is_open())
-	{
-		file << sprite->getSize().x << ' ' << sprite->getSize().y << ' ';
-
-		if (sprite->symbolMatrix != NULL)
-		{
-			for (int i = 0; i < sprite->getSize().x; i++)
-			{
-				for (int j = 0; j < sprite->getSize().y; j++)
-				{
-					file << (int)sprite->symbolMatrix->at(i, j).symbol << ' ';
-					file << sprite->symbolMatrix->at(i, j).color << ' ';
-				}
-			}
-		}
-	}
-	else throw(std::exception("Warning! Can't load file"));//написать свои исключения
+	TextureWriter::WriteFile(path, texture);
 }

@@ -4,8 +4,6 @@
 #include "InputSystem/InputSystem.h"
 #include <vector>
 
-class Object;
-
 class Object: public InputListener
 {
 public:

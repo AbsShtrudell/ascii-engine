@@ -138,10 +138,10 @@ int main()
 				switch (mode)
 				{
 				case Mode::SYMBOL:
-					spr->getSymbMatrix()->at(curspos.x, curspos.y - 2).symbol = symb.symbol;
+					spr->getTexture()->at(curspos.x, curspos.y - 2).symbol = symb.symbol;
 					break;
 				case Mode::COLOR:
-					spr->getSymbMatrix()->at(curspos.x, curspos.y - 2).color = symb.color;
+					spr->getTexture()->at(curspos.x, curspos.y - 2).color = symb.color;
 					break;
 				}
 			}
@@ -158,8 +158,8 @@ void printSprite(Sprite* spr, ASCII::Console* console)
 	{
 		for (int i = 0; i < spr->getSize().x; i++)
 		{
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), spr->getSymbMatrix()->at(i, j).color);
-			wcout << spr->getSymbMatrix()->at(i, j).symbol;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), spr->getTexture()->at(i, j).color);
+			wcout << spr->getTexture()->at(i, j).symbol;
 		}
 		console->MoveCursor(console->getCursorPosition() - Vec2(spr->getSize().x, -1));
 	}

@@ -94,31 +94,17 @@ void Render::UpdateScreen()
 	delete[]screen;
 }
 
-void Render::Draw(Vec2 location, Sprite* sprite)
+void Render::Draw(Vec2 location, IDrawObj* drawObj)
 {
-	for (size_t i = 0; i < sprite->getSize().y; i++)
+	for (size_t i = 0; i < drawObj->getSize().x; i++)
 	{
-		if (i + location.y >= screenSize.y || location.y + i < 0) continue;
-		for (size_t j = 0; j < sprite->getSize().x; j++)
+		if (i + location.x >= screenSize.x || location.x + i < 0) continue;
+		for (size_t j = 0; j < drawObj->getSize().y; j++)
 		{
-			if (j + location.x >= screenSize.x || location.x + j < 0) continue;
-			BuffSymbolMatrix->at(i + location.y,j + location.x) = sprite->frames[0][i][j];
+			if (j + location.y >= screenSize.y || location.y + j < 0) continue;
+			BuffSymbolMatrix->at(i + location.x,j + location.y) = drawObj->getTexture()->at(i, j).symbol;
 		}
 	}
-}
-
-void Render::Draw(Vec2 location, Sprite* sprite, int frame)
-{
-	if (frame < sprite->frames.size())
-		for (size_t i = 0; i < sprite->getSize().x; i++)
-		{
-			if (i + location.x >= screenSize.x || location.x + i < 0) continue;
-			for (size_t j = 0; j < sprite->getSize().y; j++)
-			{
-				if (j + location.y >= screenSize.y || location.y + j < 0) continue;
-				BuffSymbolMatrix->at(i + location.x, j + location.y) = sprite->frames[frame][i][j];
-			}
-		}
 }
 
 const Vec2 Render::getScreenSize() const
@@ -129,11 +115,12 @@ const Vec2 Render::getScreenSize() const
 void Render::UpdateBuffMatrix()
 {
 	Clear(MatrixEnum::SYMBOL_MATRIX);
-	for (size_t i = 0; i < Sprite::getAllSprites().size(); i++)
+	for (size_t i = 0; i < IDrawObj::getAllDrawObjects().size(); i++)
 	{
-		if (Sprite::getAllSprites()[i]->visible == true)
-			if (Sprite::getAllSprites()[i]->Animate == true)
-				Draw(Sprite::getAllSprites()[i]->GetWorldLocation(), Sprite::getAllSprites()[i], Sprite::getAllSprites()[i]->NextFrame());
-			else Draw(Sprite::getAllSprites()[i]->GetWorldLocation(), Sprite::getAllSprites()[i]);
+		if (IDrawObj::getAllDrawObjects()[i]->isVisible() == true)
+		{
+			Draw(IDrawObj::getAllDrawObjects()[i]->getDrawLoacation(), IDrawObj::getAllDrawObjects()[i]);
+			IDrawObj::getAllDrawObjects()[i]->OnDrawn();
+		}
 	}
 }

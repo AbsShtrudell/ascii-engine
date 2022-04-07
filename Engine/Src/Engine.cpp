@@ -2,17 +2,8 @@
 
 void Engine::Start()
 {
-	Sprite z(32, 20, "..\\Resources\\WD_Quad.txt");
-	Sprite j(15, 9, "..\\Resources\\test.txt");
-	j.LoadFrame("..\\Resources\\test1.txt", 1);
-	j.LoadFrame("..\\Resources\\test2.txt", 2);
-	j.SetLocation(Vec2(1, 1));
-
-	Object g;
-	int c = Object::GetAllObjectsOfClass<Sprite>().size();
-	int i = Object::GetAllObjects().size();
-	Vec2 l;
-
+	Sprite f;
+	f.LoadSprite("F:\\Projects\\VS Projects\\ASCIIEngine\\Resources\\WD_Quad.spr");
 	while (!exit)
 	{
 		InputSystem::Get()->Update();
@@ -21,6 +12,7 @@ void Engine::Start()
 		Sleep(40);
 	}
 }
+
 void Engine::Stop()
 {
 	exit = true;
@@ -37,7 +29,7 @@ void Engine::Init()
 	render.ResizeAllMatrixes(render.getScreenSize());
 }
 
-void Engine::OnUpdate()
+void Engine::Update()
 {
 	for (size_t i = 0; i < Object::GetAllObjects().size(); i++)
 		Object::GetAllObjects()[i]->OnUpdate();
