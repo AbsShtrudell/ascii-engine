@@ -17,6 +17,19 @@ void ASCII::Console::HideCursor()
 	SetConsoleCursorInfo(ConsoleHandle,&CursorInfo);
 }
 
+void ASCII::Console::HideScrollBar()
+{
+	CONSOLE_SCREEN_BUFFER_INFO screenBufferInfo;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	GetConsoleScreenBufferInfo(hConsole, &screenBufferInfo);
+	COORD new_screen_buffer_size;
+	new_screen_buffer_size.X = screenBufferInfo.srWindow.Right -
+		screenBufferInfo.srWindow.Left + 1; // Columns
+	new_screen_buffer_size.Y = screenBufferInfo.srWindow.Bottom -
+		screenBufferInfo.srWindow.Top + 1; // Rows
+	SetConsoleScreenBufferSize(hConsole, new_screen_buffer_size);
+}
+
 void ASCII::Console::MoveCursor(Vec2 position)
 {
 	COORD pos;
@@ -29,16 +42,17 @@ void ASCII::Console::MoveCursor(Vec2 position)
 void ASCII::Console::SetWindow(int Width, int Height)
 {
 	_COORD coord;
-	coord.X = Width;
-	coord.Y = Height;
+	coord.X = Width - 1;
+	coord.Y = Height - 1;
 	_SMALL_RECT Rect;
 	Rect.Top = 0;
 	Rect.Left = 0;
-	Rect.Bottom = Height;
-	Rect.Right = Width+1;
+	Rect.Bottom = Height - 1;
+	Rect.Right = Width - 1;
 	HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleScreenBufferSize(Handle, coord);
 	SetConsoleWindowInfo(Handle, TRUE, &Rect);
+	HideScrollBar();
 }
 
 void ASCII::Console::WriteConsoleSymbols(wchar_t* symbols,int symbolsAmount)

@@ -13,6 +13,7 @@ namespace ASCII
 		~Console();
 
 		void HideCursor();
+		void HideScrollBar();
 		void MoveCursor(Vec2 position);
 		void SetWindow(int Width, int Height);
 		void WriteConsoleSymbols(wchar_t* symbols, int symbolsAmount);

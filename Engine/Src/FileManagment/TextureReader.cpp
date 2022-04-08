@@ -1,4 +1,4 @@
-#include "TextureReader.h"
+﻿#include "TextureReader.h"
 
 void TextureReader::ReadFile(std::string path, Texture*& texture)
 {
@@ -28,7 +28,7 @@ void TextureReader::ReadFile(std::string path, Texture*& texture)
 			for (int j = 0; j < texture->getSize().y; j++)
 			{
 				file >> symb;
-				texture->at(i, j).symbol = wchar_t(symb);
+				texture->at(i, j).symbol = (wchar_t)symb;
 				file >> texture->at(i, j).color;
 			}
 		}

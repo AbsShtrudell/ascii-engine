@@ -39,6 +39,9 @@
     <ClCompile Include="..\Engine\Src\FileManagment\TextureWriter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\Engine\Src\Core\IDrawObj.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\Src\Core\Sprite.h">
@@ -69,6 +72,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine\Src\FileManagment\TextureWriter.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Src\Core\IDrawObj.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

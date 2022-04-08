@@ -3,6 +3,10 @@
 #include <iostream>
 #include <string>
 #include <conio.h>
+#include <locale>
+#include <fcntl.h>
+#include <codecvt>
+#include <io.h>
 
 using namespace std;
 
@@ -15,6 +19,10 @@ string ModeToString(Mode md);
 void printSprite(Sprite* spr, ASCII::Console* console);
 int main()
 {
+	std::locale utf8_it(std::locale("It"), new std::codecvt_utf8<wchar_t>);	//Settings for correct output and input of SYMBOLS
+	std::locale::global(utf8_it);
+	//_setmode(_fileno(stdout), _O_U16TEXT);
+
 	Sprite* spr = nullptr;
 	ASCII::Console console;
 	char input;

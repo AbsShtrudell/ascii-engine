@@ -24,11 +24,17 @@ public:
 	virtual void setSize(Vec2 sz) override;
 	virtual void setSize(int x, int y) override;
 	virtual void setVisibility(bool visibility) override;
+	void setCurrentFrame(int newFrame);
+
+	void NextFrame();
+
+	void ResizeFlipBook(int newSize);
 
 	void LoadFrame(std::string path, int frameIndex);
 	void SaveFrame(std::string path, int frameIndex);
 
 	void LoadFlipbook(std::string pathes[], int framesAmount);
+	void LoadFlipBook(std::string pathes[], int begin, int end);
 
 private:
 	std::vector<Texture*> frames;

@@ -80,11 +80,11 @@ void Render::UpdateScreen()
 {
 	int counter = 0;
 	LPWSTR screen = new WCHAR[screenSize.y * screenSize.x];
-	for (int i = 0; i < screenSize.x; i++)
-		for (int j = 0; j < screenSize.y; j++)
+	for (int i = 0; i < screenSize.y; i++)
+		for (int j = 0; j < screenSize.x; j++)
 		{
-			SymbolMatrix->at(i, j) = BuffSymbolMatrix->at(i, j);
-			screen[counter] = SymbolMatrix->at(i, j);
+			SymbolMatrix->at(j, i) = BuffSymbolMatrix->at(j, i);
+			screen[counter] = SymbolMatrix->at(j, i);
 			counter++;
 		}
 	DWORD dwBytesWritten = 0;

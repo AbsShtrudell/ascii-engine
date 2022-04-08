@@ -6,10 +6,15 @@ FlipBook::FlipBook()
 
 FlipBook::~FlipBook()
 {
+	for (auto frame : frames)
+	{
+		delete frame;
+	}
 }
 
 void FlipBook::OnDrawn()
 {
+	NextFrame();
 }
 
 const Vec2 FlipBook::getSize()
@@ -72,6 +77,26 @@ void FlipBook::setVisibility(bool visibility)
 	visible = visibility;
 }
 
+void FlipBook::setCurrentFrame(int newFrame)
+{
+	if (newFrame < frames.size() && newFrame >= 0) currentFrame = newFrame;
+}
+
+void FlipBook::NextFrame()
+{
+	if (currentFrame < frames.size() - 1) currentFrame = 0;
+	else currentFrame++;
+}
+
+void FlipBook::ResizeFlipBook(int newSize)
+{
+	if (newSize > 0)
+	{
+		frames.resize(newSize, NULL);
+		if (currentFrame >= frames.size()) currentFrame = frames.size() - 1;
+	}	
+}
+
 void FlipBook::LoadFrame(std::string path, int frameIndex)
 {
 	if (frameIndex > 0 && frameIndex < frames.size())
@@ -94,6 +119,18 @@ void FlipBook::LoadFlipbook(std::string pathes[], int framesAmount)
 	{
 		frames.resize(framesAmount, nullptr);
 		for (int i = 0; i < framesAmount; i++)
+		{
+			LoadFrame(pathes[i], i);
+		}
+	}
+}
+
+void FlipBook::LoadFlipBook(std::string pathes[], int begin, int end)
+{
+	if (begin >= 0 && end > begin)
+	{
+		if (frames.size() - 1 < end) ResizeFlipBook(end + 1);
+		for (int i = begin; i < end; i++)
 		{
 			LoadFrame(pathes[i], i);
 		}
