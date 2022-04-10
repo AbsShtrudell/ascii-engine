@@ -2,6 +2,7 @@
 
 #include "Vec2.h"
 #include "InputSystem/InputSystem.h"
+#include "CollisionSystem.h"
 #include <vector>
 
 class Object: public InputListener

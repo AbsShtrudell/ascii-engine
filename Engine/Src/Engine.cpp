@@ -3,13 +3,18 @@
 void Engine::Start()
 {
 	Sprite f;
-	f.LoadSprite("E:\\Projects\\VS Projects\\ASCIIEngine\\Resources\\WD_Quad.spr");
+	Sprite f1;
+	f.LoadSprite("F:\\Projects\\VS Projects\\ASCIIEngine\\Resources\\test3.spr");
+	f1.LoadSprite("F:\\Projects\\VS Projects\\ASCIIEngine\\Resources\\test3.spr");
+	f1.getCollider()->setSimulatePhysics(false);
+	f1.SetLocation(Vec2(0, 20));
 	while (!exit)
 	{
 		InputSystem::Get()->Update();
+		CollisionSystem::get()->Update();
 		render.UpdateBuffMatrix();
 		render.UpdateScreen();
-		Sleep(40);
+		Sleep(30);
 	}
 }
 
@@ -20,14 +25,12 @@ void Engine::Stop()
 
 void Engine::Init()
 {
-	std::locale utf8_it(std::locale("It"), new std::codecvt_utf8<wchar_t>);	//Settings for correct output and input of SYMBOLS
-	std::locale::global(utf8_it);
+	//std::locale utf8_it(std::locale("It"), new std::codecvt_utf8<wchar_t>);	//Settings for correct output and input of SYMBOLS
+	//std::locale::global(utf8_it);
 
-	_setmode(_fileno(stdout), _O_U16TEXT);
-
+	//_setmode(_fileno(stdout), _O_U16TEXT);
 	console.HideCursor();
 	console.SetWindow(render.getScreenSize().x, render.getScreenSize().y);
-	console.HideScrollBar();
 	render.ResizeAllMatrixes(render.getScreenSize());
 }
 

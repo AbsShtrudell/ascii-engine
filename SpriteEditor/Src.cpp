@@ -1,12 +1,12 @@
-#include "../Engine/Src/Core/Sprite.h"
+﻿#include "../Engine/Src/Core/Sprite.h"
 #include "../Engine/Src/Console.h"
+#include <locale>
+#include <codecvt>
+#include <fcntl.h>
+#include <io.h>
 #include <iostream>
 #include <string>
 #include <conio.h>
-#include <locale>
-#include <fcntl.h>
-#include <codecvt>
-#include <io.h>
 
 using namespace std;
 
@@ -21,10 +21,15 @@ int main()
 {
 	std::locale utf8_it(std::locale("It"), new std::codecvt_utf8<wchar_t>);	//Settings for correct output and input of SYMBOLS
 	std::locale::global(utf8_it);
+	SetConsoleOutputCP(CP_UTF8);
 	//_setmode(_fileno(stdout), _O_U16TEXT);
-
+	std::wcout.sync_with_stdio(false);
+	std::wcout.imbue(std::locale("en_US.utf8"));
+	//system("chcp 65001");
 	Sprite* spr = nullptr;
+
 	ASCII::Console console;
+	int code;
 	char input;
 	bool exit = false;
 	CSymb symb;
@@ -100,7 +105,9 @@ int main()
 				switch (mode)
 				{
 				case Mode::SYMBOL:
-					wcin >> symb.symbol;
+					cin >> code;
+					symb.symbol = wchar_t(code);
+					//wcin >> symb.symbol;
 					break;
 				case Mode::COLOR:
 					cin >> symb.color;

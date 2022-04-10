@@ -4,7 +4,7 @@ IDrawObj::IDrawObj()
 {
 	AllDrawObjects.push_back(this);
 
-	ZSort();
+	//ZSort();
 }
 
 IDrawObj::~IDrawObj()
