@@ -39,7 +39,7 @@ const int FlipBook::getCurrentFrame() const
 
 const Vec2 FlipBook::getDrawLoacation()
 {
-	return GetWorldLocation();
+	return getWorldLocation();
 }
 
 const bool FlipBook::isVisible()

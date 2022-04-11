@@ -21,12 +21,11 @@ public:
 	void set(CollideTable table);
 	void setCollideState(CollideState state);
 
-private:
-	CollideTable collisionSet = collisionSet_BlockAll;
-
 	static const CollideTable collisionSet_OverlapAll;
 	static const CollideTable collisionSet_BlockAll;
 	static const CollideTable collisionSet_IgnoreAll;
 	static const CollideTable collisionSet_OverlapOnlyPawn;
 	static const CollideTable collisionSet_BlockOnlyStatic;
+private:
+	CollideTable collisionSet = collisionSet_BlockAll;
 };

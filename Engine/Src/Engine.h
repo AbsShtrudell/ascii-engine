@@ -7,6 +7,7 @@
 #include <codecvt>
 #include <io.h>
 #include <Windows.h>
+#include "Core/CollisionSystem.h"
 #include "Render.h"
 #include "Core/Sprite.h"
 #include "Core/Vec2.h"

@@ -1,9 +1,17 @@
 #include "Collider.h"
+#include "CollisionSystem.h"
 
-Collider::Collider(Vec2 sz)
+Collider::Collider(Vec2 sz, Object* owner)
 {
 	collisionSet = new CollisionSet;
 	shape = new Matrix<bool>(sz, true);
+
+	CollisionSystem::get()->AddCollider(this);
+
+	if (owner != NULL)
+	{
+		Object::Attach(owner, this);
+	}
 }
 
 Collider::~Collider()
@@ -52,7 +60,7 @@ void Collider::setShape(Matrix<bool> shp)
 	*shape = shp;
 }
 
-void Collider::setCollideSet(CollisionSet collset)
+void Collider::setCollisionSet(CollisionSet collset)
 {
 	*collisionSet = collset;
 }
@@ -74,12 +82,21 @@ void Collider::setCollideObjType(CollideObj type)
 
 void Collider::setVelocity(Vec2 vel)
 {
-	vel = velocity;
+	velocity = vel;
 }
 
 void Collider::setSize(Vec2 sz)
 {
 	shape->setSize(sz);
+}
+
+void Collider::OnCollide(Collider* obj)
+{
+}
+
+void Collider::UpdateGravity(Vec2 direction)
+{
+	getOwner()->addLocation(direction);
 }
 
 

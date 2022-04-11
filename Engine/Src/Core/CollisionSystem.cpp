@@ -10,18 +10,18 @@ CollisionSystem::~CollisionSystem()
 
 void CollisionSystem::Update()
 {
-	std::map<IColliderResp*, IColliderResp*>::iterator it = CollidersList.begin();
-	std::map<IColliderResp*, IColliderResp*>::iterator it1;
+	std::map<Collider*, Collider*>::iterator it = CollidersList.begin();
+	std::map<Collider*, Collider*>::iterator it1;
 	while (it != CollidersList.end())
 	{
 		it1 = CollidersList.begin();
-		if (it->second->getCollider()->isCollisionEnabled())
+		if (it->second->isCollisionEnabled())
 		{
 			while (it1 != CollidersList.end())
 			{
 				if (it->second != it1->second)
 				{
-					if (it1->second->getCollider()->isCollisionEnabled())
+					if (it1->second->isCollisionEnabled())
 					{
 						if (getRelations(it->second, it1->second) == CollideType::IGNORE_THIS)
 						{
@@ -39,24 +39,24 @@ void CollisionSystem::Update()
 				it1++;
 			}
 		}
-		if (it->second->getCollider()->isSimulatePhysics())UpdateGravity(it->second);
+		if (it->second->isSimulatePhysics())UpdateGravity(it->second);
 		it++;
 	}
 }
 
-void CollisionSystem::AddCollider(IColliderResp* listener)
+void CollisionSystem::AddCollider(Collider* listener)
 {
-	std::map<IColliderResp*, IColliderResp*>::iterator it = CollidersList.find(listener);
+	std::map<Collider*, Collider*>::iterator it = CollidersList.find(listener);
 	if (it == CollidersList.end())
 	{
-		CollidersList.insert(std::make_pair<IColliderResp*, IColliderResp*>
-			(std::forward<IColliderResp*>(listener), std::forward<IColliderResp*>(listener)));
+		CollidersList.insert(std::make_pair<Collider*, Collider*>
+			(std::forward<Collider*>(listener), std::forward<Collider*>(listener)));
 	}
 }
 
-void CollisionSystem::RemoveCollider(IColliderResp* listener)
+void CollisionSystem::RemoveCollider(Collider* listener)
 {
-	std::map<IColliderResp*, IColliderResp*>::iterator it = CollidersList.find(listener);
+	std::map<Collider*, Collider*>::iterator it = CollidersList.find(listener);
 
 	if (it != CollidersList.end())
 	{
@@ -70,68 +70,68 @@ CollisionSystem* CollisionSystem::get()
 	return &system;
 }
 
-void CollisionSystem::UpdateGravity(IColliderResp* collider)
+void CollisionSystem::UpdateGravity(Collider* collider)
 {
 	if (!isOnSurface(collider))
 	{
-		collider->UpdateGravity(collider->getCollider()->getVelocity() + Vec2(0, 1));
-		collider->getCollider()->setVelocity(collider->getCollider()->getVelocity() + Vec2(0, 1));
+		collider->UpdateGravity(collider->getVelocity() + Vec2(0, 1));
+		collider->setVelocity(collider->getVelocity() + Vec2(0, 1));
 	}
-	else collider->getCollider()->setVelocity(Vec2(0, 0));
+	else collider->setVelocity(Vec2(0, 0));
 	
 }
 
-void CollisionSystem::SolveStack(IColliderResp* first, IColliderResp* second)
+void CollisionSystem::SolveStack(Collider* first, Collider* second)
 {
 }
 
-bool CollisionSystem::isSamePoints(IColliderResp* first, IColliderResp* second)
+bool CollisionSystem::isSamePoints(Collider* first, Collider* second)
 {
-	if (second->getCollideLocation().x == first->getCollideLocation().x && second->getCollideLocation().y == first->getCollideLocation().y) return true;
+	if (second->getWorldLocation().x == first->getWorldLocation().x && second->getWorldLocation().y == first->getWorldLocation().y) return true;
 	if (isSameX(first, second) && isSameY(first, second)) return true;
 	else return false;
 }
 
-bool CollisionSystem::isSameX(IColliderResp* first, IColliderResp* second)
+bool CollisionSystem::isSameX(Collider* first, Collider* second)
 {
-	if (second->getCollideLocation().x > first->getCollideLocation().x)
+	if (second->getWorldLocation().x > first->getWorldLocation().x)
 	{
-		if (first->getCollideLocation().x + first->getCollider()->getSize().x >= second->getCollideLocation().x) return true;
+		if (first->getWorldLocation().x + first->getSize().x >= second->getWorldLocation().x) return true;
 		else return false;
 	}
 	else
 	{
-		if (second->getCollideLocation().x + second->getCollider()->getSize().x >= first->getCollideLocation().x) return true;
+		if (second->getWorldLocation().x + second->getSize().x >= first->getWorldLocation().x) return true;
 		else return false;
 	}
 	return true;
 }
 
-bool CollisionSystem::isSameY(IColliderResp* first, IColliderResp* second)
+bool CollisionSystem::isSameY(Collider* first, Collider* second)
 {
-	if (second->getCollideLocation().y > first->getCollideLocation().y)
+	if (second->getWorldLocation().y > first->getWorldLocation().y)
 	{
-		if (first->getCollideLocation().y + first->getCollider()->getSize().y >= second->getCollideLocation().y) return true;
+		if (first->getWorldLocation().y + first->getSize().y >= second->getWorldLocation().y) return true;
 		else return false;
 	}
 	else
 	{
-		if (second->getCollideLocation().y + second->getCollider()->getSize().y >= first->getCollideLocation().y) return true;
+		if (second->getWorldLocation().y + second->getSize().y >= first->getWorldLocation().y) return true;
 		else return false;
 	}
 	return true;
 }
 
-bool CollisionSystem::isOnSurface(IColliderResp* first)
+bool CollisionSystem::isOnSurface(Collider* first)
 {
-	std::map<IColliderResp*, IColliderResp*>::iterator it = CollidersList.begin();
+	std::map<Collider*, Collider*>::iterator it = CollidersList.begin();
 	while (it != CollidersList.end())
 	{
 		if (it->second != first)
 		{
 			if (getRelations(it->second, first) == CollideType::BLOCK)
 			{
-				if ((first->getCollideLocation().y + first->getCollider()->getSize().y - 1) - it->second->getCollideLocation().y == -1)
+				if ((first->getWorldLocation().y + first->getSize().y - 1) - it->second->getWorldLocation().y == -1)
 				{
 					if (isSameX(first, it->second)) return true;
 				}
@@ -142,7 +142,7 @@ bool CollisionSystem::isOnSurface(IColliderResp* first)
 	return false;
 }
 
-CollideType CollisionSystem::getRelations(IColliderResp* first, IColliderResp* second)
+CollideType CollisionSystem::getRelations(Collider* first, Collider* second)
 {
-	return first->getCollider()->getCollisionSet()->getCollideType(second->getCollider()->getCollideObjType());
+	return first->getCollisionSet()->getCollideType(second->getCollideObjType());
 }

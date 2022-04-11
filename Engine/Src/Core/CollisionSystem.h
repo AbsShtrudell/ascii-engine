@@ -1,5 +1,5 @@
 #pragma once
-#include "IColliderResp.h"
+#include "Collider.h"
 #include <set>
 
 class CollisionSystem
@@ -9,21 +9,21 @@ public:
 	~CollisionSystem();
 
 	void Update();
-	void AddCollider(IColliderResp* listener);
-	void RemoveCollider(IColliderResp* listener);
+	void AddCollider(Collider* listener);
+	void RemoveCollider(Collider* listener);
 
 	static CollisionSystem* get();
 
 private:
-	void UpdateGravity(IColliderResp* );
-	void SolveStack(IColliderResp* first, IColliderResp* second);
-	bool isSamePoints(IColliderResp* first, IColliderResp* second);
-	bool isSameX(IColliderResp* first, IColliderResp* second);
-	bool isSameY(IColliderResp* first, IColliderResp* second);
-	bool isOnSurface(IColliderResp* first);
-	CollideType getRelations(IColliderResp* first, IColliderResp* second);
+	void UpdateGravity(Collider* );
+	void SolveStack(Collider* first, Collider* second);
+	bool isSamePoints(Collider* first, Collider* second);
+	bool isSameX(Collider* first, Collider* second);
+	bool isSameY(Collider* first, Collider* second);
+	bool isOnSurface(Collider* first);
+	CollideType getRelations(Collider* first, Collider* second);
 
-	std::map<IColliderResp*, IColliderResp*>CollidersList;
+	std::map<Collider*, Collider*>CollidersList;
 
 };
 

@@ -8,7 +8,7 @@ Object::Object()
 
 Object::Object(Vec2 Location, Object* owner)
 {
-	SetLocation(Location);
+	setLocation(Location);
 	AllObjects.push_back(this);
 	InputSystem::Get()->AddListener(this);
 	if (owner != NULL) Attach(owner, this);
@@ -25,59 +25,59 @@ Object::~Object()
 	InputSystem::Get()->RemoveListener(this);
 }
 
-const Vec2 Object::GetWorldLocation()
+const Vec2 Object::getWorldLocation()
 {
 	if (Owner == NULL) return Location;
-	else return Vec2(Location.x + GetOwner()->Location.y, Location.y + GetOwner()->Location.y);
+	else return Vec2(Location.x + getOwner()->Location.y, Location.y + getOwner()->Location.y);
 }
 
-const Vec2 Object::GetRelativeLocation()
+const Vec2 Object::getRelativeLocation()
 {
 	return Location;
 }
 
-Vec2 Object::SetLocation(Vec2 vector)
+Vec2 Object::setLocation(Vec2 vector)
 {
 	Location = vector;
 	return Location;
 }
 
-Vec2 Object::AddLocation(Vec2 vector)
+Vec2 Object::addLocation(Vec2 vector)
 {
 	Location.Add(vector);
 	return Location;
 }
 
-Vec2 Object::AddLocation(int x, int y)
+Vec2 Object::addLocation(int x, int y)
 {
 	Location.Add(x, y);
 	return Location;
 }
 
-void Object::SetOwner(Object* owner)
+void Object::setOwner(Object* owner)
 {
 	Owner = owner;
 }
 
-Object* Object::GetOwner() const
+Object* Object::getOwner() const
 {
 	return Owner;
 }
 
 void Object::AttachChild(Object* child)
 {
-	if (child->GetOwner() != NULL)
+	if (child->getOwner() != NULL)
 	{
-		if (child->GetOwner() == this) return;
-		Deattach(child->GetOwner(), child);
+		if (child->getOwner() == this) return;
+		Deattach(child->getOwner(), child);
 	}
 	ChildrenList.push_back(child);
-	child->SetOwner(this);
+	child->setOwner(this);
 }
 
 void Object::DeattachChild(Object* child)
 {
-	if (child->GetOwner() == NULL || child->GetOwner() != this) return;
+	if (child->getOwner() == NULL || child->getOwner() != this) return;
 
 	for (size_t i = 0; i < ChildrenList.size(); i++)
 		if (child == ChildrenList[i])
@@ -85,23 +85,23 @@ void Object::DeattachChild(Object* child)
 			ChildrenList.erase(ChildrenList.begin() + i);
 			break;
 		}
-	child->SetOwner(NULL);
+	child->setOwner(NULL);
 }
 
 void  Object::Attach(Object* owner, Object* child)
 {
-	if (child->GetOwner() != NULL)
+	if (child->getOwner() != NULL)
 	{
-		if (child->GetOwner() == owner) return;
-		Deattach(child->GetOwner(), child);
+		if (child->getOwner() == owner) return;
+		Deattach(child->getOwner(), child);
 	}
 	owner->ChildrenList.push_back(child);
-	child->SetOwner(owner);
+	child->setOwner(owner);
 }
 
 void Object::Deattach(Object* owner, Object* child)
 {
-	if (child->GetOwner() == NULL || child->GetOwner() != owner) return;
+	if (child->getOwner() == NULL || child->getOwner() != owner) return;
 
 	for (size_t i = 0; i < owner->ChildrenList.size(); i++)
 		if (child == owner->ChildrenList[i])
@@ -109,31 +109,16 @@ void Object::Deattach(Object* owner, Object* child)
 			owner->ChildrenList.erase(owner->ChildrenList.begin() + i);
 			break;
 		}
-	child->SetOwner(NULL);
+	child->setOwner(NULL);
 }
 
-std::vector<Object*> Object::GetAllObjects()
+std::vector<Object*> Object::getAllObjects()
 {
 	return AllObjects;
 }
 
 void Object::OnKeyDown(int key)
 {
-	switch (key)
-	{
-	case'W':
-		AddLocation(0, -1);
-		break;
-	case'S':
-		AddLocation(0, 1);
-		break;
-	case'A':
-		AddLocation(-1, 0);
-		break;
-	case'D':
-		AddLocation(1, 0);
-		break;
-	}
 }
 
 void Object::OnKeyUp(int key)
