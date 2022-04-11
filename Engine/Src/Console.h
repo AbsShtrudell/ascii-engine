@@ -17,6 +17,7 @@ namespace ASCII
 		void MoveCursor(Vec2 position);
 		void SetWindow(int Width, int Height);
 		void WriteConsoleSymbols(wchar_t* symbols, int symbolsAmount);
+		void WriteConsoleAttribute(WORD* colors, int colorsAmount);
 
 		const HANDLE getConsoleHandle() const;
 		const HWND getConsoleHWND() const;

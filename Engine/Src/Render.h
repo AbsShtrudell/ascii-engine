@@ -1,10 +1,15 @@
 #pragma once
 #include <Windows.h>
+#include "Core/Camera.h"
 #include "Core/IDrawObj.h"
 #include "Console.h"
 #include "Matrix.h"
 
-enum class MatrixEnum { SYMBOL_MATRIX, SYMBOL_MATRIX_BUFF, COLOR_MATRIX, COLOR_MATRIX_BUFF, BACKCOLOR_MATRIX, BACKCOLOR_MATRIX_BUFF };
+
+enum class MatrixEnum { SYMBOL_MATRIX, SYMBOL_MATRIX_BUFF };
+
+
+class Camera;
 
 class Render
 {
@@ -21,11 +26,11 @@ public:
 
 	const Vec2 getScreenSize() const;
 
+	void setCamera(Camera* cam);
 private:
-	Matrix<wchar_t> *SymbolMatrix, *BuffSymbolMatrix;
-	Matrix<int> *ColorMatrix, *BuffColorMatrix;
-	Matrix<int> *BackColorMatrix, *BuffBackColorMatrix;
+	Matrix<CSymb> *SymbolMatrix, *BuffSymbolMatrix;
 
 	Vec2 screenSize = Vec2(85, 30);
 	ASCII::Console console;
+	Camera* camera = nullptr;
 };

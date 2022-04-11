@@ -1,14 +1,16 @@
 #include "Sprite.h"
 
-Sprite::Sprite(std::string path)
+Sprite::Sprite(std::string path, Object* owner)
 {
 	LoadSprite(path);
-	collider = new Collider(size, this);
+	if (owner != NULL)
+	{
+		Attach(owner, this);
+	}
 }
 
 Sprite::Sprite()
 {
-	collider = new Collider(Vec2(5, 1), this);
 }
 
 Sprite::~Sprite()
@@ -18,11 +20,6 @@ Sprite::~Sprite()
 
 void Sprite::OnDrawn()
 {
-}
-
-Collider* Sprite::getCollider()
-{
-	return collider;
 }
 
 const Vec2 Sprite::getSize()
@@ -73,29 +70,6 @@ const bool Sprite::isVisible()
 void Sprite::setVisibility(bool visibility)
 {
 	visible = visibility;
-}
-
-void Sprite::OnKeyDown(int key)
-{
-	switch (key)
-	{
-	case'W':
-		addLocation(0, -1);
-		break;
-	case'S':
-		addLocation(0, 1);
-		break;
-	case'A':
-		addLocation(-1, 0);
-		break;
-	case'D':
-		addLocation(1, 0);
-		break;
-	case 32:
-		addLocation(0, -3);
-		collider->setVelocity(Vec2(0, -3));
-		break;
-	}
 }
 
 void Sprite::LoadSprite(std::string path)

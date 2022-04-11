@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine\Src\Console.cpp" />
+    <ClCompile Include="..\Engine\Src\Core\Collider.cpp" />
+    <ClCompile Include="..\Engine\Src\Core\CollisionSet.cpp" />
+    <ClCompile Include="..\Engine\Src\Core\CollisionSystem.cpp" />
     <ClCompile Include="..\Engine\Src\Core\IDrawObj.cpp" />
     <ClCompile Include="..\Engine\Src\Core\InputSystem\InputSystem.cpp" />
     <ClCompile Include="..\Engine\Src\Core\Object.cpp" />
@@ -31,6 +34,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Engine\Src\Console.h" />
+    <ClInclude Include="..\Engine\Src\Core\Collider.h" />
+    <ClInclude Include="..\Engine\Src\Core\CollisionSet.h" />
+    <ClInclude Include="..\Engine\Src\Core\CollisionSystem.h" />
     <ClInclude Include="..\Engine\Src\Core\IDrawObj.h" />
     <ClInclude Include="..\Engine\Src\Core\InputSystem\InputListener.h" />
     <ClInclude Include="..\Engine\Src\Core\InputSystem\InputSystem.h" />

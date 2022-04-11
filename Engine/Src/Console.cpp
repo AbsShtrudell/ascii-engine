@@ -59,7 +59,12 @@ void ASCII::Console::WriteConsoleSymbols(wchar_t* symbols,int symbolsAmount)
 {
 	DWORD dword = NULL;
 	WriteConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), symbols, symbolsAmount, { 0, 0 }, &dword);
-	return;
+}
+
+void ASCII::Console::WriteConsoleAttribute(WORD* colors, int colorsAmount)
+{
+	DWORD dword = NULL;
+	WriteConsoleOutputAttribute(getConsoleHandle(), colors, colorsAmount, { 0,0 }, &dword);
 }
 
 const HANDLE ASCII::Console::getConsoleHandle() const

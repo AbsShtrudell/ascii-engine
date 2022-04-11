@@ -6,7 +6,7 @@
 
 
 
-class Object: public InputListener
+class Object
 {
 public:
 
@@ -26,9 +26,6 @@ public:
 	void DeattachChild(Object* child);
 	static void Attach(Object* owner, Object* child);
 	static void Deattach(Object* owner, Object* child);
-
-	virtual void OnKeyDown(int key) override;
-	virtual void OnKeyUp(int key) override;
 
 	virtual void OnUpdate() {};
 

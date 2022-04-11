@@ -74,7 +74,7 @@ void CollisionSystem::UpdateGravity(Collider* collider)
 {
 	if (!isOnSurface(collider))
 	{
-		collider->UpdateGravity(collider->getVelocity() + Vec2(0, 1));
+		collider->UpdateGravity(isBlocked(collider, collider->getVelocity() + Vec2(0, 1)).second);
 		collider->setVelocity(collider->getVelocity() + Vec2(0, 1));
 	}
 	else collider->setVelocity(Vec2(0, 0));
@@ -94,14 +94,16 @@ bool CollisionSystem::isSamePoints(Collider* first, Collider* second)
 
 bool CollisionSystem::isSameX(Collider* first, Collider* second)
 {
+	int x2 = second->getWorldLocation().x;
+	int x1 = first->getWorldLocation().x;
 	if (second->getWorldLocation().x > first->getWorldLocation().x)
 	{
-		if (first->getWorldLocation().x + first->getSize().x >= second->getWorldLocation().x) return true;
+		if (first->getWorldLocation().x + first->getSize().x - 1>= second->getWorldLocation().x) return true;
 		else return false;
 	}
 	else
 	{
-		if (second->getWorldLocation().x + second->getSize().x >= first->getWorldLocation().x) return true;
+		if (second->getWorldLocation().x + second->getSize().x - 1 >= first->getWorldLocation().x) return true;
 		else return false;
 	}
 	return true;
@@ -111,12 +113,12 @@ bool CollisionSystem::isSameY(Collider* first, Collider* second)
 {
 	if (second->getWorldLocation().y > first->getWorldLocation().y)
 	{
-		if (first->getWorldLocation().y + first->getSize().y >= second->getWorldLocation().y) return true;
+		if (first->getWorldLocation().y + first->getSize().y - 1>= second->getWorldLocation().y) return true;
 		else return false;
 	}
 	else
 	{
-		if (second->getWorldLocation().y + second->getSize().y >= first->getWorldLocation().y) return true;
+		if (second->getWorldLocation().y + second->getSize().y - 1 >= first->getWorldLocation().y) return true;
 		else return false;
 	}
 	return true;
@@ -131,15 +133,84 @@ bool CollisionSystem::isOnSurface(Collider* first)
 		{
 			if (getRelations(it->second, first) == CollideType::BLOCK)
 			{
-				if ((first->getWorldLocation().y + first->getSize().y - 1) - it->second->getWorldLocation().y == -1)
+				if (isSameX(first, it->second))
 				{
-					if (isSameX(first, it->second)) return true;
+					if (abs(it->second->getWorldLocation().y - (first->getWorldLocation().y + first->getSize().y - 1)) - 1 == 0)
+					{
+						return true;
+					}
 				}
 			}
 		}
 		it++;
 	}
 	return false;
+}
+
+std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direction)
+{
+	bool isBlock = false;
+	std::map<Collider*, Collider*>::iterator it = CollidersList.begin();
+	while (it != CollidersList.end())
+	{
+		if (it->second != collider)
+		{
+			if (getRelations(it->second, collider) == CollideType::BLOCK)
+			{
+				if (direction.y != 0)
+				{
+					if (isSameX(collider, it->second))
+					{
+						if (direction.y > 0)
+						{
+							int distance = abs(it->second->getWorldLocation().y - (collider->getWorldLocation().y + collider->getSize().y - 1)) - 1;
+							if (direction.y >= distance)
+							{
+
+								direction.y = distance;
+								isBlock = true;
+							}
+						}
+						else
+						{
+							int distance = abs(collider->getWorldLocation().y - (it->second->getWorldLocation().y + it->second->getSize().y - 1)) - 1;
+							if (abs(direction.y) >= distance)
+							{
+								direction.y = -1 * distance;
+								isBlock = true;
+							}
+						}
+					}
+				}
+				if (direction.x != 0)
+				{
+					if (isSameY(collider, it->second))
+					{
+						if (direction.x > 0)
+						{
+							int distance = abs(it->second->getWorldLocation().x - (collider->getWorldLocation().x + collider->getSize().x - 1)) - 1;
+							if (direction.x >= distance)
+							{
+								direction.x = distance;
+								isBlock = true;
+							}
+						}
+						else
+						{
+							int distance = abs(collider->getWorldLocation().x - (it->second->getWorldLocation().x + it->second->getSize().x - 1)) - 1;
+							if (abs(direction.x) >= distance)
+							{
+								direction.x = -1 * distance;
+								isBlock = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		it++;
+	}
+	return std::pair<bool, Vec2>(isBlock, direction);
 }
 
 CollideType CollisionSystem::getRelations(Collider* first, Collider* second)

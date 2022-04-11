@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Console.cpp" />
+    <ClCompile Include="Src\Core\Camera.cpp" />
     <ClCompile Include="Src\Core\Collider.cpp" />
     <ClCompile Include="Src\Core\CollisionSystem.cpp" />
     <ClCompile Include="Src\Core\CollisionSet.cpp" />
@@ -27,16 +28,20 @@
     <ClCompile Include="Src\Core\IDrawObj.cpp" />
     <ClCompile Include="Src\Core\InputSystem\InputSystem.cpp" />
     <ClCompile Include="Src\Core\Object.cpp" />
+    <ClCompile Include="Src\Core\Pawn.cpp" />
     <ClCompile Include="Src\Core\Sprite.cpp" />
     <ClCompile Include="Src\Core\Vec2.cpp" />
     <ClCompile Include="Src\Engine.cpp" />
     <ClCompile Include="Src\FileManagment\TextureReader.cpp" />
     <ClCompile Include="Src\FileManagment\TextureWriter.cpp" />
+    <ClCompile Include="Src\Game\Box.cpp" />
+    <ClCompile Include="Src\Game\Player.cpp" />
     <ClCompile Include="Src\Render.cpp" />
     <ClCompile Include="Src\Src.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Console.h" />
+    <ClInclude Include="Src\Core\Camera.h" />
     <ClInclude Include="Src\Core\Collider.h" />
     <ClInclude Include="Src\Core\CollisionSystem.h" />
     <ClInclude Include="Src\Core\CollisionSet.h" />
@@ -46,12 +51,15 @@
     <ClInclude Include="Src\Core\InputSystem\InputSystem.h" />
     <ClInclude Include="Src\Core\InputSystem\KeyCode.h" />
     <ClInclude Include="Src\Core\Object.h" />
+    <ClInclude Include="Src\Core\Pawn.h" />
     <ClInclude Include="Src\Core\Sprite.h" />
     <ClInclude Include="Src\Core\Vec2.h" />
     <ClInclude Include="Src\CSymb.h" />
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\FileManagment\TextureReader.h" />
     <ClInclude Include="Src\FileManagment\TextureWriter.h" />
+    <ClInclude Include="Src\Game\Box.h" />
+    <ClInclude Include="Src\Game\Player.h" />
     <ClInclude Include="Src\Matrix.h" />
     <ClInclude Include="Src\Render.h" />
   </ItemGroup>

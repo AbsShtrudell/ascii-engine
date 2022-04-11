@@ -2,20 +2,18 @@
 
 void Engine::Start()
 {
-	Sprite f;
-	Sprite f1;
-	f.LoadSprite("F:\\Projects\\VS Projects\\ASCIIEngine\\Resources\\test3.spr");
-	f1.LoadSprite("F:\\Projects\\VS Projects\\ASCIIEngine\\Resources\\test3.spr");
-	f1.setLocation(Vec2(0, 10));
-	f1.getCollider()->setSimulatePhysics(false);
-	f1.getCollider()->setCollisionSet(CollisionSet::collisionSet_BlockAll);
+	Player player;
+	Box f1;
+	render.setCamera(player.getCamera());
+	f1.setLocation(Vec2(0, 24));
+
 	while (!exit)
 	{
 		InputSystem::Get()->Update();
 		CollisionSystem::get()->Update();
 		render.UpdateBuffMatrix();
 		render.UpdateScreen();
-		Sleep(300);
+		Sleep(30);
 	}
 }
 

@@ -11,6 +11,8 @@
 #include "Render.h"
 #include "Core/Sprite.h"
 #include "Core/Vec2.h"
+#include "Game/Player.h"
+#include "Game/Box.h"
 
 #define SCREEN_WIDTH 85
 #define SCREEN_HEIGHT 30

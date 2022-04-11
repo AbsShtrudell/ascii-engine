@@ -3,14 +3,12 @@
 Object::Object()
 {
 	AllObjects.push_back(this);
-	InputSystem::Get()->AddListener(this);
 }
 
 Object::Object(Vec2 Location, Object* owner)
 {
 	setLocation(Location);
 	AllObjects.push_back(this);
-	InputSystem::Get()->AddListener(this);
 	if (owner != NULL) Attach(owner, this);
 }
 
@@ -22,13 +20,12 @@ Object::~Object()
 			AllObjects.erase(AllObjects.begin() + i);
 			break;
 		}
-	InputSystem::Get()->RemoveListener(this);
 }
 
 const Vec2 Object::getWorldLocation()
 {
 	if (Owner == NULL) return Location;
-	else return Vec2(Location.x + getOwner()->Location.y, Location.y + getOwner()->Location.y);
+	else return Vec2(Location.x + getOwner()->Location.x, Location.y + getOwner()->Location.y);
 }
 
 const Vec2 Object::getRelativeLocation()
@@ -115,14 +112,6 @@ void Object::Deattach(Object* owner, Object* child)
 std::vector<Object*> Object::getAllObjects()
 {
 	return AllObjects;
-}
-
-void Object::OnKeyDown(int key)
-{
-}
-
-void Object::OnKeyUp(int key)
-{
 }
 
 std::vector<Object*> Object::AllObjects;

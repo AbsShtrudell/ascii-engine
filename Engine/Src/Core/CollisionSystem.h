@@ -12,6 +12,8 @@ public:
 	void AddCollider(Collider* listener);
 	void RemoveCollider(Collider* listener);
 
+	bool isOnSurface(Collider* first);
+
 	static CollisionSystem* get();
 
 private:
@@ -20,7 +22,7 @@ private:
 	bool isSamePoints(Collider* first, Collider* second);
 	bool isSameX(Collider* first, Collider* second);
 	bool isSameY(Collider* first, Collider* second);
-	bool isOnSurface(Collider* first);
+	std::pair<bool, Vec2> isBlocked(Collider* collider, Vec2 direction);
 	CollideType getRelations(Collider* first, Collider* second);
 
 	std::map<Collider*, Collider*>CollidersList;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Object.h"
-#include "Collider.h"
 #include "IDrawObj.h"
 #include "../Matrix.h"
 #include "../FileManagment/TextureReader.h"
@@ -10,13 +9,12 @@
 class Sprite : protected IDrawObj, public Object
 {
 public:
-	Sprite(std::string path);
+	Sprite(std::string path, Object* owner = NULL);
 	Sprite();
 	~Sprite();
 
 	virtual void OnDrawn() override;
 
-	Collider* getCollider();
 	virtual const Vec2 getSize() override;
 	virtual const int getZOrder() override;
 	virtual Texture* getTexture() override;
@@ -28,12 +26,9 @@ public:
 	virtual void setSize(int x, int y) override;
 	virtual void setVisibility(bool visibility) override;
 
-	virtual void OnKeyDown(int key) override;
-
 	void LoadSprite(std::string path);
 	void SaveSprite(std::string path);
 	
 private:
-	Collider* collider = nullptr;
 	Texture* texture = nullptr;
 };
