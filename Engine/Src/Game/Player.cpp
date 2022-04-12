@@ -25,7 +25,7 @@ void Player::OnKeyDown(int key)
 		if (CollisionSystem::get()->isOnSurface(collider))
 		{
 			addLocation(0, -1);
-			collider->setVelocity(Vec2(0, -3));
+			collider->setVelocity(Vec2(0, -4));
 		}
 		break;
 	case'S':

@@ -13,7 +13,7 @@ void Engine::Start()
 		CollisionSystem::get()->Update();
 		render.UpdateBuffMatrix();
 		render.UpdateScreen();
-		Sleep(30);
+		Sleep(40);
 	}
 }
 
