@@ -1,7 +1,7 @@
 #pragma once
-#include "../Matrix.h"
-#include "CollisionSet.h"
-#include "Object.h"
+#include <Math/Matrix.h>
+#include <Core/Phisycs/CollisionSet.h>
+#include <Core/Object.h>
 
 class Collider : public Object
 {

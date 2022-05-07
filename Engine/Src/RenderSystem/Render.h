@@ -1,9 +1,9 @@
 #pragma once
 #include <Windows.h>
-#include "Core/Camera.h"
-#include "Core/IDrawObj.h"
-#include "Console.h"
-#include "Matrix.h"
+#include <Core/Camera.h>
+#include <Core/IDrawObj.h>
+#include <Console/Console.h>
+#include <Math/Matrix.h>
 
 
 enum class MatrixEnum { SYMBOL_MATRIX, SYMBOL_MATRIX_BUFF };

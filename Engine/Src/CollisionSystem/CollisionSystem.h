@@ -1,5 +1,5 @@
 #pragma once
-#include "Collider.h"
+#include <Core/Phisycs/Collider.h>
 #include <set>
 
 class CollisionSystem

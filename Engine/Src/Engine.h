@@ -1,16 +1,9 @@
 #pragma once
 
-#include <iostream>
 #include <chrono>
-#include <locale>
-#include <fcntl.h>
-#include <codecvt>
-#include <io.h>
-#include <Windows.h>
-#include "Core/CollisionSystem.h"
-#include "Render.h"
-#include "Core/Sprite.h"
-#include "Core/Vec2.h"
+#include <Console/Console.h>
+#include <RenderSystem/Render.h>
+#include <CollisionSystem/CollisionSystem.h>
 #include "Game/Player.h"
 #include "Game/Box.h"
 

@@ -1,10 +1,7 @@
 #pragma once
 
-#include "Vec2.h"
-#include "InputSystem/InputSystem.h"
+#include <Math/Vec2.h>
 #include <vector>
-
-
 
 class Object
 {

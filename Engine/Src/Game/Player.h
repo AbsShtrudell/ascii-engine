@@ -1,8 +1,8 @@
 #pragma once
-#include "../Core/Pawn.h"
-#include "../Core/Collider.h"
-#include "../Core/Camera.h"
-#include "../Core/Sprite.h"
+#include <Core/Pawn.h>
+#include <Core/Phisycs/Collider.h>
+#include <Core/Camera.h>
+#include <Core/Sprite.h>
 
 class Player : public Pawn
 {

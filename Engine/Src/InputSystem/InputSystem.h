@@ -1,5 +1,5 @@
 #pragma once
-#include "InputListener.h"
+#include <InputSystem/InputListener.h>
 #include <map>
 
 class InputSystem

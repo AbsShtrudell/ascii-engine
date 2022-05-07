@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "../Core/CollisionSystem.h"
+#include <CollisionSystem/CollisionSystem.h>
 
 Player::Player()
 {

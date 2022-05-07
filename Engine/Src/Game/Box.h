@@ -1,6 +1,6 @@
 #pragma once
-#include "../Core/Collider.h"
-#include "../Core/Sprite.h"
+#include <Core/Phisycs/Collider.h>
+#include <Core/Sprite.h>
 class Box : public Sprite
 {
 public:

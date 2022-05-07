@@ -1,6 +1,6 @@
 #pragma once
-#include "Core/Vec2.h"
-#include "CSymb.h"
+#include <Math/Vec2.h>
+#include <RenderSystem/CSymb.h>
 #include <vector>
 
 template <typename T>

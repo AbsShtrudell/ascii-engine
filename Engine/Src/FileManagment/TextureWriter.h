@@ -1,6 +1,6 @@
 #pragma once
 #include <fstream>
-#include "../Matrix.h"
+#include <Math//Matrix.h>
 
 class TextureWriter
 {

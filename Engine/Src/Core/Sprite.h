@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Object.h"
-#include "IDrawObj.h"
-#include "../Matrix.h"
-#include "../FileManagment/TextureReader.h"
-#include "../FileManagment/TextureWriter.h"
+#include <Core/Object.h>
+#include <Core/IDrawObj.h>
+#include <FileManagment/TextureReader.h>
+#include <FileManagment/TextureWriter.h>
 
 class Sprite : protected IDrawObj, public Object
 {

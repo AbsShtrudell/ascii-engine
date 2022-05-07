@@ -1,6 +1,6 @@
 #pragma once
-#include "Object.h"
-#include "InputSystem/InputSystem.h"
+#include <Core/Object.h>
+#include <InputSystem/InputSystem.h>
 
 class Pawn : public Object, public InputListener
 {
