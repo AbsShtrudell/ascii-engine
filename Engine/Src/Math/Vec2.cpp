@@ -10,11 +10,11 @@ Vec2::Vec2(int x, int y)
 	this->y = y;
 }
 
-Vec2::Vec2(const Vec2& vec)
-{
-	x = vec.x;
-	y = vec.y;
-}
+//Vec2::Vec2(const Vec2& vec)
+//{
+//	x = vec.x;
+//	y = vec.y;
+//}
 
 Vec2::~Vec2()
 {

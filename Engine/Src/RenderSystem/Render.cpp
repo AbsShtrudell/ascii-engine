@@ -10,42 +10,33 @@ Render::~Render()
 {
 }
 
-void Render::Clear(MatrixEnum MatrixType)
+void Render::Clear(RenderMatrix MatrixType)
 {
 	switch (MatrixType)
 	{
-	case MatrixEnum::SYMBOL_MATRIX:
+	case RenderMatrix::SYMBOL_MATRIX:
 		SymbolMatrix->Clear();
 		break;
-	case MatrixEnum::SYMBOL_MATRIX_BUFF:
+	case RenderMatrix::SYMBOL_MATRIX_BUFF:
 		BuffSymbolMatrix->Clear();
 		break;
 	}
 }
 
-void Render::ResizeAllMatrixes(Vec2 size)
+void Render::ResizeScreen(Vec2 size)
 {
 	SymbolMatrix->setSize(size);
 	BuffSymbolMatrix->setSize(size);
 	screenSize = size;
 }
 
-void Render::ResizeMatrix(MatrixEnum MatrixType, Vec2 size)
-{
-	switch (MatrixType)
-	{
-	case MatrixEnum::SYMBOL_MATRIX:
-		SymbolMatrix->setSize(size);
-		break;
-	case MatrixEnum::SYMBOL_MATRIX_BUFF:
-		BuffSymbolMatrix->setSize(size);
-		break;
-	}
-	screenSize = size;
-}
-
 void Render::UpdateScreen()
 {
+	if (camera == NULL)
+	{
+		std::vector<Camera*> cameras = Object::getAllObjectsOfClass<Camera>();
+		if (cameras.size() > 0) setCamera(cameras[0]);
+	}
 	int counter = 0;
 	LPWSTR screen = new WCHAR[screenSize.y * screenSize.x];
 	WORD* screenColor = new WORD[screenSize.y * screenSize.x];
@@ -61,7 +52,7 @@ void Render::UpdateScreen()
 
 	console.WriteConsoleSymbols(screen, screenSize.y * screenSize.x);
 	console.WriteConsoleAttribute(screenColor, screenSize.y * screenSize.x);
-	Clear(MatrixEnum::SYMBOL_MATRIX_BUFF);
+	Clear(RenderMatrix::SYMBOL_MATRIX_BUFF);
 	delete[]screen;
 	delete[]screenColor;
 }
@@ -70,13 +61,16 @@ void Render::Draw(Vec2 location, IDrawObj* drawObj)
 {
 	if (camera != NULL)
 	{
+		Texture texture = drawObj->getTexture();
 		for (size_t i = 0; i < drawObj->getSize().x; i++)
 		{
 			if (i + location.x - camera->getWorldLocation().x >= screenSize.x || - camera->getWorldLocation().x + location.x + i < 0) continue;
 			for (size_t j = 0; j < drawObj->getSize().y; j++)
 			{
 				if (j + location.y - camera->getWorldLocation().y >= screenSize.y || - camera->getWorldLocation().y + location.y + j < 0) continue;
-				BuffSymbolMatrix->at(-camera->getWorldLocation().x + i + location.x, -camera->getWorldLocation().y + j + location.y) = drawObj->getTexture()->at(i, j);
+				{
+					BuffSymbolMatrix->at(-camera->getWorldLocation().x + i + location.x, -camera->getWorldLocation().y + j + location.y) = texture.at(i, j);
+				}
 			}
 		}
 	}
@@ -94,7 +88,7 @@ void Render::setCamera(Camera* cam)
 
 void Render::UpdateBuffMatrix()
 {
-	Clear(MatrixEnum::SYMBOL_MATRIX);
+	Clear(RenderMatrix::SYMBOL_MATRIX);
 	IDrawObj::ZSort();
 	for (size_t i = 0; i < IDrawObj::getAllDrawObjects().size(); i++)
 	{

@@ -1,146 +1,191 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Исходные файлы">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Файлы заголовков">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Файлы ресурсов">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{19f342cc-5f69-4046-abb8-c84489d36802}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{4bdc6763-da2c-4be4-818c-6b1032211a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\RenderSystem">
+      <UniqueIdentifier>{70da27d6-7537-4259-a16a-baa9d08a8d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Console">
+      <UniqueIdentifier>{6d40eb25-c401-412c-a9b0-cd4b1a8cf77e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\FileManagment">
+      <UniqueIdentifier>{fdf2a2ec-7a22-42ee-8ed2-73369e78f3f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Math">
+      <UniqueIdentifier>{be4759ef-db96-4599-aff5-ff6e7d8fee1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\InputSystem">
+      <UniqueIdentifier>{1b315feb-bcd9-4a43-add6-4f823675a90e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Core">
+      <UniqueIdentifier>{84473f9e-da8f-4caa-a63b-6ca1340a4f05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Core\Physics">
+      <UniqueIdentifier>{48637ee5-19e1-4520-bb73-58f07e9278a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\CollisionSystem">
+      <UniqueIdentifier>{a074092b-0610-4a36-afd5-ba48af648700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Animators">
+      <UniqueIdentifier>{233c5951-37bc-4399-8dcb-5f0081b05d97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Engine.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Src.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\Object.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\Sprite.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\InputSystem\InputSystem.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\Vec2.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Console.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Render.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\FlipBook.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\FileManagment\TextureReader.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\FileManagment\TextureWriter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\IDrawObj.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\Collider.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\CollisionSet.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\CollisionSystem.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\Camera.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Core\Pawn.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Game\Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Src\Game\Box.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Console\Console.cpp">
+      <Filter>Src\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\Camera.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\FlipBook.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\IDrawObj.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\Object.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\Pawn.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\Sprite.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\Phisycs\Collider.cpp">
+      <Filter>Src\Core\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\Phisycs\CollisionSet.cpp">
+      <Filter>Src\Core\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FileManagment\TextureReader.cpp">
+      <Filter>Src\FileManagment</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FileManagment\TextureWriter.cpp">
+      <Filter>Src\FileManagment</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\InputSystem\InputSystem.cpp">
+      <Filter>Src\InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Math\Vec2.cpp">
+      <Filter>Src\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RenderSystem\Render.cpp">
+      <Filter>Src\RenderSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Engine.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Src.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\CollisionSystem\CollisionSystem.cpp">
+      <Filter>Src\CollisionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\Animation.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Core\Animator.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\PlayerAnimator.cpp">
+      <Filter>Game\Animators</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\World.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Coin.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Engine.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\Object.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\Sprite.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\InputSystem\InputListener.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\InputSystem\InputSystem.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\InputSystem\KeyCode.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\Vec2.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Console.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Render.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Matrix.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\FlipBook.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\CSymb.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\FileManagment\TextureReader.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\FileManagment\TextureWriter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\IDrawObj.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\Collider.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\CollisionSet.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\CollisionSystem.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\Camera.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Core\Pawn.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Game\Player.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Src\Game\Box.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Console\Console.h">
+      <Filter>Src\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Camera.h">
+      <Filter>Src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\FlipBook.h">
+      <Filter>Src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\IDrawObj.h">
+      <Filter>Src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Object.h">
+      <Filter>Src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Pawn.h">
+      <Filter>Src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Sprite.h">
+      <Filter>Src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Phisycs\Collider.h">
+      <Filter>Src\Core\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Phisycs\CollisionSet.h">
+      <Filter>Src\Core\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\FileManagment\TextureReader.h">
+      <Filter>Src\FileManagment</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\FileManagment\TextureWriter.h">
+      <Filter>Src\FileManagment</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\InputSystem\InputListener.h">
+      <Filter>Src\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\InputSystem\InputSystem.h">
+      <Filter>Src\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Math\Matrix.h">
+      <Filter>Src\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Math\Vec2.h">
+      <Filter>Src\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\RenderSystem\CSymb.h">
+      <Filter>Src\RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\RenderSystem\Render.h">
+      <Filter>Src\RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Engine.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\CollisionSystem\CollisionSystem.h">
+      <Filter>Src\CollisionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Animation.h">
+      <Filter>Src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Animator.h">
+      <Filter>Src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\PlayerAnimator.h">
+      <Filter>Game\Animators</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\World.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Coin.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

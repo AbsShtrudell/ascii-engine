@@ -3,8 +3,8 @@
 
 Player::Player()
 {
-	sprite = new Sprite("F:\\Projects\\VS Projects\\ASCIIEngine\\Resources\\mario.spr", this);
-	collider = new Collider(sprite->getSize(), this);
+	animator = new PlayerAnimator(this);
+	collider = new Collider(animator->getSize(), this);
 	camera = new Camera(this);
 }
 
@@ -17,6 +17,11 @@ Camera* Player::getCamera()
 	return camera;
 }
 
+void Player::OnUpdate()
+{
+	animator->setOnGroundState(CollisionSystem::get()->isOnSurface(collider));
+}
+
 void Player::OnKeyDown(int key)
 {
 	switch (key)
@@ -25,16 +30,31 @@ void Player::OnKeyDown(int key)
 		if (CollisionSystem::get()->isOnSurface(collider))
 		{
 			addLocation(0, -1);
-			collider->setVelocity(Vec2(0, -4));
+			collider->setVelocity(Vec2(0, -8));
 		}
 		break;
 	case'S':
 		break;
 	case'A':
-		addLocation(-1, 0);
+		animator->setMovingState(-1);
+		addLocation(-1 * speed, 0);
 		break;
 	case'D':
-		addLocation(1, 0);
+		animator->setMovingState(1);
+		addLocation(1 * speed, 0);
+		break;
+	}
+}
+
+void Player::OnKeyUp(int key)
+{
+	switch (key)
+	{
+	case'A':
+		animator->setMovingState(0);
+		break;
+	case'D':
+		animator->setMovingState(0);
 		break;
 	}
 }

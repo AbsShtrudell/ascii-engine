@@ -1,5 +1,5 @@
 #include "Collider.h"
-#include "CollisionSystem.h"
+#include <CollisionSystem/CollisionSystem.h>
 
 Collider::Collider(Vec2 sz, Object* owner)
 {

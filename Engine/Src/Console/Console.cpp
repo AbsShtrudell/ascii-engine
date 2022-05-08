@@ -17,19 +17,6 @@ void ASCII::Console::HideCursor()
 	SetConsoleCursorInfo(ConsoleHandle,&CursorInfo);
 }
 
-void ASCII::Console::HideScrollBar()
-{
-	CONSOLE_SCREEN_BUFFER_INFO screenBufferInfo;
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	GetConsoleScreenBufferInfo(hConsole, &screenBufferInfo);
-	COORD new_screen_buffer_size;
-	new_screen_buffer_size.X = screenBufferInfo.srWindow.Right -
-		screenBufferInfo.srWindow.Left + 1; // Columns
-	new_screen_buffer_size.Y = screenBufferInfo.srWindow.Bottom -
-		screenBufferInfo.srWindow.Top + 1; // Rows
-	SetConsoleScreenBufferSize(hConsole, new_screen_buffer_size);
-}
-
 void ASCII::Console::MoveCursor(Vec2 position)
 {
 	COORD pos;
@@ -41,18 +28,49 @@ void ASCII::Console::MoveCursor(Vec2 position)
 
 void ASCII::Console::SetWindow(int Width, int Height)
 {
-	_COORD coord;
-	coord.X = Width - 1;
-	coord.Y = Height - 1;
-	_SMALL_RECT Rect;
-	Rect.Top = 0;
-	Rect.Left = 0;
-	Rect.Bottom = Height - 1;
-	Rect.Right = Width - 1;
-	HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleScreenBufferSize(Handle, coord);
-	SetConsoleWindowInfo(Handle, TRUE, &Rect);
-	HideScrollBar();
+    HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    if (Handle == INVALID_HANDLE_VALUE)
+        throw std::runtime_error("Unable to get stdout handle.");
+
+    {
+        COORD largestSize = GetLargestConsoleWindowSize(Handle);
+        if (Width > largestSize.X)
+            throw std::invalid_argument("The x dimension is too large.");
+        if (Height > largestSize.Y)
+            throw std::invalid_argument("The y dimension is too large.");
+    }
+
+    CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
+    if (!GetConsoleScreenBufferInfo(Handle, &bufferInfo))
+        throw std::runtime_error("Unable to retrieve screen buffer info.");
+
+    SMALL_RECT& winInfo = bufferInfo.srWindow;
+    COORD windowSize = { winInfo.Right - winInfo.Left + 1, winInfo.Bottom - winInfo.Top + 1 };
+
+    if (windowSize.X > Width || windowSize.Y > Height)
+    {
+        // window size needs to be adjusted before the buffer size can be reduced.
+        SMALL_RECT info =
+        {
+            0,
+            0,
+            Width < windowSize.X ? Width - 1 : windowSize.X - 1,
+            Height < windowSize.Y ? Height - 1 : windowSize.Y - 1
+        };
+
+        if (!SetConsoleWindowInfo(Handle, TRUE, &info))
+            throw std::runtime_error("Unable to resize window before resizing buffer.");
+    }
+
+    COORD size = { Width, Height };
+    if (!SetConsoleScreenBufferSize(Handle, size))
+        throw std::runtime_error("Unable to resize screen buffer.");
+
+
+    SMALL_RECT info = { 0, 0, Width - 1, Height - 1 };
+    if (!SetConsoleWindowInfo(Handle, TRUE, &info))
+        throw std::runtime_error("Unable to resize window after resizing buffer.");
 }
 
 void ASCII::Console::WriteConsoleSymbols(wchar_t* symbols,int symbolsAmount)

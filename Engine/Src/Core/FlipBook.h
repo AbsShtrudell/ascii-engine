@@ -1,42 +1,29 @@
 #pragma once
 #include <Core/Object.h>
 #include <Core/IDrawObj.h>
-#include <FileManagment/TextureReader.h>
-#include <FileManagment/TextureWriter.h>
+#include <Core/Animation.h>
 
 class FlipBook : protected IDrawObj, public Object
 {
 public:
-	FlipBook();
+	FlipBook(Animation* anim, Object* owner);
 	~FlipBook();
 
 	virtual void OnDrawn() override;
 
 	virtual const Vec2 getSize() override;
 	virtual const int getZOrder() override;
-	virtual Texture* getTexture() override;
-	const int getCurrentFrame() const;
+	virtual Texture getTexture() override;
 	virtual const Vec2 getDrawLoacation() override;
 	virtual const bool isVisible() override;
+	bool isRotated();
 
 	virtual void setZOrder(int newValue) override;
-	virtual void setSize(Vec2 sz) override;
-	virtual void setSize(int x, int y) override;
 	virtual void setVisibility(bool visibility) override;
-	void setCurrentFrame(int newFrame);
-
-	void NextFrame();
-
-	void ResizeFlipBook(int newSize);
-
-	void LoadFrame(std::string path, int frameIndex);
-	void SaveFrame(std::string path, int frameIndex);
-
-	void LoadFlipbook(std::string pathes[], int framesAmount);
-	void LoadFlipBook(std::string pathes[], int begin, int end);
+	void setRotationState(bool value);
 
 private:
-	std::vector<Texture*> frames;
-	int currentFrame = 0;
+	Animation* animation;
+	bool rotated = false;
 };
 

@@ -2,6 +2,7 @@
 #include <Core/Pawn.h>
 #include <Core/Phisycs/Collider.h>
 #include <Core/Camera.h>
+#include <Game/PlayerAnimator.h>
 #include <Core/Sprite.h>
 
 class Player : public Pawn
@@ -12,11 +13,16 @@ public:
 
 	Camera* getCamera();
 
-	void OnKeyDown(int key);
+	void OnUpdate() override;
+	void OnKeyDown(int key) override;
+	void OnKeyUp(int key) override;
 
 private:
-	Sprite* sprite;
+	PlayerAnimator* animator;
 	Collider* collider;
 	Camera* camera;
+
+	int speed = 2;
+	bool dead = false;
 };
 

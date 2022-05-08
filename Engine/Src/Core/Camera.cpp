@@ -6,7 +6,7 @@ Camera::Camera(Object* owner)
 	{
 		Attach(owner, this);
 	}
-	setLocation(Vec2(-42, -10));
+	setLocation(Vec2(-40, -30));
 }
 
 Camera::~Camera()

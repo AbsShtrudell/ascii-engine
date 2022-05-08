@@ -1,33 +1,31 @@
 #pragma once
-
 #include <Core/Object.h>
 #include <Core/IDrawObj.h>
-#include <FileManagment/TextureReader.h>
-#include <FileManagment/TextureWriter.h>
+#include <Core/Animation.h>
 
-class Sprite : protected IDrawObj, public Object
+class Animator : protected IDrawObj, public Object
 {
 public:
-	Sprite(std::string path, Object* owner = NULL);
-	Sprite();
-	~Sprite();
+	Animator();
+	~Animator();
 
 	virtual void OnDrawn() override;
+	void OnUpdate() override;
+	virtual void CheckAnimatorState() = 0;
 
+	bool isRotated();
+	const Animation* getCurrentAnimation();
 	virtual const Vec2 getSize() override;
 	virtual const int getZOrder() override;
 	virtual Texture getTexture() override;
 	virtual const Vec2 getDrawLoacation() override;
 	virtual const bool isVisible() override;
 
+	void setCurrentAnimation(Animation* animation, bool rotated);
 	virtual void setZOrder(int newValue) override;
-	void setSize(Vec2 sz);
-	void setSize(int x, int y);
 	virtual void setVisibility(bool visibility) override;
-
-	void LoadSprite(std::string path);
-	void SaveSprite(std::string path);
-	
 private:
-	Texture* texture = nullptr;
+	Animation* currentAnimation;
+	bool rotated;
 };
+

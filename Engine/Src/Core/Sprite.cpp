@@ -32,9 +32,9 @@ const int Sprite::getZOrder()
 	return Z;
 }
 
-Matrix<CSymb>* Sprite::getTexture()
+Matrix<CSymb> Sprite::getTexture()
 {
-	return texture;
+	return *texture;
 }
 
 const Vec2 Sprite::getDrawLoacation()

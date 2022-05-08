@@ -4,8 +4,7 @@
 #include <Console/Console.h>
 #include <RenderSystem/Render.h>
 #include <CollisionSystem/CollisionSystem.h>
-#include "Game/Player.h"
-#include "Game/Box.h"
+#include <Game/World.h>
 
 #define SCREEN_WIDTH 85
 #define SCREEN_HEIGHT 30

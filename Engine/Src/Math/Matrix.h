@@ -2,6 +2,7 @@
 #include <Math/Vec2.h>
 #include <RenderSystem/CSymb.h>
 #include <vector>
+#include <memory>
 
 template <typename T>
 class Matrix
@@ -9,8 +10,10 @@ class Matrix
 public:
 	Matrix(Vec2 size, T nullValue);
 	Matrix(int x, int y, T nullValue);
-	Matrix(Matrix& matr);
+	Matrix(const Matrix& matr);
 	~Matrix();
+
+	std::shared_ptr<Matrix<T>> getInverted();
 
 	const Vec2 getSize() const;
 	void setSize(Vec2 size);
@@ -49,18 +52,31 @@ Matrix<T>::Matrix(int x, int y, T nullValue)
 }
 
 template<typename T>
-Matrix<T>::Matrix(Matrix& matr)
+Matrix<T>::Matrix(const Matrix& matr)
 {
 	this->size = matr.size;
 	this->nullValue = matr.nullValue;
 	matrix = matr.matrix;
-
 }
 
 template<typename T>
 Matrix<T>::~Matrix()
 {
 
+}
+
+template<typename T>
+std::shared_ptr<Matrix<T>> Matrix<T>::getInverted()
+{
+	std::shared_ptr<Matrix<T>> inverted(new Matrix<T>(size, nullValue));
+	for (int x = 0; x < size.x; x++)
+	{
+		for (int y = 0; y < size.y; y++)
+		{
+			inverted->at(x, y) = this->at(size.x - x - 1, y);
+		}
+	}
+	return inverted;
 }
 
 template<typename T>

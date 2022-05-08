@@ -7,7 +7,7 @@ public:
 
 	Vec2();
 	Vec2(int x, int y);
-	Vec2(const Vec2& vec);
+	//Vec2(const Vec2& vec);
 	~Vec2();
 
 	Vec2 Add(int x, int y);

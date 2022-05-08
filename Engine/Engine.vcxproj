@@ -19,49 +19,58 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Console.cpp" />
+    <ClCompile Include="Src\CollisionSystem\CollisionSystem.cpp" />
+    <ClCompile Include="Src\Console\Console.cpp" />
+    <ClCompile Include="Src\Core\Animation.cpp" />
+    <ClCompile Include="Src\Core\Animator.cpp" />
     <ClCompile Include="Src\Core\Camera.cpp" />
-    <ClCompile Include="Src\Core\Collider.cpp" />
-    <ClCompile Include="Src\Core\CollisionSystem.cpp" />
-    <ClCompile Include="Src\Core\CollisionSet.cpp" />
     <ClCompile Include="Src\Core\FlipBook.cpp" />
     <ClCompile Include="Src\Core\IDrawObj.cpp" />
-    <ClCompile Include="Src\Core\InputSystem\InputSystem.cpp" />
     <ClCompile Include="Src\Core\Object.cpp" />
     <ClCompile Include="Src\Core\Pawn.cpp" />
+    <ClCompile Include="Src\Core\Phisycs\Collider.cpp" />
+    <ClCompile Include="Src\Core\Phisycs\CollisionSet.cpp" />
     <ClCompile Include="Src\Core\Sprite.cpp" />
-    <ClCompile Include="Src\Core\Vec2.cpp" />
     <ClCompile Include="Src\Engine.cpp" />
     <ClCompile Include="Src\FileManagment\TextureReader.cpp" />
     <ClCompile Include="Src\FileManagment\TextureWriter.cpp" />
     <ClCompile Include="Src\Game\Box.cpp" />
+    <ClCompile Include="Src\Game\Coin.cpp" />
     <ClCompile Include="Src\Game\Player.cpp" />
-    <ClCompile Include="Src\Render.cpp" />
+    <ClCompile Include="Src\Game\PlayerAnimator.cpp" />
+    <ClCompile Include="Src\Game\World.cpp" />
+    <ClCompile Include="Src\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="Src\Math\Vec2.cpp" />
+    <ClCompile Include="Src\RenderSystem\Render.cpp" />
     <ClCompile Include="Src\Src.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Console.h" />
+    <ClInclude Include="Src\CollisionSystem\CollisionSystem.h" />
+    <ClInclude Include="Src\Console\Console.h" />
+    <ClInclude Include="Src\Core\Animation.h" />
+    <ClInclude Include="Src\Core\Animator.h" />
     <ClInclude Include="Src\Core\Camera.h" />
-    <ClInclude Include="Src\Core\Collider.h" />
-    <ClInclude Include="Src\Core\CollisionSystem.h" />
-    <ClInclude Include="Src\Core\CollisionSet.h" />
     <ClInclude Include="Src\Core\FlipBook.h" />
     <ClInclude Include="Src\Core\IDrawObj.h" />
-    <ClInclude Include="Src\Core\InputSystem\InputListener.h" />
-    <ClInclude Include="Src\Core\InputSystem\InputSystem.h" />
-    <ClInclude Include="Src\Core\InputSystem\KeyCode.h" />
     <ClInclude Include="Src\Core\Object.h" />
     <ClInclude Include="Src\Core\Pawn.h" />
+    <ClInclude Include="Src\Core\Phisycs\Collider.h" />
+    <ClInclude Include="Src\Core\Phisycs\CollisionSet.h" />
     <ClInclude Include="Src\Core\Sprite.h" />
-    <ClInclude Include="Src\Core\Vec2.h" />
-    <ClInclude Include="Src\CSymb.h" />
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\FileManagment\TextureReader.h" />
     <ClInclude Include="Src\FileManagment\TextureWriter.h" />
     <ClInclude Include="Src\Game\Box.h" />
+    <ClInclude Include="Src\Game\Coin.h" />
     <ClInclude Include="Src\Game\Player.h" />
-    <ClInclude Include="Src\Matrix.h" />
-    <ClInclude Include="Src\Render.h" />
+    <ClInclude Include="Src\Game\PlayerAnimator.h" />
+    <ClInclude Include="Src\Game\World.h" />
+    <ClInclude Include="Src\InputSystem\InputListener.h" />
+    <ClInclude Include="Src\InputSystem\InputSystem.h" />
+    <ClInclude Include="Src\Math\Matrix.h" />
+    <ClInclude Include="Src\Math\Vec2.h" />
+    <ClInclude Include="Src\RenderSystem\CSymb.h" />
+    <ClInclude Include="Src\RenderSystem\Render.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -127,6 +136,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)\Src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -182,6 +192,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackReserveSize>
+      </StackReserveSize>
+      <StackCommitSize>
+      </StackCommitSize>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

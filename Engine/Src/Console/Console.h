@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <stdexcept>
 #include <Math/Vec2.h>
 
 namespace ASCII
