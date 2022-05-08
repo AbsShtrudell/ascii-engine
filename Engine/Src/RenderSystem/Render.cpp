@@ -37,6 +37,7 @@ void Render::UpdateScreen()
 		std::vector<Camera*> cameras = Object::getAllObjectsOfClass<Camera>();
 		if (cameras.size() > 0) setCamera(cameras[0]);
 	}
+
 	int counter = 0;
 	LPWSTR screen = new WCHAR[screenSize.y * screenSize.x];
 	WORD* screenColor = new WORD[screenSize.y * screenSize.x];

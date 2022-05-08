@@ -108,6 +108,9 @@
     <ClCompile Include="Src\Game\Coin.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Core\Text.cpp">
+      <Filter>Src\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game\Player.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Src\Game\Coin.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Core\Text.h">
+      <Filter>Src\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

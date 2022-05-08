@@ -92,6 +92,7 @@ void Collider::setSize(Vec2 sz)
 
 void Collider::OnCollide(Collider* obj)
 {
+	
 }
 
 void Collider::UpdateGravity(Vec2 direction)

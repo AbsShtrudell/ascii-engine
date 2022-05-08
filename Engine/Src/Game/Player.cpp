@@ -4,6 +4,7 @@
 Player::Player()
 {
 	animator = new PlayerAnimator(this);
+	animator->setZOrder(5);
 	collider = new Collider(animator->getSize(), this);
 	collider->setCollideObjType(CollideObj::PAWN);
 	collider->setSimulatePhysics(true);

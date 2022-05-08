@@ -31,6 +31,7 @@
     <ClCompile Include="Src\Core\Phisycs\Collider.cpp" />
     <ClCompile Include="Src\Core\Phisycs\CollisionSet.cpp" />
     <ClCompile Include="Src\Core\Sprite.cpp" />
+    <ClCompile Include="Src\Core\Text.cpp" />
     <ClCompile Include="Src\Engine.cpp" />
     <ClCompile Include="Src\FileManagment\TextureReader.cpp" />
     <ClCompile Include="Src\FileManagment\TextureWriter.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Src\Core\Phisycs\Collider.h" />
     <ClInclude Include="Src\Core\Phisycs\CollisionSet.h" />
     <ClInclude Include="Src\Core\Sprite.h" />
+    <ClInclude Include="Src\Core\Text.h" />
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\FileManagment\TextureReader.h" />
     <ClInclude Include="Src\FileManagment\TextureWriter.h" />

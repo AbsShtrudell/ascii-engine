@@ -15,7 +15,7 @@ void CollisionSystem::Update()
 	while (it != CollidersList.end())
 	{
 		it1 = CollidersList.begin();
-		if (it->second->isCollisionEnabled())
+		if (it->second->isCollisionEnabled() && it->second->getCollideObjType() != CollideObj::STATIC)
 		{
 			while (it1 != CollidersList.end())
 			{

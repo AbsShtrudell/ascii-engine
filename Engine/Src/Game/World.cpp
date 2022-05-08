@@ -15,4 +15,8 @@ World::World()
 
 	Coin* coin = new Coin();
 	coin->setLocation(Vec2(16, -8));
+
+	Text* text = new Text(L"LEVEL-1", 158);
+	player->AttachChild(text);
+	text->setLocation(Vec2(-40, -30));
 }
