@@ -22,7 +22,7 @@ private:
 	Collider* collider;
 	Camera* camera;
 
-	int speed = 2;
+	int speed = 5;
 	bool dead = false;
 };
 

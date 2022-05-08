@@ -40,7 +40,7 @@ const CollideTable CollisionSet::collisionSet_OverlapAll =
 
 const CollideTable CollisionSet::collisionSet_BlockAll =
 {CollideState(CollideObj::DYNAMIC,CollideType::BLOCK),
- CollideState(CollideObj::STATIC, CollideType::BLOCK),
+ CollideState(CollideObj::STATIC, CollideType::IGNORE_THIS),
  CollideState(CollideObj::PAWN,   CollideType::BLOCK)};
 
 const CollideTable CollisionSet::collisionSet_IgnoreAll =

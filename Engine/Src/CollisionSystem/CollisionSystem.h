@@ -19,9 +19,7 @@ public:
 private:
 	void UpdateGravity(Collider* );
 	void SolveStack(Collider* first, Collider* second);
-	bool isSamePoints(Collider* first, Collider* second);
-	bool isSameX(Collider* first, Collider* second);
-	bool isSameY(Collider* first, Collider* second);
+	bool isCollide(Collider* first, Collider* second);
 	std::pair<bool, Vec2> isBlocked(Collider* collider, Vec2 direction);
 	CollideType getRelations(Collider* first, Collider* second);
 

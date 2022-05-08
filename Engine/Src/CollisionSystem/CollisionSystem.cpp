@@ -25,7 +25,7 @@ void CollisionSystem::Update()
 					{
 						if (getRelations(it->second, it1->second) == CollideType::IGNORE_THIS)
 						{
-							if (isSamePoints(it->second, it1->second))
+							if (isCollide(it->second, it1->second))
 							{
 								if (getRelations(it->second, it1->second) == CollideType::BLOCK)
 								{
@@ -85,43 +85,13 @@ void CollisionSystem::SolveStack(Collider* first, Collider* second)
 {
 }
 
-bool CollisionSystem::isSamePoints(Collider* first, Collider* second)
+bool CollisionSystem::isCollide(Collider* first, Collider* second)
 {
-	if (second->getWorldLocation().x == first->getWorldLocation().x && second->getWorldLocation().y == first->getWorldLocation().y) return true;
-	if (isSameX(first, second) && isSameY(first, second)) return true;
+	if (first->getWorldLocation().x < second->getWorldLocation().x + second->getSize().x &&
+		first->getWorldLocation().x + first->getSize().x > second->getWorldLocation().x &&
+		first->getWorldLocation().y < second->getWorldLocation().y + second->getSize().y &&
+		first->getWorldLocation().y + first->getSize().y > second->getWorldLocation().y) return true;
 	else return false;
-}
-
-bool CollisionSystem::isSameX(Collider* first, Collider* second)
-{
-	int x2 = second->getWorldLocation().x;
-	int x1 = first->getWorldLocation().x;
-	if (second->getWorldLocation().x > first->getWorldLocation().x)
-	{
-		if (first->getWorldLocation().x + first->getSize().x - 1>= second->getWorldLocation().x) return true;
-		else return false;
-	}
-	else
-	{
-		if (second->getWorldLocation().x + second->getSize().x - 1 >= first->getWorldLocation().x) return true;
-		else return false;
-	}
-	return true;
-}
-
-bool CollisionSystem::isSameY(Collider* first, Collider* second)
-{
-	if (second->getWorldLocation().y > first->getWorldLocation().y)
-	{
-		if (first->getWorldLocation().y + first->getSize().y - 1>= second->getWorldLocation().y) return true;
-		else return false;
-	}
-	else
-	{
-		if (second->getWorldLocation().y + second->getSize().y - 1 >= first->getWorldLocation().y) return true;
-		else return false;
-	}
-	return true;
 }
 
 bool CollisionSystem::isOnSurface(Collider* first)
@@ -133,7 +103,8 @@ bool CollisionSystem::isOnSurface(Collider* first)
 		{
 			if (getRelations(it->second, first) == CollideType::BLOCK)
 			{
-				if (isSameX(first, it->second))
+				if (first->getWorldLocation().x < it->second->getWorldLocation().x + it->second->getSize().x &&
+					first->getWorldLocation().x + first->getSize().x > it->second->getWorldLocation().x)
 				{
 					if (abs(it->second->getWorldLocation().y - (first->getWorldLocation().y + first->getSize().y - 1)) - 1 == 0)
 					{
@@ -159,7 +130,8 @@ std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direct
 			{
 				if (direction.y != 0)
 				{
-					if (isSameX(collider, it->second))
+					if (collider->getWorldLocation().x < it->second->getWorldLocation().x + it->second->getSize().x &&
+						collider->getWorldLocation().x + collider->getSize().x > it->second->getWorldLocation().x)
 					{
 						if (direction.y > 0)
 						{
@@ -184,7 +156,8 @@ std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direct
 				}
 				if (direction.x != 0)
 				{
-					if (isSameY(collider, it->second))
+					if (collider->getWorldLocation().y < it->second->getWorldLocation().y + it->second->getSize().y &&
+						collider->getWorldLocation().y + collider->getSize().y > it->second->getWorldLocation().y)
 					{
 						if (direction.x > 0)
 						{

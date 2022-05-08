@@ -2,9 +2,10 @@
 
 Coin::Coin()
 {
-	sprite = new Sprite("Resources\\MarioBrosSprites\\coin.spr", this);
-	collider = new Collider(sprite->getSize(), this);
+	LoadSprite("Resources\\MarioBrosSprites\\coin.spr");
+	collider = new Collider(getSize(), this);
 
 	collider->setSimulatePhysics(false);
 	collider->setCollisionSet(CollisionSet::collisionSet_OverlapOnlyPawn);
+	collider->setCollideObjType(CollideObj::DYNAMIC);
 }

@@ -3,14 +3,13 @@
 #include <Core/Object.h>
 #include <Core/Phisycs/Collider.h>
 
-class Coin : public Object
+class Coin : public Sprite
 {
 public:
 	Coin();
 	~Coin();
 
 private:
-	Sprite* sprite;
 	Collider* collider;
 };
 
