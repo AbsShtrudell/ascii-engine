@@ -34,6 +34,9 @@
     <Filter Include="Game\Animators">
       <UniqueIdentifier>{233c5951-37bc-4399-8dcb-5f0081b05d97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\System">
+      <UniqueIdentifier>{bbb356dd-6409-4019-a59d-24e31c147407}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Game\Player.cpp">
@@ -42,7 +45,7 @@
     <ClCompile Include="Src\Game\Box.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Console\Console.cpp">
+    <ClCompile Include="Src\Console\ConsoleWIN.cpp">
       <Filter>Src\Console</Filter>
     </ClCompile>
     <ClCompile Include="Src\Core\Camera.cpp">
@@ -111,6 +114,13 @@
     <ClCompile Include="Src\Core\Text.cpp">
       <Filter>Src\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Console\IConsole.cpp">
+      <Filter>Src\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\UI.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\System\Delegate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game\Player.h">
@@ -119,7 +129,7 @@
     <ClInclude Include="Src\Game\Box.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Console\Console.h">
+    <ClInclude Include="Src\Console\ConsoleWIN.h">
       <Filter>Src\Console</Filter>
     </ClInclude>
     <ClInclude Include="Src\Core\Camera.h">
@@ -194,5 +204,12 @@
     <ClInclude Include="Src\Core\Text.h">
       <Filter>Src\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Console\IConsole.h">
+      <Filter>Src\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\UI.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\System\Delegate.h" />
   </ItemGroup>
 </Project>

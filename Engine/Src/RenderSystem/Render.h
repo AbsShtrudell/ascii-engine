@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <Core/Camera.h>
 #include <Core/IDrawObj.h>
-#include <Console/Console.h>
+#include <Console/ConsoleWIN.h>
 #include <Math/Matrix.h>
 
 
@@ -27,6 +27,6 @@ private:
 	Matrix<CSymb> *SymbolMatrix, *BuffSymbolMatrix;
 
 	Vec2 screenSize = Vec2(200, 50);
-	ASCII::Console console;
+	ASCII::IConsole* console;
 	Camera* camera = nullptr;
 };

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <chrono>
-#include <Console/Console.h>
+#include <Console/ConsoleWIN.h>
 #include <RenderSystem/Render.h>
 #include <CollisionSystem/CollisionSystem.h>
 #include <Game/World.h>
@@ -19,7 +19,7 @@ public:
 	void Update();
 
 private:
-	ASCII::Console console;
+	ASCII::ConsoleWIN console;
 	Render render;
 	bool exit = false;
 };

@@ -1,23 +1,23 @@
-#include "Console.h"
+#include "ConsoleWIN.h"
 
-ASCII::Console::Console()
+ASCII::ConsoleWIN::ConsoleWIN()
 {
 	ConsoleHWND = GetConsoleWindow();
 	ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
-ASCII::Console::~Console()
+ASCII::ConsoleWIN::~ConsoleWIN()
 {
 }
 
-void ASCII::Console::HideCursor()
+void ASCII::ConsoleWIN::HideCursor()
 {
 	CursorInfo.bVisible = false;
 	CursorInfo.dwSize = 1;
 	SetConsoleCursorInfo(ConsoleHandle,&CursorInfo);
 }
 
-void ASCII::Console::MoveCursor(Vec2 position)
+void ASCII::ConsoleWIN::MoveCursor(Vec2 position)
 {
 	COORD pos;
 	pos.X = position.x;
@@ -26,7 +26,7 @@ void ASCII::Console::MoveCursor(Vec2 position)
 	SetConsoleCursorPosition(getConsoleHandle(), pos);
 }
 
-void ASCII::Console::SetWindow(int Width, int Height)
+void ASCII::ConsoleWIN::SetWindow(int Width, int Height)
 {
     HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -73,59 +73,66 @@ void ASCII::Console::SetWindow(int Width, int Height)
         throw std::runtime_error("Unable to resize window after resizing buffer.");
 }
 
-void ASCII::Console::WriteConsoleSymbols(wchar_t* symbols,int symbolsAmount)
+void ASCII::ConsoleWIN::WriteConsoleSymbols(wchar_t* symbols,int symbolsAmount)
 {
 	DWORD dword = NULL;
 	WriteConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), symbols, symbolsAmount, { 0, 0 }, &dword);
 }
 
-void ASCII::Console::WriteConsoleAttribute(WORD* colors, int colorsAmount)
+void ASCII::ConsoleWIN::WriteConsoleAttribute(int* colors, int colorsAmount)
 {
 	DWORD dword = NULL;
-	WriteConsoleOutputAttribute(getConsoleHandle(), colors, colorsAmount, { 0,0 }, &dword);
+
+    WORD* screenColor = new WORD[colorsAmount];
+    for (int i = 0; i < colorsAmount; i++)
+        screenColor[i] = colors[i];
+
+	WriteConsoleOutputAttribute(getConsoleHandle(), screenColor, colorsAmount, { 0,0 }, &dword);
+
+    delete[]screenColor;
 }
 
-const HANDLE ASCII::Console::getConsoleHandle() const
+const HANDLE ASCII::ConsoleWIN::getConsoleHandle() const
 {
 	return ConsoleHandle;
 }
 
-const HWND ASCII::Console::getConsoleHWND() const
+const HWND ASCII::ConsoleWIN::getConsoleHWND() const
 {
 	return ConsoleHWND;
 }
 
-const CONSOLE_CURSOR_INFO ASCII::Console::getCursorInfo() 
+const CONSOLE_CURSOR_INFO ASCII::ConsoleWIN::getCursorInfo()
 {
 	GetConsoleCursorInfo(ConsoleHandle, &CursorInfo);
 	return CursorInfo;
 }
 
-const CONSOLE_SCREEN_BUFFER_INFO ASCII::Console::getConsoleScreenBuffInfo() 
+const CONSOLE_SCREEN_BUFFER_INFO ASCII::ConsoleWIN::getConsoleScreenBuffInfo()
 {
 	GetConsoleScreenBufferInfo(ConsoleHandle, &ConsoleScreenBuffInfo);
 	return ConsoleScreenBuffInfo;
 }
 
-const COORD ASCII::Console::getConsoleBuffSize() 
+const COORD ASCII::ConsoleWIN::getConsoleBuffSize()
 {
 	ConsoleBuffSize = getConsoleScreenBuffInfo().dwSize;
 	return ConsoleBuffSize;
 }
 
-const WINDOWINFO ASCII::Console::getConsoleWindowInfo() 
+const WINDOWINFO ASCII::ConsoleWIN::getConsoleWindowInfo()
 {
 	GetWindowInfo(ConsoleHWND, &ConsoleWindowInfo);
 	return ConsoleWindowInfo;
 }
 
-const RECT ASCII::Console::getConsoleWindowSize() 
+const RECT ASCII::ConsoleWIN::getConsoleWindowSize()
 {
 	ConsoleWindowSize = getConsoleWindowInfo().rcWindow; //??
 	return ConsoleWindowSize;
 }
 
-const Vec2 ASCII::Console::getCursorPosition()
+const Vec2 ASCII::ConsoleWIN::getCursorPosition()
 {
 	return Vec2(getConsoleScreenBuffInfo().dwCursorPosition.X, getConsoleScreenBuffInfo().dwCursorPosition.Y);
 }

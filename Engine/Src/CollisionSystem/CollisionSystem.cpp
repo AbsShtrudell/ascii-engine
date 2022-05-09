@@ -1,4 +1,5 @@
 #include "CollisionSystem.h"
+#include <algorithm>
 
 CollisionSystem::CollisionSystem()
 {
@@ -10,53 +11,47 @@ CollisionSystem::~CollisionSystem()
 
 void CollisionSystem::Update()
 {
-	std::map<Collider*, Collider*>::iterator it = CollidersList.begin();
-	std::map<Collider*, Collider*>::iterator it1;
-	while (it != CollidersList.end())
+	for(const auto& collider1 : CollidersList)
 	{
-		it1 = CollidersList.begin();
-		if (it->second->isCollisionEnabled() && it->second->getCollideObjType() != CollideObj::STATIC)
+		if (collider1->isCollisionEnabled() && (collider1->getCollideObjType() != CollideObj::STATIC))
 		{
-			while (it1 != CollidersList.end())
+			for (const auto& collider2 : CollidersList)
 			{
-				if (it->second != it1->second)
+				if (collider1 != collider2)
 				{
-					if (it1->second->isCollisionEnabled())
+					if (collider2->isCollisionEnabled())
 					{
-						if (getRelations(it->second, it1->second) == CollideType::IGNORE_THIS)
+						if (getRelations(collider1, collider2) == CollideType::IGNORE_THIS)
 						{
-							if (isCollide(it->second, it1->second))
+							if (isCollide(collider1, collider2))
 							{
-								if (getRelations(it->second, it1->second) == CollideType::BLOCK)
+								if (getRelations(collider1, collider2) == CollideType::BLOCK)
 								{
-									SolveStack(it->second, it1->second);
+									SolveStack(collider1, collider2);
 								}
-								it->second->OnCollide(it1->second);
+								collider1->OnCollide(collider2);
 							}
 						}
 					}
 				}
-				it1++;
 			}
 		}
-		if (it->second->isSimulatePhysics())UpdateGravity(it->second);
-		it++;
+		if (collider1->isSimulatePhysics())UpdateGravity(collider1);
 	}
 }
 
 void CollisionSystem::AddCollider(Collider* listener)
 {
-	std::map<Collider*, Collider*>::iterator it = CollidersList.find(listener);
+	auto it = std::find(CollidersList.begin(), CollidersList.end(), listener);
 	if (it == CollidersList.end())
 	{
-		CollidersList.insert(std::make_pair<Collider*, Collider*>
-			(std::forward<Collider*>(listener), std::forward<Collider*>(listener)));
+		CollidersList.push_back(listener);
 	}
 }
 
 void CollisionSystem::RemoveCollider(Collider* listener)
 {
-	std::map<Collider*, Collider*>::iterator it = CollidersList.find(listener);
+	auto it = std::find(CollidersList.begin(), CollidersList.end(), listener);
 
 	if (it != CollidersList.end())
 	{
@@ -94,26 +89,24 @@ bool CollisionSystem::isCollide(Collider* first, Collider* second)
 	else return false;
 }
 
-bool CollisionSystem::isOnSurface(Collider* first)
+bool CollisionSystem::isOnSurface(Collider* colllider)
 {
-	std::map<Collider*, Collider*>::iterator it = CollidersList.begin();
-	while (it != CollidersList.end())
+	for(const auto& element : CollidersList)
 	{
-		if (it->second != first)
+		if (element != colllider)
 		{
-			if (getRelations(it->second, first) == CollideType::BLOCK)
+			if (getRelations(element, colllider) == CollideType::BLOCK)
 			{
-				if (first->getWorldLocation().x < it->second->getWorldLocation().x + it->second->getSize().x &&
-					first->getWorldLocation().x + first->getSize().x > it->second->getWorldLocation().x)
+				if (colllider->getWorldLocation().x < element->getWorldLocation().x + element->getSize().x &&
+					colllider->getWorldLocation().x + colllider->getSize().x > element->getWorldLocation().x)
 				{
-					if (abs(it->second->getWorldLocation().y - (first->getWorldLocation().y + first->getSize().y - 1)) - 1 == 0)
+					if (abs(element->getWorldLocation().y - (colllider->getWorldLocation().y + colllider->getSize().y - 1)) - 1 == 0)
 					{
 						return true;
 					}
 				}
 			}
 		}
-		it++;
 	}
 	return false;
 }
@@ -121,21 +114,20 @@ bool CollisionSystem::isOnSurface(Collider* first)
 std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direction)
 {
 	bool isBlock = false;
-	std::map<Collider*, Collider*>::iterator it = CollidersList.begin();
-	while (it != CollidersList.end())
+	for(const auto& element : CollidersList)
 	{
-		if (it->second != collider)
+		if (element != collider)
 		{
-			if (getRelations(it->second, collider) == CollideType::BLOCK)
+			if (getRelations(element, collider) == CollideType::BLOCK)
 			{
 				if (direction.y != 0)
 				{
-					if (collider->getWorldLocation().x < it->second->getWorldLocation().x + it->second->getSize().x &&
-						collider->getWorldLocation().x + collider->getSize().x > it->second->getWorldLocation().x)
+					if (collider->getWorldLocation().x < element->getWorldLocation().x + element->getSize().x &&
+						collider->getWorldLocation().x + collider->getSize().x > element->getWorldLocation().x)
 					{
 						if (direction.y > 0)
 						{
-							int distance = abs(it->second->getWorldLocation().y - (collider->getWorldLocation().y + collider->getSize().y - 1)) - 1;
+							int distance = abs(element->getWorldLocation().y - (collider->getWorldLocation().y + collider->getSize().y - 1)) - 1;
 							if (direction.y >= distance)
 							{
 
@@ -145,7 +137,7 @@ std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direct
 						}
 						else
 						{
-							int distance = abs(collider->getWorldLocation().y - (it->second->getWorldLocation().y + it->second->getSize().y - 1)) - 1;
+							int distance = abs(collider->getWorldLocation().y - (element->getWorldLocation().y + element->getSize().y - 1)) - 1;
 							if (abs(direction.y) >= distance)
 							{
 								direction.y = -1 * distance;
@@ -156,12 +148,12 @@ std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direct
 				}
 				if (direction.x != 0)
 				{
-					if (collider->getWorldLocation().y < it->second->getWorldLocation().y + it->second->getSize().y &&
-						collider->getWorldLocation().y + collider->getSize().y > it->second->getWorldLocation().y)
+					if (collider->getWorldLocation().y < element->getWorldLocation().y + element->getSize().y &&
+						collider->getWorldLocation().y + collider->getSize().y > element->getWorldLocation().y)
 					{
 						if (direction.x > 0)
 						{
-							int distance = abs(it->second->getWorldLocation().x - (collider->getWorldLocation().x + collider->getSize().x - 1)) - 1;
+							int distance = abs(element->getWorldLocation().x - (collider->getWorldLocation().x + collider->getSize().x - 1)) - 1;
 							if (direction.x >= distance)
 							{
 								direction.x = distance;
@@ -170,7 +162,7 @@ std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direct
 						}
 						else
 						{
-							int distance = abs(collider->getWorldLocation().x - (it->second->getWorldLocation().x + it->second->getSize().x - 1)) - 1;
+							int distance = abs(collider->getWorldLocation().x - (element->getWorldLocation().x + element->getSize().x - 1)) - 1;
 							if (abs(direction.x) >= distance)
 							{
 								direction.x = -1 * distance;
@@ -181,7 +173,6 @@ std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direct
 				}
 			}
 		}
-		it++;
 	}
 	return std::pair<bool, Vec2>(isBlock, direction);
 }

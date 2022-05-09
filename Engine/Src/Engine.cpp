@@ -11,7 +11,7 @@ void Engine::Start()
 		Update();
 		render.UpdateBuffMatrix();
 		render.UpdateScreen();
-		Sleep(2);
+		Sleep(10);
 	}
 }
 

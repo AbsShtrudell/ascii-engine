@@ -10,7 +10,7 @@ class IDrawObj
 {
 public:
 	IDrawObj();
-	~IDrawObj();
+	virtual ~IDrawObj();
 
 	virtual void OnDrawn() = 0;
 

@@ -11,8 +11,6 @@ public:
 	Player();
 	~Player();
 
-	Camera* getCamera();
-
 	void OnUpdate() override;
 	void OnKeyDown(int key) override;
 	void OnKeyUp(int key) override;

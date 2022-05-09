@@ -15,11 +15,6 @@ Player::~Player()
 {
 }
 
-Camera* Player::getCamera()
-{
-	return camera;
-}
-
 void Player::OnUpdate()
 {
 	animator->setOnGroundState(CollisionSystem::get()->isOnSurface(collider));

@@ -9,3 +9,7 @@ Coin::Coin()
 	collider->setCollisionSet(CollisionSet::collisionSet_OverlapOnlyPawn);
 	collider->setCollideObjType(CollideObj::DYNAMIC);
 }
+
+Coin::~Coin()
+{
+}

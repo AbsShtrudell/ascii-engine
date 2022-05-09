@@ -1,24 +1,20 @@
 #pragma once
-#include <Windows.h>
-#include <stdexcept>
-#include <Math/Vec2.h>
+#include <Console/IConsole.h>
 
 namespace ASCII
 {
-	class Console
+	class ConsoleWIN : public IConsole
 	{
 	public:
 
-		ASCII::Console();
-		ASCII::Console(Console& console);
-		~Console();
+		ConsoleWIN();
+		~ConsoleWIN();
 
-		void HideCursor();
-		void HideScrollBar();
-		void MoveCursor(Vec2 position);
-		void SetWindow(int Width, int Height);
-		void WriteConsoleSymbols(wchar_t* symbols, int symbolsAmount);
-		void WriteConsoleAttribute(WORD* colors, int colorsAmount);
+		virtual void HideCursor() override;
+		virtual void MoveCursor(Vec2 position) override;
+		virtual void SetWindow(int Width, int Height) override;
+		virtual void WriteConsoleSymbols(wchar_t* symbols, int symbolsAmount) override;
+		virtual void WriteConsoleAttribute(int* colors, int colorsAmount) override;
 
 		const HANDLE getConsoleHandle() const;
 		const HWND getConsoleHWND() const;

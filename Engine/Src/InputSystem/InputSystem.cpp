@@ -17,27 +17,17 @@ void InputSystem::Update()
 	{
 		for (unsigned int i = 0; i < 256; i++)
 		{
-			if (KeyState[i] & 0x80) //KEY IS DOWN
+			if (KeyState[i] & 0x80)
 			{
-				std::map<InputListener*, InputListener*>::iterator it = ListenersList.begin();
-
-				while (it != ListenersList.end())
-				{
-					it->second->OnKeyDown(i);
-					it++;
-				}
+				for(const auto& listener : ListenersList)
+					listener->OnKeyDown(i);
 			}
-			else //KEY IS UP
+			else
 			{
 				if (KeyState[i] != OldKeyState[i])
 				{
-					std::map<InputListener*, InputListener*>::iterator it = ListenersList.begin();
-
-					while (it != ListenersList.end())
-					{
-						it->second->OnKeyUp(i);
-						it++;
-					}
+					for (const auto& listener : ListenersList)
+						listener->OnKeyUp(i);
 				}
 			}
 		}
@@ -47,13 +37,12 @@ void InputSystem::Update()
 
 void InputSystem::AddListener(InputListener* listener)
 {
-	ListenersList.insert(std::make_pair<InputListener*, InputListener*>
-		(std::forward<InputListener*>(listener), std::forward<InputListener*>(listener)));
+	ListenersList.push_back(listener);
 }
 
 void InputSystem::RemoveListener(InputListener* listener)
 {
-	std::map<InputListener*, InputListener*>::iterator it = ListenersList.find(listener);
+	auto it = find(ListenersList.begin(), ListenersList.end(), listener);
 
 	if (it != ListenersList.end())
 	{

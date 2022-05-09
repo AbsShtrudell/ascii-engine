@@ -19,6 +19,9 @@ public:
 	Vec2 addLocation(int x, int y);
 
 	Object* getOwner() const;
+	std::vector<Object*> getAllChilds();
+	template <typename T>
+	std::vector<T*> getAllChildsOfClass();
 	void AttachChild(Object* child);
 	void DeattachChild(Object* child);
 	static void Attach(Object* owner, Object* child);
@@ -40,6 +43,20 @@ private:
 	Object* Owner = nullptr;
 	Vec2 Location = Vec2(0,0);
 };
+
+template<typename T>
+inline std::vector<T*> Object::getAllChildsOfClass()
+{
+	std::vector<T*> OutputObjectList;
+	T* tempObj = nullptr;
+	for (size_t i = 0; i < ChildrenList.size(); i++)
+	{
+		tempObj = dynamic_cast<T*>(ChildrenList[i]);
+		if (tempObj != NULL)
+			OutputObjectList.push_back(tempObj);
+	}
+	return OutputObjectList;
+}
 
 template <typename T>
 static std::vector<T*> Object::getAllObjectsOfClass()

@@ -1,29 +1,32 @@
 #pragma once
 #include <Core/Phisycs/Collider.h>
-#include <set>
+#include <list>
 
 class CollisionSystem
 {
 public:
+
 	CollisionSystem();
 	~CollisionSystem();
 
-	void Update();
+	static CollisionSystem* get();
+
 	void AddCollider(Collider* listener);
 	void RemoveCollider(Collider* listener);
 
-	bool isOnSurface(Collider* first);
+	void Update();
 
-	static CollisionSystem* get();
+	bool isOnSurface(Collider* collider);
 
 private:
-	void UpdateGravity(Collider* );
+
+	void UpdateGravity(Collider* collider);
 	void SolveStack(Collider* first, Collider* second);
+
 	bool isCollide(Collider* first, Collider* second);
 	std::pair<bool, Vec2> isBlocked(Collider* collider, Vec2 direction);
 	CollideType getRelations(Collider* first, Collider* second);
 
-	std::map<Collider*, Collider*>CollidersList;
-
+	std::list<Collider*>CollidersList;
 };
 

@@ -2,6 +2,8 @@
 
 Render::Render()
 {
+	console = new ASCII::ConsoleWIN();
+
 	SymbolMatrix = new Matrix<CSymb>(screenSize, { L' ' , 159});
 	BuffSymbolMatrix = new Matrix<CSymb>(screenSize, { L' ', 159 });
 }
@@ -40,7 +42,8 @@ void Render::UpdateScreen()
 
 	int counter = 0;
 	LPWSTR screen = new WCHAR[screenSize.y * screenSize.x];
-	WORD* screenColor = new WORD[screenSize.y * screenSize.x];
+	int* screenColor = new int[screenSize.y * screenSize.x];
+
 	for (int i = 0; i < screenSize.y; i++)
 		for (int j = 0; j < screenSize.x; j++)
 		{
@@ -49,10 +52,11 @@ void Render::UpdateScreen()
 			screenColor[counter] = SymbolMatrix->at(j, i).color;
 			counter++;
 		}
+
 	DWORD dwBytesWritten = 0;
 
-	console.WriteConsoleSymbols(screen, screenSize.y * screenSize.x);
-	console.WriteConsoleAttribute(screenColor, screenSize.y * screenSize.x);
+	console->WriteConsoleSymbols(screen, screenSize.y * screenSize.x);
+	console->WriteConsoleAttribute(screenColor, screenSize.y * screenSize.x);
 	Clear(RenderMatrix::SYMBOL_MATRIX_BUFF);
 	delete[]screen;
 	delete[]screenColor;

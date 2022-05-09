@@ -1,6 +1,6 @@
 #pragma once
 #include <InputSystem/InputListener.h>
-#include <map>
+#include <list>
 
 class InputSystem
 {
@@ -15,7 +15,7 @@ public:
 	static InputSystem* Get();
 
 private:
-	std::map<InputListener*, InputListener*> ListenersList;
+	std::list<InputListener*> ListenersList;
 	unsigned char KeyState[256] = {};
 	unsigned char OldKeyState[256] = {};
 };

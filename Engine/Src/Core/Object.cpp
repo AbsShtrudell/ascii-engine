@@ -25,7 +25,7 @@ Object::~Object()
 const Vec2 Object::getWorldLocation()
 {
 	if (Owner == NULL) return Location;
-	else return Vec2(Location.x + getOwner()->Location.x, Location.y + getOwner()->Location.y);
+	else return Vec2(Location.x + getOwner()->getWorldLocation().x, Location.y + getOwner()->getWorldLocation().y);
 }
 
 const Vec2 Object::getRelativeLocation()
@@ -107,6 +107,11 @@ void Object::Deattach(Object* owner, Object* child)
 			break;
 		}
 	child->setOwner(NULL);
+}
+
+std::vector<Object*> Object::getAllChilds()
+{
+	return ChildrenList;
 }
 
 std::vector<Object*> Object::getAllObjects()

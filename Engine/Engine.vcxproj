@@ -20,7 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\CollisionSystem\CollisionSystem.cpp" />
-    <ClCompile Include="Src\Console\Console.cpp" />
+    <ClCompile Include="Src\Console\ConsoleWIN.cpp" />
+    <ClCompile Include="Src\Console\IConsole.cpp" />
     <ClCompile Include="Src\Core\Animation.cpp" />
     <ClCompile Include="Src\Core\Animator.cpp" />
     <ClCompile Include="Src\Core\Camera.cpp" />
@@ -39,15 +40,18 @@
     <ClCompile Include="Src\Game\Coin.cpp" />
     <ClCompile Include="Src\Game\Player.cpp" />
     <ClCompile Include="Src\Game\PlayerAnimator.cpp" />
+    <ClCompile Include="Src\Game\UI.cpp" />
     <ClCompile Include="Src\Game\World.cpp" />
     <ClCompile Include="Src\InputSystem\InputSystem.cpp" />
     <ClCompile Include="Src\Math\Vec2.cpp" />
     <ClCompile Include="Src\RenderSystem\Render.cpp" />
     <ClCompile Include="Src\Src.cpp" />
+    <ClCompile Include="Src\System\Delegate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\CollisionSystem\CollisionSystem.h" />
-    <ClInclude Include="Src\Console\Console.h" />
+    <ClInclude Include="Src\Console\ConsoleWIN.h" />
+    <ClInclude Include="Src\Console\IConsole.h" />
     <ClInclude Include="Src\Core\Animation.h" />
     <ClInclude Include="Src\Core\Animator.h" />
     <ClInclude Include="Src\Core\Camera.h" />
@@ -66,6 +70,7 @@
     <ClInclude Include="Src\Game\Coin.h" />
     <ClInclude Include="Src\Game\Player.h" />
     <ClInclude Include="Src\Game\PlayerAnimator.h" />
+    <ClInclude Include="Src\Game\UI.h" />
     <ClInclude Include="Src\Game\World.h" />
     <ClInclude Include="Src\InputSystem\InputListener.h" />
     <ClInclude Include="Src\InputSystem\InputSystem.h" />
@@ -73,6 +78,7 @@
     <ClInclude Include="Src\Math\Vec2.h" />
     <ClInclude Include="Src\RenderSystem\CSymb.h" />
     <ClInclude Include="Src\RenderSystem\Render.h" />
+    <ClInclude Include="Src\System\Delegate.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
