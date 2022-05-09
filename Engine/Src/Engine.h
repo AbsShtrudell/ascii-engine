@@ -17,6 +17,7 @@ public:
 	void Stop();
 	void Init();
 	void Update();
+	void DestroyObjects();
 
 private:
 	ASCII::ConsoleWIN console;

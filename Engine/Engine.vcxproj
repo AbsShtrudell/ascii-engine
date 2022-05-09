@@ -29,8 +29,8 @@
     <ClCompile Include="Src\Core\IDrawObj.cpp" />
     <ClCompile Include="Src\Core\Object.cpp" />
     <ClCompile Include="Src\Core\Pawn.cpp" />
-    <ClCompile Include="Src\Core\Phisycs\Collider.cpp" />
-    <ClCompile Include="Src\Core\Phisycs\CollisionSet.cpp" />
+    <ClCompile Include="Src\Core\Physics\Collider.cpp" />
+    <ClCompile Include="Src\Core\Physics\CollisionSet.cpp" />
     <ClCompile Include="Src\Core\Sprite.cpp" />
     <ClCompile Include="Src\Core\Text.cpp" />
     <ClCompile Include="Src\Engine.cpp" />
@@ -38,6 +38,8 @@
     <ClCompile Include="Src\FileManagment\TextureWriter.cpp" />
     <ClCompile Include="Src\Game\Box.cpp" />
     <ClCompile Include="Src\Game\Coin.cpp" />
+    <ClCompile Include="Src\Game\Enemy.cpp" />
+    <ClCompile Include="Src\Game\EnemyAnimator.cpp" />
     <ClCompile Include="Src\Game\Player.cpp" />
     <ClCompile Include="Src\Game\PlayerAnimator.cpp" />
     <ClCompile Include="Src\Game\UI.cpp" />
@@ -59,8 +61,8 @@
     <ClInclude Include="Src\Core\IDrawObj.h" />
     <ClInclude Include="Src\Core\Object.h" />
     <ClInclude Include="Src\Core\Pawn.h" />
-    <ClInclude Include="Src\Core\Phisycs\Collider.h" />
-    <ClInclude Include="Src\Core\Phisycs\CollisionSet.h" />
+    <ClInclude Include="Src\Core\Physics\Collider.h" />
+    <ClInclude Include="Src\Core\Physics\CollisionSet.h" />
     <ClInclude Include="Src\Core\Sprite.h" />
     <ClInclude Include="Src\Core\Text.h" />
     <ClInclude Include="Src\Engine.h" />
@@ -68,6 +70,8 @@
     <ClInclude Include="Src\FileManagment\TextureWriter.h" />
     <ClInclude Include="Src\Game\Box.h" />
     <ClInclude Include="Src\Game\Coin.h" />
+    <ClInclude Include="Src\Game\Enemy.h" />
+    <ClInclude Include="Src\Game\EnemyAnimator.h" />
     <ClInclude Include="Src\Game\Player.h" />
     <ClInclude Include="Src\Game\PlayerAnimator.h" />
     <ClInclude Include="Src\Game\UI.h" />

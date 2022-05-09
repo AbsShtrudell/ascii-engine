@@ -1,6 +1,7 @@
 #pragma once
 #include <Core/Text.h>
 #include <Core/Sprite.h>
+#include <string>
 
 class UI : public Object
 {

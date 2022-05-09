@@ -11,6 +11,7 @@ void Engine::Start()
 		Update();
 		render.UpdateBuffMatrix();
 		render.UpdateScreen();
+		DestroyObjects();
 		Sleep(10);
 	}
 }
@@ -31,4 +32,16 @@ void Engine::Update()
 {
 	for (size_t i = 0; i < Object::getAllObjects().size(); i++)
 		Object::getAllObjects()[i]->OnUpdate();
+}
+
+void Engine::DestroyObjects()
+{
+	Object* temp = nullptr;
+
+	while(Object::getDestroyedObjects().size() > 0)
+	{
+		temp = Object::getDestroyedObjects().at(Object::getDestroyedObjects().size() - 1);
+		Object::getDestroyedObjects().pop_back();
+		delete temp;
+	}
 }

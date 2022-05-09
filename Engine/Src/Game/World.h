@@ -3,6 +3,7 @@
 #include <Game/Player.h>
 #include <Game/Coin.h>
 #include <Game/UI.h>
+#include <Game/Enemy.h>
 
 class World
 {

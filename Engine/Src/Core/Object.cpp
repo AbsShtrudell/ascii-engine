@@ -1,4 +1,5 @@
 #include "Object.h"
+#include <algorithm>
 
 Object::Object()
 {
@@ -109,6 +110,12 @@ void Object::Deattach(Object* owner, Object* child)
 	child->setOwner(NULL);
 }
 
+void Object::Destroy()
+{
+	if (std::find(DestroyedObjects.begin(), DestroyedObjects.end(), this) == DestroyedObjects.end())
+		DestroyedObjects.push_back(this);
+}
+
 std::vector<Object*> Object::getAllChilds()
 {
 	return ChildrenList;
@@ -119,4 +126,10 @@ std::vector<Object*> Object::getAllObjects()
 	return AllObjects;
 }
 
+std::vector<Object*>& Object::getDestroyedObjects()
+{
+	return DestroyedObjects;
+}
+
 std::vector<Object*> Object::AllObjects;
+std::vector<Object*> Object::DestroyedObjects;

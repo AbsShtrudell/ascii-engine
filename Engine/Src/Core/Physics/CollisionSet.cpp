@@ -35,7 +35,7 @@ void CollisionSet::setCollideState(CollideState state)
 
 const CollideTable CollisionSet::collisionSet_OverlapAll =
 {CollideState(CollideObj::DYNAMIC,CollideType::OVELAP),
- CollideState(CollideObj::STATIC, CollideType::OVELAP),
+ CollideState(CollideObj::STATIC, CollideType::BLOCK),
  CollideState(CollideObj::PAWN,   CollideType::OVELAP)};
 
 const CollideTable CollisionSet::collisionSet_BlockAll =

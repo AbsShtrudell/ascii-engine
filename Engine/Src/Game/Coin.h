@@ -1,7 +1,7 @@
 #pragma once
 #include <Core/Sprite.h>
 #include <Core/Object.h>
-#include <Core/Phisycs/Collider.h>
+#include <Core/Physics/Collider.h>
 
 class Coin : public Sprite
 {

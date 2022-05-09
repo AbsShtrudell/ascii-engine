@@ -9,7 +9,7 @@ public:
 
 	Object();
 	Object(Vec2 Location, Object* owner = NULL);
-	~Object();
+	virtual ~Object();
 
 	const Vec2 getWorldLocation();
 	const Vec2 getRelativeLocation();
@@ -29,7 +29,10 @@ public:
 
 	virtual void OnUpdate() {};
 
+	void Destroy();
+
 	static std::vector<Object*> getAllObjects();
+	static std::vector<Object*>& getDestroyedObjects();
 
 	template <typename T> 
 	static std::vector<T*> getAllObjectsOfClass();
@@ -38,6 +41,7 @@ private:
 	void setOwner(Object* owner);
 
 	static std::vector<Object*> AllObjects;
+	static std::vector<Object*> DestroyedObjects;
 
 	std::vector<Object*> ChildrenList;
 	Object* Owner = nullptr;

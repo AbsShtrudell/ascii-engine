@@ -21,6 +21,7 @@ public:
 	T& at(int x, int y);
 	T& at(Vec2 item);
 
+	void Invert();
 	void FillMatrix(T value);
 	void Clear();
 
@@ -110,6 +111,28 @@ T& Matrix<T>::at(Vec2 item)
 {
 	if ((item.x < size.x && item.y < size.y) && (item.x >= 0 && item.y >= 0))
 		return matrix.at(item.x).at(item.y);
+}
+
+template<typename T>
+inline void Matrix<T>::Invert()
+{
+	Matrix<T>* inverted = new Matrix<T>(size, nullValue);
+	for (int x = 0; x < size.x; x++)
+	{
+		for (int y = 0; y < size.y; y++)
+		{
+			inverted->at(x, y) = this->at(size.x - x - 1, y);
+		}
+	}
+
+	for (int x = 0; x < size.x; x++)
+	{
+		for (int y = 0; y < size.y; y++)
+		{
+			this->at(x, y) = inverted->at(x, y);
+		}
+	}
+	
 }
 
 template<typename T>

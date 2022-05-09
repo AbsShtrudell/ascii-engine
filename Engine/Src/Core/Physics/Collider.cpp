@@ -16,6 +16,7 @@ Collider::Collider(Vec2 sz, Object* owner)
 
 Collider::~Collider()
 {
+	CollisionSystem::get()->RemoveCollider(this);
 	delete collisionSet;
 	delete shape;
 }
@@ -92,7 +93,7 @@ void Collider::setSize(Vec2 sz)
 
 void Collider::OnCollide(Collider* obj)
 {
-	
+	onCollide.Call(obj);
 }
 
 void Collider::UpdateGravity(Vec2 direction)

@@ -1,7 +1,8 @@
 #pragma once
 #include <Math/Matrix.h>
-#include <Core/Phisycs/CollisionSet.h>
+#include <Core/Physics/CollisionSet.h>
 #include <Core/Object.h>
+#include <System/Delegate.h>
 
 class Collider : public Object
 {
@@ -36,4 +37,6 @@ private:
 	CollisionSet* collisionSet;
 	Matrix<bool>* shape;
 	Vec2 velocity = Vec2(0, 0);
+public:
+	Delegate<Object*> onCollide;
 };

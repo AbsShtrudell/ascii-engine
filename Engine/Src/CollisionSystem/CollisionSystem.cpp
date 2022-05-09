@@ -21,7 +21,7 @@ void CollisionSystem::Update()
 				{
 					if (collider2->isCollisionEnabled())
 					{
-						if (getRelations(collider1, collider2) == CollideType::IGNORE_THIS)
+						if (getRelations(collider1, collider2) != CollideType::IGNORE_THIS)
 						{
 							if (isCollide(collider1, collider2))
 							{
@@ -118,7 +118,7 @@ std::pair<bool, Vec2> CollisionSystem::isBlocked(Collider* collider, Vec2 direct
 	{
 		if (element != collider)
 		{
-			if (getRelations(element, collider) == CollideType::BLOCK)
+			if (getRelations(collider, element) == CollideType::BLOCK)
 			{
 				if (direction.y != 0)
 				{
