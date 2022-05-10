@@ -37,7 +37,11 @@ void Render::UpdateScreen()
 	if (camera == NULL)
 	{
 		std::vector<Camera*> cameras = Object::getAllObjectsOfClass<Camera>();
-		if (cameras.size() > 0) setCamera(cameras[0]);
+		if (cameras.size() > 0)
+		{
+			setCamera(cameras[0]);
+			cameras[0]->onDestroyed.Bind(std::bind(&Render::ClearCamera, this, std::placeholders::_1));
+		}
 	}
 
 	int counter = 0;
@@ -79,6 +83,11 @@ void Render::Draw(Vec2 location, IDrawObj* drawObj)
 			}
 		}
 	}
+}
+
+void Render::ClearCamera(int i)
+{
+	camera = NULL;
 }
 
 const Vec2 Render::getScreenSize() const

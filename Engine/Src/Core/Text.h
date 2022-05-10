@@ -16,8 +16,12 @@ public:
 	virtual const Vec2 getSize() override;
 	virtual const int getZOrder() override;
 	virtual Texture getTexture() override;
+	std::wstring getText();
 	virtual const Vec2 getDrawLoacation() override;
 	virtual const bool isVisible() override;
+
+	void AddSymbol(wchar_t symbol);
+	void RemoveLastSymbol();
 
 	virtual void setZOrder(int newValue) override;
 	virtual void setVisibility(bool visibility) override;
@@ -27,5 +31,6 @@ public:
 private:
 	Texture* textSprite = nullptr;
 	int color = 7;
+	int maxLength = 20;
 };
 

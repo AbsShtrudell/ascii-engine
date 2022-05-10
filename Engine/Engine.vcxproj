@@ -40,6 +40,13 @@
     <ClCompile Include="Src\Game\Coin.cpp" />
     <ClCompile Include="Src\Game\Enemy.cpp" />
     <ClCompile Include="Src\Game\EnemyAnimator.cpp" />
+    <ClCompile Include="Src\Game\Menu\MainMenuControlller.cpp" />
+    <ClCompile Include="Src\Game\Menu\Menu.cpp" />
+    <ClCompile Include="Src\Game\Menu\PlayerInfo.cpp" />
+    <ClCompile Include="Src\Game\Menu\PlayersLeaderBoard.cpp" />
+    <ClCompile Include="Src\Game\Menu\SelectPlayer.cpp" />
+    <ClCompile Include="Src\Game\Menu\UserContainer.cpp" />
+    <ClCompile Include="Src\Game\Menu\Write.cpp" />
     <ClCompile Include="Src\Game\Player.cpp" />
     <ClCompile Include="Src\Game\PlayerAnimator.cpp" />
     <ClCompile Include="Src\Game\UI.cpp" />
@@ -48,7 +55,6 @@
     <ClCompile Include="Src\Math\Vec2.cpp" />
     <ClCompile Include="Src\RenderSystem\Render.cpp" />
     <ClCompile Include="Src\Src.cpp" />
-    <ClCompile Include="Src\System\Delegate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\CollisionSystem\CollisionSystem.h" />
@@ -72,6 +78,13 @@
     <ClInclude Include="Src\Game\Coin.h" />
     <ClInclude Include="Src\Game\Enemy.h" />
     <ClInclude Include="Src\Game\EnemyAnimator.h" />
+    <ClInclude Include="Src\Game\Menu\MainMenuControlller.h" />
+    <ClInclude Include="Src\Game\Menu\Menu.h" />
+    <ClInclude Include="Src\Game\Menu\PlayerInfo.h" />
+    <ClInclude Include="Src\Game\Menu\PlayersLeaderBoard.h" />
+    <ClInclude Include="Src\Game\Menu\SelectPlayer.h" />
+    <ClInclude Include="Src\Game\Menu\UserContainer.h" />
+    <ClInclude Include="Src\Game\Menu\Write.h" />
     <ClInclude Include="Src\Game\Player.h" />
     <ClInclude Include="Src\Game\PlayerAnimator.h" />
     <ClInclude Include="Src\Game\UI.h" />

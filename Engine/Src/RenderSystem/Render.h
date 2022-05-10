@@ -20,13 +20,15 @@ public:
 	void UpdateBuffMatrix();
 	void Draw(Vec2 location, IDrawObj* drawObj);
 
+	void ClearCamera(int i);
+
 	const Vec2 getScreenSize() const;
 
 	void setCamera(class Camera* cam);
 private:
 	Matrix<CSymb> *SymbolMatrix, *BuffSymbolMatrix;
 
-	Vec2 screenSize = Vec2(200, 50);
+	Vec2 screenSize = Vec2(180, 50);
 	ASCII::IConsole* console;
 	Camera* camera = nullptr;
 };

@@ -23,3 +23,4 @@ private:
 	std::function<void(A)> action;
 };
 
+

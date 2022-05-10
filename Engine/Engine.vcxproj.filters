@@ -31,20 +31,23 @@
     <Filter Include="Src\CollisionSystem">
       <UniqueIdentifier>{a074092b-0610-4a36-afd5-ba48af648700}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Animators">
-      <UniqueIdentifier>{233c5951-37bc-4399-8dcb-5f0081b05d97}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\System">
       <UniqueIdentifier>{76ae81a1-3cc9-4455-9e1d-30498a67276e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\MainLevel">
+      <UniqueIdentifier>{70cc5185-34b4-4618-8856-06a698337e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\MainLevel\Animators">
+      <UniqueIdentifier>{233c5951-37bc-4399-8dcb-5f0081b05d97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\MainLevel\Player">
+      <UniqueIdentifier>{985d926f-c2f6-49a7-a191-53f8dc2d1d7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\MainMenu">
+      <UniqueIdentifier>{706f8c95-7fe4-403e-9d09-a71431c5cb31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Game\Player.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Game\Box.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Console\ConsoleWIN.cpp">
       <Filter>Src\Console</Filter>
     </ClCompile>
@@ -97,13 +100,7 @@
       <Filter>Src\Core</Filter>
     </ClCompile>
     <ClCompile Include="Src\Game\PlayerAnimator.cpp">
-      <Filter>Game\Animators</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Game\World.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Game\Coin.cpp">
-      <Filter>Game</Filter>
+      <Filter>Game\MainLevel\Animators</Filter>
     </ClCompile>
     <ClCompile Include="Src\Core\Text.cpp">
       <Filter>Src\Core</Filter>
@@ -111,32 +108,54 @@
     <ClCompile Include="Src\Console\IConsole.cpp">
       <Filter>Src\Console</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Game\UI.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\System\Delegate.cpp">
-      <Filter>Src\System</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Core\Physics\Collider.cpp">
       <Filter>Src\Core\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Src\Core\Physics\CollisionSet.cpp">
       <Filter>Src\Core\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Game\Enemy.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Game\EnemyAnimator.cpp">
-      <Filter>Game\Animators</Filter>
+      <Filter>Game\MainLevel\Animators</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Game\Box.cpp">
+      <Filter>Game\MainLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Coin.cpp">
+      <Filter>Game\MainLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Enemy.cpp">
+      <Filter>Game\MainLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\World.cpp">
+      <Filter>Game\MainLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Player.cpp">
+      <Filter>Game\MainLevel\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\UI.cpp">
+      <Filter>Game\MainLevel\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\Menu.cpp">
+      <Filter>Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\Write.cpp">
+      <Filter>Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\MainMenuControlller.cpp">
+      <Filter>Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\SelectPlayer.cpp">
+      <Filter>Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\PlayerInfo.cpp">
+      <Filter>Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\UserContainer.cpp">
+      <Filter>Game\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\PlayersLeaderBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Game\Player.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Game\Box.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Console\ConsoleWIN.h">
       <Filter>Src\Console</Filter>
     </ClInclude>
@@ -195,22 +214,13 @@
       <Filter>Src\Core</Filter>
     </ClInclude>
     <ClInclude Include="Src\Game\PlayerAnimator.h">
-      <Filter>Game\Animators</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Game\World.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Game\Coin.h">
-      <Filter>Game</Filter>
+      <Filter>Game\MainLevel\Animators</Filter>
     </ClInclude>
     <ClInclude Include="Src\Core\Text.h">
       <Filter>Src\Core</Filter>
     </ClInclude>
     <ClInclude Include="Src\Console\IConsole.h">
       <Filter>Src\Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Game\UI.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Src\System\Delegate.h">
       <Filter>Src\System</Filter>
@@ -221,11 +231,45 @@
     <ClInclude Include="Src\Core\Physics\CollisionSet.h">
       <Filter>Src\Core\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Game\Enemy.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Game\EnemyAnimator.h">
-      <Filter>Game\Animators</Filter>
+      <Filter>Game\MainLevel\Animators</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Game\Box.h">
+      <Filter>Game\MainLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Coin.h">
+      <Filter>Game\MainLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Enemy.h">
+      <Filter>Game\MainLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\World.h">
+      <Filter>Game\MainLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Player.h">
+      <Filter>Game\MainLevel\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\UI.h">
+      <Filter>Game\MainLevel\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\Menu.h">
+      <Filter>Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\Write.h">
+      <Filter>Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\MainMenuControlller.h">
+      <Filter>Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\SelectPlayer.h">
+      <Filter>Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\PlayerInfo.h">
+      <Filter>Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\UserContainer.h">
+      <Filter>Game\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\PlayersLeaderBoard.h" />
   </ItemGroup>
 </Project>

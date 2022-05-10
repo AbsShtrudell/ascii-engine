@@ -2,7 +2,7 @@
 
 void Engine::Start()
 {
-	World* world = new World();
+	Menu* world = new Menu();
 
 	while (!exit)
 	{
@@ -12,7 +12,7 @@ void Engine::Start()
 		render.UpdateBuffMatrix();
 		render.UpdateScreen();
 		DestroyObjects();
-		Sleep(10);
+		Sleep(8);
 	}
 }
 

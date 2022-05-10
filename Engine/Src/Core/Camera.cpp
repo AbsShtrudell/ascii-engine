@@ -6,9 +6,9 @@ Camera::Camera(Object* owner)
 	{
 		Attach(owner, this);
 	}
-	setLocation(Vec2(-40, -30));
 }
 
 Camera::~Camera()
 {
+	onDestroyed.Call(0);
 }

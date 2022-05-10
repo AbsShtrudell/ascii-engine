@@ -13,6 +13,7 @@ Player::Player()
 	camera = new Camera(this);
 	ui = new UI;
 	camera->AttachChild(ui);
+	camera->setLocation(Vec2(-40, -30));
 }
 
 Player::~Player()
