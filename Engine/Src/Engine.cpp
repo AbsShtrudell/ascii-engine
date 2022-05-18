@@ -2,7 +2,7 @@
 
 void Engine::Start()
 {
-	Menu* world = new Menu();
+	MainMenu* world = new MainMenu();
 
 	while (!exit)
 	{

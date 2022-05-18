@@ -7,7 +7,6 @@ enum class CollideObj { STATIC, DYNAMIC, PAWN };
 
 typedef std::map<CollideObj, CollideType> CollideTable;
 typedef std::pair<CollideObj, CollideType> CollideState;
-//class CollisionSet;
 
 class CollisionSet
 {

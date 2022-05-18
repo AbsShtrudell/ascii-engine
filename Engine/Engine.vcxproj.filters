@@ -46,6 +46,15 @@
     <Filter Include="Game\MainMenu">
       <UniqueIdentifier>{706f8c95-7fe4-403e-9d09-a71431c5cb31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\MainMenu\Menus">
+      <UniqueIdentifier>{9772ef96-42a3-41a0-9fe8-b235bb586bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\MainMenu\System">
+      <UniqueIdentifier>{2d09e0ee-4e40-4111-a311-b4a35008f17f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\MainMenu\Players">
+      <UniqueIdentifier>{0d1733f3-318a-487b-8044-a946ed223e6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Console\ConsoleWIN.cpp">
@@ -135,25 +144,34 @@
     <ClCompile Include="Src\Game\UI.cpp">
       <Filter>Game\MainLevel\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Game\Menu\Menu.cpp">
-      <Filter>Game\MainMenu</Filter>
+    <ClCompile Include="Src\Game\Menu\SelectMenu.cpp">
+      <Filter>Game\MainMenu\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\ScoreMenu.cpp">
+      <Filter>Game\MainMenu\Menus</Filter>
     </ClCompile>
     <ClCompile Include="Src\Game\Menu\Write.cpp">
-      <Filter>Game\MainMenu</Filter>
+      <Filter>Game\MainMenu\System</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Game\Menu\MainMenuControlller.cpp">
-      <Filter>Game\MainMenu</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Game\Menu\SelectPlayer.cpp">
-      <Filter>Game\MainMenu</Filter>
+    <ClCompile Include="Src\Game\Menu\MainMenu.cpp">
+      <Filter>Game\MainMenu\Menus</Filter>
     </ClCompile>
     <ClCompile Include="Src\Game\Menu\PlayerInfo.cpp">
-      <Filter>Game\MainMenu</Filter>
+      <Filter>Game\MainMenu\Players</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Game\Menu\UserContainer.cpp">
-      <Filter>Game\MainMenu</Filter>
+    <ClCompile Include="Src\Game\Menu\UsersController.cpp">
+      <Filter>Game\MainMenu\Players</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Game\Menu\PlayersLeaderBoard.cpp" />
+    <ClCompile Include="Src\Game\Menu\Date.cpp">
+      <Filter>Game\MainMenu\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\SelectMenuController.cpp">
+      <Filter>Game\MainMenu\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\MainMenuControlller.cpp">
+      <Filter>Game\MainMenu\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Menu\AdminMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Console\ConsoleWIN.h">
@@ -222,9 +240,6 @@
     <ClInclude Include="Src\Console\IConsole.h">
       <Filter>Src\Console</Filter>
     </ClInclude>
-    <ClInclude Include="Src\System\Delegate.h">
-      <Filter>Src\System</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Core\Physics\Collider.h">
       <Filter>Src\Core\Physics</Filter>
     </ClInclude>
@@ -252,24 +267,36 @@
     <ClInclude Include="Src\Game\UI.h">
       <Filter>Game\MainLevel\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Game\Menu\Menu.h">
-      <Filter>Game\MainMenu</Filter>
+    <ClInclude Include="Src\Game\Menu\SelectMenu.h">
+      <Filter>Game\MainMenu\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\ScoreMenu.h">
+      <Filter>Game\MainMenu\Menus</Filter>
     </ClInclude>
     <ClInclude Include="Src\Game\Menu\Write.h">
-      <Filter>Game\MainMenu</Filter>
+      <Filter>Game\MainMenu\System</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Game\Menu\MainMenuControlller.h">
-      <Filter>Game\MainMenu</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Game\Menu\SelectPlayer.h">
-      <Filter>Game\MainMenu</Filter>
+    <ClInclude Include="Src\Game\Menu\MainMenu.h">
+      <Filter>Game\MainMenu\Menus</Filter>
     </ClInclude>
     <ClInclude Include="Src\Game\Menu\PlayerInfo.h">
-      <Filter>Game\MainMenu</Filter>
+      <Filter>Game\MainMenu\Players</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Game\Menu\UserContainer.h">
-      <Filter>Game\MainMenu</Filter>
+    <ClInclude Include="Src\Game\Menu\UsersController.h">
+      <Filter>Game\MainMenu\Players</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Game\Menu\PlayersLeaderBoard.h" />
+    <ClInclude Include="Src\Game\Menu\Date.h">
+      <Filter>Game\MainMenu\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\System\Delegate.h">
+      <Filter>Src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\SelectMenuController.h">
+      <Filter>Game\MainMenu\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\MainMenuControlller.h">
+      <Filter>Game\MainMenu\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Menu\AdminMenu.h" />
   </ItemGroup>
 </Project>

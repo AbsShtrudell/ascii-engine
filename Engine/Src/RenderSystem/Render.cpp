@@ -61,6 +61,7 @@ void Render::UpdateScreen()
 
 	console->WriteConsoleSymbols(screen, screenSize.y * screenSize.x);
 	console->WriteConsoleAttribute(screenColor, screenSize.y * screenSize.x);
+
 	Clear(RenderMatrix::SYMBOL_MATRIX_BUFF);
 	delete[]screen;
 	delete[]screenColor;

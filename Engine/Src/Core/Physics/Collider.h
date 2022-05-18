@@ -38,5 +38,5 @@ private:
 	Matrix<bool>* shape;
 	Vec2 velocity = Vec2(0, 0);
 public:
-	Delegate<Object*> onCollide;
+	Delegate<Collider*> onCollide;
 };

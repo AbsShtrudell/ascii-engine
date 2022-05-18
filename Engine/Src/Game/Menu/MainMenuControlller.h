@@ -11,12 +11,17 @@ public:
 
 	virtual void OnKeyUp(int key) override;
 
+	void setAdminState(bool value);
 private:
-	Camera* camera;
 	Text* startGameText;
 	Text* scoreMenuText;
+	Text* adminMenuText;
+	Text* exitMenuText;
 
+	bool admin = false;
 public:
 	Delegate<int> onStart;
+	Delegate<int> onScoreMenu;
+	Delegate<int> onAdminMenu;
 };
 
