@@ -13,30 +13,20 @@ void CollisionSystem::Update()
 {
 	for(const auto& collider1 : CollidersList)
 	{
-		if (collider1->isCollisionEnabled() && (collider1->getCollideObjType() != CollideObj::STATIC))
-		{
-			for (const auto& collider2 : CollidersList)
-			{
-				if (collider1 != collider2)
-				{
-					if (collider2->isCollisionEnabled())
-					{
-						if (getRelations(collider1, collider2) != CollideType::IGNORE_THIS)
-						{
-							if (isCollide(collider1, collider2))
-							{
-								if (getRelations(collider1, collider2) == CollideType::BLOCK)
-								{
-									SolveStack(collider1, collider2);
-								}
-								collider1->OnCollide(collider2);
-							}
-						}
-					}
-				}
-			}
-		}
 		if (collider1->isSimulatePhysics())UpdateGravity(collider1);
+		if (!collider1->isCollisionEnabled() && (collider1->getCollideObjType() == CollideObj::STATIC))
+			continue;
+		for (const auto& collider2 : CollidersList)
+		{
+			if (collider1 == collider2) continue;
+			if (!collider2->isCollisionEnabled()) continue;
+			if (getRelations(collider1, collider2) == CollideType::IGNORE_THIS) continue;
+			if (!isCollide(collider1, collider2)) continue;
+		
+			collider1->OnCollide(collider2);
+			
+			if (getRelations(collider1, collider2) == CollideType::BLOCK) SolveStack(collider1, collider2);
+		}
 	}
 }
 
