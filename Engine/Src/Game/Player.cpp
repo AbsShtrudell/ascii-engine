@@ -22,6 +22,7 @@ Player::~Player()
 
 void Player::OnUpdate()
 {
+	if (getWorldLocation().y > 16) Dead();
 	animator->setOnGroundState(CollisionSystem::get()->isOnSurface(collider));
 }
 
@@ -46,6 +47,11 @@ void Player::OnKeyDown(int key)
 		animator->setMovingState(1);
 		addLocation(1 * speed, 0);
 		break;
+	case 32:
+		if (dead)
+		{
+			onEndLevel.Call(coinsamount);
+		}
 	}
 }
 
@@ -89,12 +95,16 @@ void Player::OnCollide(Object* obj)
 
 void Player::Dead()
 {
-	camera->setLocation(camera->getWorldLocation());
-	DeattachChild(camera);
-	dead = true;
-	addLocation(0, -1);
-	collider->setVelocity(Vec2(0, -8));
-	collider->setCollisionSet(CollisionSet::collisionSet_IgnoreAll);
-	collider->setCollisionEnabled(false);
-	animator->setDeathState(dead);
+	if (!dead)
+	{
+		camera->setLocation(camera->getWorldLocation());
+		DeattachChild(camera);
+		dead = true;
+		addLocation(0, -1);
+		collider->setVelocity(Vec2(0, -8));
+		collider->setCollisionSet(CollisionSet::collisionSet_IgnoreAll);
+		collider->setCollisionEnabled(false);
+		animator->setDeathState(dead);
+		ui->setGameOverState(true);
+	}
 }

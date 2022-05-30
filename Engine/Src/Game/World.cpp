@@ -35,3 +35,8 @@ World::World()
 World::~World()
 {
 }
+
+void World::LoadMenu()
+{
+	World
+}

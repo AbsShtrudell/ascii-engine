@@ -10,6 +10,8 @@ class World
 public:
 	World();
 	~World();
+
+	void LoadMenu();
 private:
 
 };

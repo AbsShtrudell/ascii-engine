@@ -29,5 +29,7 @@ private:
 	int speed = 5;
 	int coinsamount = 0;
 	bool dead = false;
+public:
+	Delegate<int> onEndLevel;
 };
 

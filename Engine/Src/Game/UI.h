@@ -11,10 +11,12 @@ public:
 	~UI();
 
 	void setCoinsCounterText(std::wstring text);
+	void setGameOverState(bool value);
 
 private:
 	Sprite* coinicon = nullptr;
 	Text* coinscounter = nullptr;
 	Text* level = nullptr;
+	Text* gameOverText = nullptr;
 };
 

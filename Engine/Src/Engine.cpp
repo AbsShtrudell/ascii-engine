@@ -1,18 +1,24 @@
 ﻿#include "Engine.h"
+#include <chrono>
 
 void Engine::Start()
 {
 	MainMenu* world = new MainMenu();
-
+	std::chrono::system_clock::time_point start;
+	std::chrono::system_clock::time_point end;
+	double duration;
 	while (!exit)
 	{
+		start = std::chrono::system_clock::now();
 		InputSystem::Get()->Update();
 		CollisionSystem::get()->Update();
 		Update();
 		render.UpdateBuffMatrix();
 		render.UpdateScreen();
 		DestroyObjects();
-		Sleep(8);
+		end = std::chrono::system_clock::now();
+		duration = 1000 / 60 - std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+		Sleep(duration > 0? duration: 0);
 	}
 }
 
