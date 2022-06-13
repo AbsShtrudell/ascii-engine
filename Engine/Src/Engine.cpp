@@ -3,9 +3,11 @@
 
 void Engine::Start()
 {
-	MainMenu* world = new MainMenu();
+	World* world = new World();
+
 	std::chrono::system_clock::time_point start;
 	std::chrono::system_clock::time_point end;
+
 	double duration;
 	while (!exit)
 	{

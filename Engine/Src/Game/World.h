@@ -11,7 +11,6 @@ public:
 	World();
 	~World();
 
-	void LoadMenu();
 private:
 
 };
